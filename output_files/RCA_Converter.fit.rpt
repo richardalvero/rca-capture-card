@@ -1,5 +1,5 @@
 Fitter report for RCA_Converter
-Tue Oct 25 17:07:32 2022
+Tue Nov 01 13:38:18 2022
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -18,24 +18,25 @@ Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
  10. Fitter Partition Statistics
  11. Input Pins
  12. Output Pins
- 13. Dual Purpose and Dedicated Pins
- 14. I/O Bank Usage
- 15. All Package Pins
- 16. I/O Assignment Warnings
- 17. Fitter Resource Utilization by Entity
- 18. Delay Chain Summary
- 19. Pad To Core Delay Chain Fanout
- 20. Routing Usage Summary
- 21. LAB Logic Elements
- 22. LAB Signals Sourced
- 23. LAB Signals Sourced Out
- 24. I/O Rules Summary
- 25. I/O Rules Details
- 26. I/O Rules Matrix
- 27. Fitter Device Options
- 28. Operating Settings and Conditions
- 29. Fitter Messages
- 30. Fitter Suppressed Messages
+ 13. Bidir Pins
+ 14. Dual Purpose and Dedicated Pins
+ 15. I/O Bank Usage
+ 16. All Package Pins
+ 17. I/O Assignment Warnings
+ 18. Fitter Resource Utilization by Entity
+ 19. Delay Chain Summary
+ 20. Pad To Core Delay Chain Fanout
+ 21. Routing Usage Summary
+ 22. LAB Logic Elements
+ 23. LAB Signals Sourced
+ 24. LAB Signals Sourced Out
+ 25. I/O Rules Summary
+ 26. I/O Rules Details
+ 27. I/O Rules Matrix
+ 28. Fitter Device Options
+ 29. Operating Settings and Conditions
+ 30. Fitter Messages
+ 31. Fitter Suppressed Messages
 
 
 
@@ -62,7 +63,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Tue Oct 25 17:07:32 2022       ;
+; Fitter Status                      ; Successful - Tue Nov 01 13:38:18 2022       ;
 ; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                      ; RCA_Converter                               ;
 ; Top-level Entity Name              ; top_level                                   ;
@@ -73,7 +74,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Total combinational functions  ; 1 / 49,760 ( < 1 % )                        ;
 ;     Dedicated logic registers      ; 0 / 49,760 ( 0 % )                          ;
 ; Total registers                    ; 0                                           ;
-; Total pins                         ; 13 / 360 ( 4 % )                            ;
+; Total pins                         ; 15 / 360 ( 4 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 1,677,312 ( 0 % )                       ;
 ; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
@@ -161,8 +162,8 @@ https://fpgasoftware.intel.com/eula.
 ; Type                ; Total [A + B]     ; From Design Partitions [A] ; From Rapid Recompile [B] ;
 +---------------------+-------------------+----------------------------+--------------------------+
 ; Placement (by node) ;                   ;                            ;                          ;
-;     -- Requested    ; 0.00 % ( 0 / 46 ) ; 0.00 % ( 0 / 46 )          ; 0.00 % ( 0 / 46 )        ;
-;     -- Achieved     ; 0.00 % ( 0 / 46 ) ; 0.00 % ( 0 / 46 )          ; 0.00 % ( 0 / 46 )        ;
+;     -- Requested    ; 0.00 % ( 0 / 52 ) ; 0.00 % ( 0 / 52 )          ; 0.00 % ( 0 / 52 )        ;
+;     -- Achieved     ; 0.00 % ( 0 / 52 ) ; 0.00 % ( 0 / 52 )          ; 0.00 % ( 0 / 52 )        ;
 ;                     ;                   ;                            ;                          ;
 ; Routing (by net)    ;                   ;                            ;                          ;
 ;     -- Requested    ; 0.00 % ( 0 / 0 )  ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
@@ -185,7 +186,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 ; Partition Name                 ; Preservation Achieved ; Preservation Level Used ; Netlist Type Used ; Preservation Method ; Notes ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
-; Top                            ; 0.00 % ( 0 / 30 )     ; N/A                     ; Source File       ; N/A                 ;       ;
+; Top                            ; 0.00 % ( 0 / 36 )     ; N/A                     ; Source File       ; N/A                 ;       ;
 ; hard_block:auto_generated_inst ; 0.00 % ( 0 / 16 )     ; N/A                     ; Source File       ; N/A                 ;       ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 
@@ -222,8 +223,8 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ;                                             ;                       ;
 ; Total LABs:  partially or completely used   ; 1 / 3,110 ( < 1 % )   ;
 ; Virtual pins                                ; 0                     ;
-; I/O pins                                    ; 13 / 360 ( 4 % )      ;
-;     -- Clock pins                           ; 0 / 8 ( 0 % )         ;
+; I/O pins                                    ; 15 / 360 ( 4 % )      ;
+;     -- Clock pins                           ; 1 / 8 ( 13 % )        ;
 ;     -- Dedicated input pins                 ; 1 / 1 ( 100 % )       ;
 ;                                             ;                       ;
 ; M9Ks                                        ; 0 / 182 ( 0 % )       ;
@@ -244,8 +245,8 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; Peak interconnect usage (total/H/V)         ; 0.0% / 0.0% / 0.1%    ;
 ; Maximum fan-out                             ; 17                    ;
 ; Highest non-global fan-out                  ; 17                    ;
-; Total fan-out                               ; 24                    ;
-; Average fan-out                             ; 0.52                  ;
+; Total fan-out                               ; 28                    ;
+; Average fan-out                             ; 0.54                  ;
 +---------------------------------------------+-----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -280,7 +281,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; Total LABs:  partially or completely used   ; 1 / 3110 ( < 1 % )  ; 0 / 3110 ( 0 % )               ;
 ;                                             ;                     ;                                ;
 ; Virtual pins                                ; 0                   ; 0                              ;
-; I/O pins                                    ; 13                  ; 0                              ;
+; I/O pins                                    ; 15                  ; 0                              ;
 ; Embedded Multiplier 9-bit elements          ; 0 / 288 ( 0 % )     ; 0 / 288 ( 0 % )                ;
 ; Total memory bits                           ; 0                   ; 0                              ;
 ; Total RAM block bits                        ; 0                   ; 0                              ;
@@ -288,23 +289,23 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; Analog-to-Digital Converter                 ; 2 / 2 ( 100 % )     ; 0 / 2 ( 0 % )                  ;
 ;                                             ;                     ;                                ;
 ; Connections                                 ;                     ;                                ;
-;     -- Input Connections                    ; 0                   ; 0                              ;
+;     -- Input Connections                    ; 2                   ; 0                              ;
 ;     -- Registered Input Connections         ; 0                   ; 0                              ;
-;     -- Output Connections                   ; 0                   ; 0                              ;
+;     -- Output Connections                   ; 2                   ; 0                              ;
 ;     -- Registered Output Connections        ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Internal Connections                        ;                     ;                                ;
-;     -- Total Connections                    ; 30                  ; 8                              ;
+;     -- Total Connections                    ; 34                  ; 8                              ;
 ;     -- Registered Connections               ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; External Connections                        ;                     ;                                ;
-;     -- Top                                  ; 0                   ; 0                              ;
+;     -- Top                                  ; 4                   ; 0                              ;
 ;     -- hard_block:auto_generated_inst       ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Partition Interface                         ;                     ;                                ;
 ;     -- Input Ports                          ; 3                   ; 0                              ;
 ;     -- Output Ports                         ; 10                  ; 0                              ;
-;     -- Bidir Ports                          ; 0                   ; 0                              ;
+;     -- Bidir Ports                          ; 2                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Registered Ports                            ;                     ;                                ;
 ;     -- Registered Input Ports               ; 0                   ; 0                              ;
@@ -327,9 +328,9 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
 ; Name     ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ; Slew Rate ;
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
-; clk      ; F18   ; 6        ; 78           ; 40           ; 14           ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
-; power_on ; Y2    ; 3        ; 16           ; 0            ; 14           ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
-; rst      ; E21   ; 6        ; 78           ; 33           ; 0            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
+; clk      ; AA11  ; 4        ; 40           ; 0            ; 7            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
+; power_on ; V5    ; 3        ; 14           ; 0            ; 7            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
+; rst      ; AA5   ; 3        ; 26           ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ; 0         ;
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
 
 
@@ -338,17 +339,27 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 +---------------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
 ; Name          ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination                       ; Termination Control Block ; Output Buffer Pre-emphasis ; Voltage Output Differential ; Location assigned by ; Output Enable Source ; Output Enable Group ;
 +---------------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
-; TMDS_clk_n    ; Y8    ; 3        ; 20           ; 0            ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_clk_p    ; AA1   ; 3        ; 18           ; 0            ; 28           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_n[0]     ; U15   ; 4        ; 56           ; 0            ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_n[1]     ; W6    ; 3        ; 16           ; 0            ; 28           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_n[2]     ; A20   ; 7        ; 66           ; 54           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_p[0]     ; B3    ; 8        ; 26           ; 39           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_p[1]     ; B10   ; 7        ; 46           ; 54           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; TMDS_p[2]     ; D22   ; 6        ; 78           ; 35           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; UART_TX_out   ; M22   ; 5        ; 78           ; 25           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; UART_TX_ready ; N9    ; 2        ; 0            ; 13           ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_clk_n    ; A11   ; 7        ; 51           ; 54           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_clk_p    ; Y22   ; 5        ; 78           ; 15           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_n[0]     ; AB9   ; 3        ; 34           ; 0            ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_n[1]     ; A20   ; 7        ; 66           ; 54           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_n[2]     ; AB17  ; 4        ; 69           ; 0            ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_p[0]     ; L8    ; 1B       ; 0            ; 27           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_p[1]     ; N15   ; 6        ; 78           ; 29           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; TMDS_p[2]     ; J11   ; 7        ; 49           ; 54           ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; UART_TX_out   ; D12   ; 7        ; 51           ; 54           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; UART_TX_ready ; M22   ; 5        ; 78           ; 25           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
 +---------------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Bidir Pins                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
++------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+----------------------+----------------------+---------------------+
+; Name ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Output Termination                ; Termination Control Block ; Output Buffer Pre-emphasis ; Location assigned by ; Output Enable Source ; Output Enable Group ;
++------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+----------------------+----------------------+---------------------+
+; scl  ; AB10  ; 4        ; 38           ; 0            ; 14           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; Fitter               ; 0 pF                 ; -                   ;
+; sda  ; B8    ; 7        ; 46           ; 54           ; 28           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; Fitter               ; 0 pF                 ; -                   ;
++------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+----------------------+----------------------+---------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -373,14 +384,14 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; I/O Bank ; Usage           ; VCCIO Voltage ; VREF Voltage ;
 +----------+-----------------+---------------+--------------+
 ; 1A       ; 0 / 16 ( 0 % )  ; 2.5V          ; --           ;
-; 1B       ; 4 / 24 ( 17 % ) ; 2.5V          ; --           ;
-; 2        ; 1 / 36 ( 3 % )  ; 2.5V          ; --           ;
-; 3        ; 4 / 48 ( 8 % )  ; 2.5V          ; --           ;
-; 4        ; 1 / 48 ( 2 % )  ; 2.5V          ; --           ;
-; 5        ; 1 / 40 ( 3 % )  ; 2.5V          ; --           ;
-; 6        ; 3 / 60 ( 5 % )  ; 2.5V          ; --           ;
-; 7        ; 2 / 52 ( 4 % )  ; 2.5V          ; --           ;
-; 8        ; 5 / 36 ( 14 % ) ; 2.5V          ; --           ;
+; 1B       ; 5 / 24 ( 21 % ) ; 2.5V          ; --           ;
+; 2        ; 0 / 36 ( 0 % )  ; 2.5V          ; --           ;
+; 3        ; 3 / 48 ( 6 % )  ; 2.5V          ; --           ;
+; 4        ; 3 / 48 ( 6 % )  ; 2.5V          ; --           ;
+; 5        ; 2 / 40 ( 5 % )  ; 2.5V          ; --           ;
+; 6        ; 1 / 60 ( 2 % )  ; 2.5V          ; --           ;
+; 7        ; 5 / 52 ( 10 % ) ; 2.5V          ; --           ;
+; 8        ; 4 / 36 ( 11 % ) ; 2.5V          ; --           ;
 +----------+-----------------+---------------+--------------+
 
 
@@ -399,7 +410,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; A8       ; 447        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A9       ; 449        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A10      ; 439        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; A11      ; 437        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; A11      ; 437        ; 7        ; TMDS_clk_n                                     ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; A12      ; 435        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A13      ; 433        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A14      ; 425        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -408,20 +419,20 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; A17      ; 407        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A18      ; 405        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; A19      ; 403        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; A20      ; 401        ; 7        ; TMDS_n[2]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; A20      ; 401        ; 7        ; TMDS_n[1]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; A21      ; 371        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; A22      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
-; AA1      ; 133        ; 3        ; TMDS_clk_p                                     ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; AA1      ; 133        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA2      ; 135        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA3      ; 153        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; --       ; --           ;
 ; AA4      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
-; AA5      ; 157        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; AA5      ; 157        ; 3        ; rst                                            ; input  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; AA6      ; 156        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA7      ; 158        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA8      ; 165        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA9      ; 169        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA10     ; 170        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; AA11     ; 180        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; AA11     ; 180        ; 4        ; clk                                            ; input  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; AA12     ; 182        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AA13     ; 197        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; --       ; --           ;
 ; AA14     ; 201        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -441,15 +452,15 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; AB6      ; 161        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB7      ; 163        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB8      ; 167        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; AB9      ; 171        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; AB10     ; 177        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; AB9      ; 171        ; 3        ; TMDS_n[0]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; AB10     ; 177        ; 4        ; scl                                            ; bidir  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; AB11     ; 179        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB12     ; 181        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB13     ; 183        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB14     ; 199        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB15     ; 203        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB16     ; 209        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; AB17     ; 241        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; AB17     ; 241        ; 4        ; TMDS_n[2]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; AB18     ; 243        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB19     ; 213        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; AB20     ; 215        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -457,14 +468,14 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; AB22     ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; B1       ; 495        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B2       ; 493        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; B3       ; 484        ; 8        ; TMDS_p[0]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; B3       ; 484        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B4       ; 486        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B5       ; 485        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B6       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; B7       ; 469        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; B8       ; 451        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; B8       ; 451        ; 7        ; sda                                            ; bidir  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; B9       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
-; B10      ; 448        ; 7        ; TMDS_p[1]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; B10      ; 448        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B11      ; 443        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B12      ; 441        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; B13      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
@@ -510,7 +521,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; D9       ; 474        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; D10      ; 476        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; D11      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
-; D12      ; 438        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; D12      ; 438        ; 7        ; UART_TX_out                                    ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; D13      ; 431        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; D14      ; 428        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; D15      ; 404        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -520,7 +531,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; D19      ; 359        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; D20      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; D21      ; 345        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; --       ; --           ;
-; D22      ; 341        ; 6        ; TMDS_p[2]                                      ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; D22      ; 341        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E1       ; 41         ; 1B       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E2       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; E3       ; 3          ; 1A       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -541,7 +552,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; E18      ; 387        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E19      ; 352        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E20      ; 355        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; E21      ; 335        ; 6        ; rst                                            ; input  ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; E21      ; 335        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E22      ; 333        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F1       ; 47         ; 1B       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F2       ; 43         ; 1B       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -560,7 +571,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; F15      ; 398        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; F16      ; 396        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; F17      ; 364        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; F18      ; 354        ; 6        ; clk                                            ; input  ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; F18      ; 354        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F19      ; 353        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F20      ; 342        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F21      ; 340        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -619,7 +630,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; J8       ; 4          ; 1A       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; J9       ; 6          ; 1A       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; J10      ; 468        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; J11      ; 446        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; J11      ; 446        ; 7        ; TMDS_p[2]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; J12      ; 434        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; J13      ; 422        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; J14      ; 368        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -660,7 +671,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; L5       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; L6       ;            ; 1A       ; VCCIO1A                                        ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; L7       ;            ; 1B       ; VCCIO1B                                        ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
-; L8       ; 40         ; 1B       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
+; L8       ; 40         ; 1B       ; TMDS_p[0]                                      ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; L9       ; 42         ; 1B       ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; L10      ;            ; --       ; VCC                                            ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; L11      ;            ; --       ; VCC                                            ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
@@ -696,7 +707,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; M19      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; M20      ; 337        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; M21      ; 312        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; M22      ; 315        ; 5        ; UART_TX_out                                    ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; M22      ; 315        ; 5        ; UART_TX_ready                                  ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; N1       ; 87         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; N2       ; 75         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; N3       ; 73         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -705,13 +716,13 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; N6       ;            ; 2        ; VCCIO2                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; N7       ;            ; 2        ; VCCIO2                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; N8       ; 84         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; N9       ; 86         ; 2        ; UART_TX_ready                                  ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
+; N9       ; 86         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; N10      ;            ; --       ; VCC                                            ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; N11      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; N12      ;            ; --       ; VCC                                            ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; N13      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; N14      ; 320        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; N15      ; 322        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
+; N15      ; 322        ; 6        ; TMDS_p[1]                                      ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; N16      ;            ; 5        ; VCCIO5                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; N17      ;            ; 6        ; VCCIO6                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; N18      ; 336        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -799,7 +810,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; U12      ;            ; 4        ; VCCIO4                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; U13      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; U14      ;            ; 4        ; VCCIO4                                         ; power  ;                       ; 2.5V    ; --         ;                 ; --       ; --           ;
-; U15      ; 208        ; 4        ; TMDS_n[0]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; U15      ; 208        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; U16      ;            ;          ; VCCD_PLL4                                      ; power  ;                       ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; U17      ; 246        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; U18      ; 244        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -811,7 +822,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; V2       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; V3       ; 95         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; V4       ; 125        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; V5       ; 127        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
+; V5       ; 127        ; 3        ; power_on                                       ; input  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
 ; V6       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; V7       ; 136        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; V8       ; 138        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -834,7 +845,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; W3       ; 134        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; W4       ; 132        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; W5       ; 124        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; W6       ; 126        ; 3        ; TMDS_n[1]                                      ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; W6       ; 126        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; W7       ; 148        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; W8       ; 150        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; W9       ; 144        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -852,13 +863,13 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; W21      ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; W22      ; 283        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; Y1       ; 129        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; Y2       ; 131        ; 3        ; power_on                                       ; input  ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; Y2       ; 131        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y3       ; 149        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y4       ; 151        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y5       ; 137        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y6       ; 139        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y7       ; 141        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
-; Y8       ; 143        ; 3        ; TMDS_clk_n                                     ; output ; 2.5 V                 ;         ; Column I/O ; N               ; no       ; Off          ;
+; Y8       ; 143        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y9       ;            ;          ; GND                                            ; gnd    ;                       ;         ; --         ;                 ; --       ; --           ;
 ; Y10      ; 168        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y11      ; 175        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
@@ -872,7 +883,7 @@ The pin-out file can be found in C:/Users/gioco/Documents/UF_Senior_2022-2023/CE
 ; Y19      ; 224        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Column I/O ;                 ; no       ; On           ;
 ; Y20      ; 285        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
 ; Y21      ; 287        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
-; Y22      ; 281        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                ;        ;                       ;         ; Row I/O    ;                 ; no       ; On           ;
+; Y22      ; 281        ; 5        ; TMDS_clk_p                                     ; output ; 2.5 V                 ;         ; Row I/O    ; N               ; no       ; Off          ;
 +----------+------------+----------+------------------------------------------------+--------+-----------------------+---------+------------+-----------------+----------+--------------+
 Note: Pin directions (input, output or bidir) are based on device operating in user mode.
 
@@ -895,6 +906,8 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ; TMDS_clk_n    ; Incomplete set of assignments ;
 ; clk           ; Incomplete set of assignments ;
 ; rst           ; Incomplete set of assignments ;
+; sda           ; Incomplete set of assignments ;
+; scl           ; Incomplete set of assignments ;
 ; power_on      ; Missing location assignment   ;
 ; UART_TX_ready ; Missing location assignment   ;
 ; UART_TX_out   ; Missing location assignment   ;
@@ -908,6 +921,8 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ; TMDS_clk_n    ; Missing location assignment   ;
 ; clk           ; Missing location assignment   ;
 ; rst           ; Missing location assignment   ;
+; sda           ; Missing location assignment   ;
+; scl           ; Missing location assignment   ;
 +---------------+-------------------------------+
 
 
@@ -916,7 +931,7 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +----------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; ADC blocks ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+---------------------+-------------+--------------+
-; |top_level                 ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 13   ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; 0          ; |top_level          ; top_level   ; work         ;
+; |top_level                 ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 1          ; 0            ; 0       ; 0         ; 15   ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; 0          ; |top_level          ; top_level   ; work         ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -939,6 +954,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; TMDS_clk_n    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; clk           ; Input    ; --            ; --            ; --                    ; --  ; --   ;
 ; rst           ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; sda           ; Bidir    ; --            ; --            ; --                    ; --  ; --   ;
+; scl           ; Bidir    ; --            ; --            ; --                    ; --  ; --   ;
 +---------------+----------+---------------+---------------+-----------------------+-----+------+
 
 
@@ -950,6 +967,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; power_on            ;                   ;         ;
 ; clk                 ;                   ;         ;
 ; rst                 ;                   ;         ;
+; sda                 ;                   ;         ;
+; scl                 ;                   ;         ;
 +---------------------+-------------------+---------+
 
 
@@ -960,13 +979,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------+
 ; Block interconnects   ; 4 / 148,641 ( < 1 % ) ;
 ; C16 interconnects     ; 0 / 5,382 ( 0 % )     ;
-; C4 interconnects      ; 4 / 106,704 ( < 1 % ) ;
+; C4 interconnects      ; 3 / 106,704 ( < 1 % ) ;
 ; Direct links          ; 1 / 148,641 ( < 1 % ) ;
 ; Global clocks         ; 0 / 20 ( 0 % )        ;
 ; Local interconnects   ; 0 / 49,760 ( 0 % )    ;
 ; NSLEEPs               ; 0 / 500 ( 0 % )       ;
 ; R24 interconnects     ; 0 / 5,406 ( 0 % )     ;
-; R4 interconnects      ; 2 / 147,764 ( < 1 % ) ;
+; R4 interconnects      ; 3 / 147,764 ( < 1 % ) ;
 +-----------------------+-----------------------+
 
 
@@ -1020,10 +1039,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; I/O Rules Statistic              ; Total ;
 +----------------------------------+-------+
 ; Total I/O Rules                  ; 30    ;
-; Number of I/O Rules Passed       ; 9     ;
+; Number of I/O Rules Passed       ; 10    ;
 ; Number of I/O Rules Failed       ; 0     ;
 ; Number of I/O Rules Unchecked    ; 0     ;
-; Number of I/O Rules Inapplicable ; 21    ;
+; Number of I/O Rules Inapplicable ; 20    ;
 +----------------------------------+-------+
 
 
@@ -1052,7 +1071,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Pass         ; IO_000020 ; I/O Properties Checks for One I/O ; The I/O standard should support the requested PCI Clamp Diode.                                       ; Critical ; 0 such failures found.                                                   ; I/O                 ;                   ;
 ; Inapplicable ; IO_000021 ; I/O Properties Checks for One I/O ; The I/O standard should support the requested Weak Pull Up value.                                    ; Critical ; No Weak Pull-Up Resistor assignments found.                              ; I/O                 ;                   ;
 ; Inapplicable ; IO_000022 ; I/O Properties Checks for One I/O ; The I/O standard should support the requested Bus Hold value.                                        ; Critical ; No Enable Bus-Hold Circuitry assignments found.                          ; I/O                 ;                   ;
-; Inapplicable ; IO_000023 ; I/O Properties Checks for One I/O ; The I/O standard should support the Open Drain value.                                                ; Critical ; No open drain assignments found.                                         ; I/O                 ;                   ;
+; Pass         ; IO_000023 ; I/O Properties Checks for One I/O ; The I/O standard should support the Open Drain value.                                                ; Critical ; 0 such failures found.                                                   ; I/O                 ;                   ;
 ; Pass         ; IO_000024 ; I/O Properties Checks for One I/O ; The I/O direction should support the On Chip Termination value.                                      ; Critical ; 0 such failures found.                                                   ; I/O                 ;                   ;
 ; Inapplicable ; IO_000026 ; I/O Properties Checks for One I/O ; On Chip Termination and Current Strength should not be used at the same time.                        ; Critical ; No Current Strength assignments found.                                   ; I/O                 ;                   ;
 ; Inapplicable ; IO_000027 ; I/O Properties Checks for One I/O ; Weak Pull Up and Bus Hold should not be used at the same time.                                       ; Critical ; No Enable Bus-Hold Circuitry or Weak Pull-Up Resistor assignments found. ; I/O                 ;                   ;
@@ -1071,9 +1090,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 ; Pin/Rules          ; IO_000001    ; IO_000002    ; IO_000003    ; IO_000004    ; IO_000005    ; IO_000006 ; IO_000007    ; IO_000008    ; IO_000009 ; IO_000010 ; IO_000011    ; IO_000012    ; IO_000013    ; IO_000014    ; IO_000015    ; IO_000018    ; IO_000019    ; IO_000020    ; IO_000021    ; IO_000022    ; IO_000023    ; IO_000024    ; IO_000026    ; IO_000027    ; IO_000045    ; IO_000046    ; IO_000047    ; IO_000033 ; IO_000034    ; IO_000042    ;
 +--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
-; Total Pass         ; 0            ; 0            ; 0            ; 0            ; 0            ; 13        ; 0            ; 0            ; 13        ; 13        ; 0            ; 10           ; 0            ; 0            ; 3            ; 0            ; 10           ; 3            ; 0            ; 0            ; 0            ; 10           ; 0            ; 0            ; 0            ; 0            ; 0            ; 13        ; 0            ; 0            ;
+; Total Pass         ; 0            ; 0            ; 0            ; 0            ; 0            ; 15        ; 0            ; 0            ; 15        ; 15        ; 0            ; 12           ; 0            ; 0            ; 5            ; 0            ; 12           ; 5            ; 0            ; 0            ; 2            ; 12           ; 0            ; 0            ; 0            ; 0            ; 0            ; 15        ; 0            ; 0            ;
 ; Total Unchecked    ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
-; Total Inapplicable ; 13           ; 13           ; 13           ; 13           ; 13           ; 0         ; 13           ; 13           ; 0         ; 0         ; 13           ; 3            ; 13           ; 13           ; 10           ; 13           ; 3            ; 10           ; 13           ; 13           ; 13           ; 3            ; 13           ; 13           ; 13           ; 13           ; 13           ; 0         ; 13           ; 13           ;
+; Total Inapplicable ; 15           ; 15           ; 15           ; 15           ; 15           ; 0         ; 15           ; 15           ; 0         ; 0         ; 15           ; 3            ; 15           ; 15           ; 10           ; 15           ; 3            ; 10           ; 15           ; 15           ; 13           ; 3            ; 15           ; 15           ; 15           ; 15           ; 15           ; 0         ; 15           ; 15           ;
 ; Total Fail         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
 ; power_on           ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; UART_TX_ready      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
@@ -1088,6 +1107,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; TMDS_clk_n         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; clk                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; rst                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; sda                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Pass         ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; scl                ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Pass         ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 +--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 
 
@@ -1153,7 +1174,7 @@ Info (12825): Data[1]/ASDO dual-purpose pin not reserved
 Info (12825): nCSO dual-purpose pin not reserved
 Info (12825): DCLK dual-purpose pin not reserved
 Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Assignment Warnings report for details
-Critical Warning (169085): No exact pin location assignment(s) for 13 pins of 13 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
+Critical Warning (169085): No exact pin location assignment(s) for 15 pins of 15 total pins. For the list of pins please refer to the I/O Assignment Warnings table in the fitter report.
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'RCA_Converter.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
@@ -1165,7 +1186,7 @@ Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
 Info (176214): Statistics of I/O pins that need to be placed that use the same VCCIO and VREF, before I/O pin placement
-    Info (176211): Number of I/O pins in group: 13 (unused VREF, 2.5V VCCIO, 3 input, 10 output, 0 bidirectional)
+    Info (176211): Number of I/O pins in group: 15 (unused VREF, 2.5V VCCIO, 3 input, 10 output, 2 bidirectional)
         Info (176212): I/O standards used: 2.5 V.
 Info (176215): I/O bank details before I/O pin placement
     Info (176214): Statistics of I/O banks
@@ -1178,7 +1199,7 @@ Info (176215): I/O bank details before I/O pin placement
         Info (176213): I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  60 pins available
         Info (176213): I/O bank number 7 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  52 pins available
         Info (176213): I/O bank number 8 does not use VREF pins and has undetermined VCCIO pins. 4 total pin(s) used --  32 pins available
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1200,12 +1221,15 @@ Info (334003): Started post-fitting delay annotation
 Warning (334000): Timing characteristics of device 10M50DAF484C6GES are preliminary
 Info (334004): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Warning (169064): Following 2 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
+    Info (169065): Pin sda has a permanently disabled output enable File: C:/Users/gioco/Documents/UF_Senior_2022-2023/CEN3907C Computer Engineering Design 1/Project/Local Project Repository/top_level.vhd Line: 13
+    Info (169065): Pin scl has a permanently disabled output enable File: C:/Users/gioco/Documents/UF_Senior_2022-2023/CEN3907C Computer Engineering Design 1/Project/Local Project Repository/top_level.vhd Line: 14
 Info (144001): Generated suppressed messages file C:/Users/gioco/Documents/UF_Senior_2022-2023/CEN3907C Computer Engineering Design 1/Project/Local Project Repository/output_files/RCA_Converter.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 5636 megabytes
-    Info: Processing ended: Tue Oct 25 17:07:32 2022
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:07
+Info: Quartus Prime Fitter was successful. 0 errors, 9 warnings
+    Info: Peak virtual memory: 5639 megabytes
+    Info: Processing ended: Tue Nov 01 13:38:18 2022
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:05
 
 
 +----------------------------+

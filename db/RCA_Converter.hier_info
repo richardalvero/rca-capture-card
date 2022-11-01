@@ -1,9 +1,13 @@
 |top_level
+clk => rca_input:U_RCA_INPUT.clk
 clk => usb_output:U_USB_OUTPUT.clk
 clk => hdmi_output:U_HDMI_OUTPUT.clk
 power_on => ~NO_FANOUT~
+rst => rca_input:U_RCA_INPUT.rst
 rst => usb_output:U_USB_OUTPUT.rst
 rst => hdmi_output:U_HDMI_OUTPUT.rst
+sda <> rca_input:U_RCA_INPUT.sda
+scl <> rca_input:U_RCA_INPUT.scl
 UART_TX_ready <= usb_output:U_USB_OUTPUT.UART_TX_ready
 UART_TX_out <= usb_output:U_USB_OUTPUT.UART_TX_out
 TMDS_p[0] <= hdmi_output:U_HDMI_OUTPUT.TMDS_p[0]
@@ -14,6 +18,30 @@ TMDS_n[1] <= hdmi_output:U_HDMI_OUTPUT.TMDS_n[1]
 TMDS_n[2] <= hdmi_output:U_HDMI_OUTPUT.TMDS_n[2]
 TMDS_clk_p <= hdmi_output:U_HDMI_OUTPUT.TMDS_clk_p
 TMDS_clk_n <= hdmi_output:U_HDMI_OUTPUT.TMDS_clk_n
+
+
+|top_level|RCA_Input:U_RCA_INPUT
+clk => state_r~1.DATAIN
+rst => state_r~3.DATAIN
+ADC_address[0] => ~NO_FANOUT~
+ADC_address[1] => ~NO_FANOUT~
+ADC_address[2] => ~NO_FANOUT~
+ADC_address[3] => ~NO_FANOUT~
+ADC_address[4] => ~NO_FANOUT~
+ADC_address[5] => ~NO_FANOUT~
+ADC_address[6] => ~NO_FANOUT~
+wr => ~NO_FANOUT~
+data_rd[0] => ~NO_FANOUT~
+data_rd[1] => ~NO_FANOUT~
+data_rd[2] => ~NO_FANOUT~
+data_rd[3] => ~NO_FANOUT~
+data_rd[4] => ~NO_FANOUT~
+data_rd[5] => ~NO_FANOUT~
+data_rd[6] => ~NO_FANOUT~
+data_rd[7] => ~NO_FANOUT~
+ack_flag => ~NO_FANOUT~
+sda <> <UNC>
+scl <> <UNC>
 
 
 |top_level|USB_Output:U_USB_OUTPUT

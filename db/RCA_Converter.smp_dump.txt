@@ -8,3 +8,14 @@ state_r.DATA_BITS 0 0 0 1 0 0 1
 state_r.P_BIT 0 0 1 0 0 0 1 
 state_r.STOP_BIT 0 1 0 0 0 0 1 
 state_r.RESTART 1 0 0 0 0 0 1 
+
+State Machine - |top_level|RCA_Input:U_RCA_INPUT|state_r
+Name state_r.STOP state_r.MASTER_ACK state_r.ACK2 state_r.W state_r.ACK1 state_r.COMMAND state_r.START state_r.READY 
+state_r.READY 0 0 0 0 0 0 0 0 
+state_r.START 0 0 0 0 0 0 1 1 
+state_r.COMMAND 0 0 0 0 0 1 0 1 
+state_r.ACK1 0 0 0 0 1 0 0 1 
+state_r.W 0 0 0 1 0 0 0 1 
+state_r.ACK2 0 0 1 0 0 0 0 1 
+state_r.MASTER_ACK 0 1 0 0 0 0 0 1 
+state_r.STOP 1 0 0 0 0 0 0 1 

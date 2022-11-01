@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition"
 
--- DATE "10/25/2022 17:07:43"
+-- DATE "11/01/2022 13:38:27"
 
 -- 
 -- Device: Altera 10M50DAF484C6GES Package FBGA484
@@ -91,6 +91,8 @@ ENTITY 	top_level IS
 	clk : IN std_logic;
 	power_on : IN std_logic;
 	rst : IN std_logic;
+	sda : INOUT std_logic;
+	scl : INOUT std_logic;
 	UART_TX_ready : OUT std_logic;
 	UART_TX_out : OUT std_logic;
 	TMDS_p : OUT std_logic_vector(2 DOWNTO 0);
@@ -101,19 +103,21 @@ ENTITY 	top_level IS
 END top_level;
 
 -- Design Ports Information
--- power_on	=>  Location: PIN_Y2,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- UART_TX_ready	=>  Location: PIN_N9,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- UART_TX_out	=>  Location: PIN_M22,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_p[0]	=>  Location: PIN_B3,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_p[1]	=>  Location: PIN_B10,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_p[2]	=>  Location: PIN_D22,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_n[0]	=>  Location: PIN_U15,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_n[1]	=>  Location: PIN_W6,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_n[2]	=>  Location: PIN_A20,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_clk_p	=>  Location: PIN_AA1,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- TMDS_clk_n	=>  Location: PIN_Y8,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- clk	=>  Location: PIN_F18,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- rst	=>  Location: PIN_E21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- power_on	=>  Location: PIN_V5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- UART_TX_ready	=>  Location: PIN_M22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- UART_TX_out	=>  Location: PIN_D12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_p[0]	=>  Location: PIN_L8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_p[1]	=>  Location: PIN_N15,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_p[2]	=>  Location: PIN_J11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_n[0]	=>  Location: PIN_AB9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_n[1]	=>  Location: PIN_A20,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_n[2]	=>  Location: PIN_AB17,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_clk_p	=>  Location: PIN_Y22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- TMDS_clk_n	=>  Location: PIN_A11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- clk	=>  Location: PIN_AA11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- rst	=>  Location: PIN_AA5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- sda	=>  Location: PIN_B8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- scl	=>  Location: PIN_AB10,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
 ARCHITECTURE structure OF top_level IS
@@ -140,10 +144,14 @@ SIGNAL \~QUARTUS_CREATED_ADC2~_CHSEL_bus\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \power_on~input_o\ : std_logic;
 SIGNAL \clk~input_o\ : std_logic;
 SIGNAL \rst~input_o\ : std_logic;
+SIGNAL \sda~input_o\ : std_logic;
+SIGNAL \scl~input_o\ : std_logic;
 SIGNAL \~QUARTUS_CREATED_GND~I_combout\ : std_logic;
 SIGNAL \~QUARTUS_CREATED_UNVM~~busy\ : std_logic;
 SIGNAL \~QUARTUS_CREATED_ADC1~~eoc\ : std_logic;
 SIGNAL \~QUARTUS_CREATED_ADC2~~eoc\ : std_logic;
+SIGNAL \sda~output_o\ : std_logic;
+SIGNAL \scl~output_o\ : std_logic;
 SIGNAL \UART_TX_ready~output_o\ : std_logic;
 SIGNAL \UART_TX_out~output_o\ : std_logic;
 SIGNAL \TMDS_p[0]~output_o\ : std_logic;
@@ -186,7 +194,7 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor);
 
--- Location: LCCOMB_X44_Y41_N16
+-- Location: LCCOMB_X44_Y52_N8
 \~QUARTUS_CREATED_GND~I\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \~QUARTUS_CREATED_GND~I_combout\ = GND
@@ -199,7 +207,31 @@ GENERIC MAP (
 PORT MAP (
 	combout => \~QUARTUS_CREATED_GND~I_combout\);
 
--- Location: IOOBUF_X0_Y13_N23
+-- Location: IOOBUF_X46_Y54_N30
+\sda~output\ : fiftyfivenm_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "true")
+-- pragma translate_on
+PORT MAP (
+	i => VCC,
+	devoe => ww_devoe,
+	o => \sda~output_o\);
+
+-- Location: IOOBUF_X38_Y0_N16
+\scl~output\ : fiftyfivenm_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "true")
+-- pragma translate_on
+PORT MAP (
+	i => VCC,
+	devoe => ww_devoe,
+	o => \scl~output_o\);
+
+-- Location: IOOBUF_X78_Y25_N2
 \UART_TX_ready~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -211,7 +243,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \UART_TX_ready~output_o\);
 
--- Location: IOOBUF_X78_Y25_N2
+-- Location: IOOBUF_X51_Y54_N2
 \UART_TX_out~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -223,7 +255,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \UART_TX_out~output_o\);
 
--- Location: IOOBUF_X26_Y39_N16
+-- Location: IOOBUF_X0_Y27_N16
 \TMDS_p[0]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -235,7 +267,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_p[0]~output_o\);
 
--- Location: IOOBUF_X46_Y54_N9
+-- Location: IOOBUF_X78_Y29_N16
 \TMDS_p[1]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -247,7 +279,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_p[1]~output_o\);
 
--- Location: IOOBUF_X78_Y35_N9
+-- Location: IOOBUF_X49_Y54_N23
 \TMDS_p[2]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -259,7 +291,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_p[2]~output_o\);
 
--- Location: IOOBUF_X56_Y0_N23
+-- Location: IOOBUF_X34_Y0_N16
 \TMDS_n[0]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -271,7 +303,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_n[0]~output_o\);
 
--- Location: IOOBUF_X16_Y0_N30
+-- Location: IOOBUF_X66_Y54_N2
 \TMDS_n[1]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -283,7 +315,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_n[1]~output_o\);
 
--- Location: IOOBUF_X66_Y54_N2
+-- Location: IOOBUF_X69_Y0_N23
 \TMDS_n[2]~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -295,7 +327,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_n[2]~output_o\);
 
--- Location: IOOBUF_X18_Y0_N30
+-- Location: IOOBUF_X78_Y15_N9
 \TMDS_clk_p~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -307,7 +339,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_clk_p~output_o\);
 
--- Location: IOOBUF_X20_Y0_N2
+-- Location: IOOBUF_X51_Y54_N9
 \TMDS_clk_n~output\ : fiftyfivenm_io_obuf
 -- pragma translate_off
 GENERIC MAP (
@@ -319,7 +351,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \TMDS_clk_n~output_o\);
 
--- Location: IOIBUF_X16_Y0_N15
+-- Location: IOIBUF_X14_Y0_N8
 \power_on~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -331,7 +363,7 @@ PORT MAP (
 	i => ww_power_on,
 	o => \power_on~input_o\);
 
--- Location: IOIBUF_X78_Y40_N15
+-- Location: IOIBUF_X40_Y0_N8
 \clk~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -343,7 +375,7 @@ PORT MAP (
 	i => ww_clk,
 	o => \clk~input_o\);
 
--- Location: IOIBUF_X78_Y33_N1
+-- Location: IOIBUF_X26_Y0_N1
 \rst~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -354,6 +386,30 @@ GENERIC MAP (
 PORT MAP (
 	i => ww_rst,
 	o => \rst~input_o\);
+
+-- Location: IOIBUF_X46_Y54_N29
+\sda~input\ : fiftyfivenm_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	listen_to_nsleep_signal => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => sda,
+	o => \sda~input_o\);
+
+-- Location: IOIBUF_X38_Y0_N15
+\scl~input\ : fiftyfivenm_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	listen_to_nsleep_signal => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => scl,
+	o => \scl~input_o\);
 
 -- Location: UNVM_X0_Y40_N40
 \~QUARTUS_CREATED_UNVM~\ : fiftyfivenm_unvm
@@ -445,6 +501,10 @@ ww_TMDS_n(2) <= \TMDS_n[2]~output_o\;
 ww_TMDS_clk_p <= \TMDS_clk_p~output_o\;
 
 ww_TMDS_clk_n <= \TMDS_clk_n~output_o\;
+
+sda <= \sda~output_o\;
+
+scl <= \scl~output_o\;
 END structure;
 
 

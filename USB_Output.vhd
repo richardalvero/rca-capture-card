@@ -22,7 +22,7 @@ entity USB_Output is
 end USB_Output;
 
 architecture transmit of USB_Output is
-	
+	-- Implement UART as an FSM
 	type state_t is (IDLE, TXSYNC, START_BIT, DATA_BITS, P_BIT, STOP_BIT, RESTART);
 	signal state_r, next_state : state_t;
 	

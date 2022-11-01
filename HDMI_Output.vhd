@@ -15,6 +15,7 @@ entity HDMI_Output is
 		TMDS_n :			out std_logic_vector(2 downto 0); -- TMDS RGB -
 		TMDS_clk_p :	out std_logic; -- TMDS + Clock
 		TMDS_clk_n :	out std_logic); -- TMDS - Clock
+		
 end HDMI_Output;
 
 architecture output of HDMI_Output is
