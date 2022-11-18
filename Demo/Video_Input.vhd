@@ -11,8 +11,8 @@ entity videoInput is
 		vsync : 	in std_logic;
 		
 		-- Output of Counter
-		output : out std_logic_vector(23 downto 0));
-
+		output : out std_logic_vector(23 downto 0);
+		write_led : out std_logic);
 end videoInput;
 
 -- Architecture of Video Input
@@ -25,10 +25,14 @@ begin
 	begin
 		if (rst = '1') then
 			count <= (others => '0');
-		
+			write_led <= '0';
+
 		elsif (rising_edge(sclk)) then
 			if (vsync = '1') then
 				count <= count + 1;
+				write_led <= '1';
+			else 
+				write_led <= '0';
 			end if;
 		end if;
 	end process;

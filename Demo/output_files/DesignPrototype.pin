@@ -522,7 +522,7 @@ sclk                         : W9        : input  : 2.5 V             :         
 vsync                        : W10       : input  : 2.5 V             :         : 3         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : W11       :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W12       :        :                   :         : 4         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : W13       :        :                   :         : 4         :                
+write_led                    : W13       : output : 2.5 V             :         : 4         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : W14       :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W15       :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : W16       :        :                   :         : 4         :                

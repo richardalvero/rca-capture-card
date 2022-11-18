@@ -26,7 +26,10 @@ entity toplevel is
 		led4		: 	out std_logic_vector(6 downto 0);
 		led4_dp	:	out std_logic;
 		led5		: 	out std_logic_vector(6 downto 0);
-		led5_dp	:	out std_logic);
+		led5_dp	:	out std_logic;
+		
+		-- Output LED
+		write_led :	out std_logic);
 end toplevel;
 
 architecture STR of toplevel is
@@ -42,7 +45,8 @@ architecture STR of toplevel is
 		port (
 			sclk, rst : in std_logic;
 			vsync : 	in std_logic;
-			output : out std_logic_vector(23 downto 0));
+			output : out std_logic_vector(23 downto 0);
+			write_led : out std_logic);
 	end component;
 	
 	-- Internal Signals Used
@@ -54,7 +58,8 @@ begin
 		sclk => sclk,
 		rst => not rst,
 		vsync => vsync,
-		output => vsync_counter);
+		output => vsync_counter,
+		write_led => write_led);
 
 	-- map VSync Counter to 7 Segment Display
 	U_LED0 : decoder port map (

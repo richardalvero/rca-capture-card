@@ -172,6 +172,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "write_led",
+					"strict" : false
+				},
+				{
 					"name" : "vsync",
 					"strict" : false
 				},
