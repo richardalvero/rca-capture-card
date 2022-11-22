@@ -1,0 +1,3 @@
+/home/richardalvero/pico/level/build/pioasm/CMakeFiles/rebuild_cache.dir
+/home/richardalvero/pico/level/build/pioasm/CMakeFiles/edit_cache.dir
+/home/richardalvero/pico/level/build/pioasm/CMakeFiles/pioasm.dir
