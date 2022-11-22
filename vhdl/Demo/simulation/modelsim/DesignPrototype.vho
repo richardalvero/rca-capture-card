@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition"
 
--- DATE "11/18/2022 16:02:20"
+-- DATE "11/22/2022 14:56:40"
 
 -- 
 -- Device: Altera 10M50DAF484C6GES Package FBGA484
@@ -91,8 +91,9 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY 	toplevel IS
     PORT (
 	rst : IN std_logic;
-	vsync : IN std_logic;
 	sclk : IN std_logic;
+	vsync : IN std_logic;
+	hsync : IN std_logic;
 	led0 : BUFFER std_logic_vector(6 DOWNTO 0);
 	led0_dp : BUFFER std_logic;
 	led1 : BUFFER std_logic_vector(6 DOWNTO 0);
@@ -104,8 +105,7 @@ ENTITY 	toplevel IS
 	led4 : BUFFER std_logic_vector(6 DOWNTO 0);
 	led4_dp : BUFFER std_logic;
 	led5 : BUFFER std_logic_vector(6 DOWNTO 0);
-	led5_dp : BUFFER std_logic;
-	write_led : BUFFER std_logic
+	led5_dp : BUFFER std_logic
 	);
 END toplevel;
 
@@ -158,10 +158,10 @@ END toplevel;
 -- led5[5]	=>  Location: PIN_N19,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- led5[6]	=>  Location: PIN_N20,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- led5_dp	=>  Location: PIN_L19,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- write_led	=>  Location: PIN_W13,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- vsync	=>  Location: PIN_W10,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- sclk	=>  Location: PIN_W9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- sclk	=>  Location: PIN_W10,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- rst	=>  Location: PIN_B8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- vsync	=>  Location: PIN_W9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- hsync	=>  Location: PIN_W8,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
 ARCHITECTURE structure OF toplevel IS
@@ -175,8 +175,9 @@ SIGNAL ww_devoe : std_logic;
 SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
 SIGNAL ww_rst : std_logic;
-SIGNAL ww_vsync : std_logic;
 SIGNAL ww_sclk : std_logic;
+SIGNAL ww_vsync : std_logic;
+SIGNAL ww_hsync : std_logic;
 SIGNAL ww_led0 : std_logic_vector(6 DOWNTO 0);
 SIGNAL ww_led0_dp : std_logic;
 SIGNAL ww_led1 : std_logic_vector(6 DOWNTO 0);
@@ -189,7 +190,6 @@ SIGNAL ww_led4 : std_logic_vector(6 DOWNTO 0);
 SIGNAL ww_led4_dp : std_logic;
 SIGNAL ww_led5 : std_logic_vector(6 DOWNTO 0);
 SIGNAL ww_led5_dp : std_logic;
-SIGNAL ww_write_led : std_logic;
 SIGNAL \~QUARTUS_CREATED_ADC1~_CHSEL_bus\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \~QUARTUS_CREATED_ADC2~_CHSEL_bus\ : std_logic_vector(4 DOWNTO 0);
 SIGNAL \~QUARTUS_CREATED_GND~I_combout\ : std_logic;
@@ -244,16 +244,55 @@ SIGNAL \led5[4]~output_o\ : std_logic;
 SIGNAL \led5[5]~output_o\ : std_logic;
 SIGNAL \led5[6]~output_o\ : std_logic;
 SIGNAL \led5_dp~output_o\ : std_logic;
-SIGNAL \write_led~output_o\ : std_logic;
 SIGNAL \sclk~input_o\ : std_logic;
 SIGNAL \vsync~input_o\ : std_logic;
-SIGNAL \U_VID|count[0]~23_combout\ : std_logic;
+SIGNAL \U_VID|vcount[0]~93_combout\ : std_logic;
 SIGNAL \rst~input_o\ : std_logic;
-SIGNAL \U_VID|count[1]~24_combout\ : std_logic;
-SIGNAL \U_VID|count[1]~25\ : std_logic;
-SIGNAL \U_VID|count[2]~26_combout\ : std_logic;
-SIGNAL \U_VID|count[2]~27\ : std_logic;
-SIGNAL \U_VID|count[3]~28_combout\ : std_logic;
+SIGNAL \U_VID|vcount[1]~31_combout\ : std_logic;
+SIGNAL \U_VID|vcount[1]~32\ : std_logic;
+SIGNAL \U_VID|vcount[2]~33_combout\ : std_logic;
+SIGNAL \U_VID|vcount[2]~34\ : std_logic;
+SIGNAL \U_VID|vcount[3]~35_combout\ : std_logic;
+SIGNAL \U_VID|vcount[3]~36\ : std_logic;
+SIGNAL \U_VID|vcount[4]~37_combout\ : std_logic;
+SIGNAL \U_VID|vcount[4]~38\ : std_logic;
+SIGNAL \U_VID|vcount[5]~39_combout\ : std_logic;
+SIGNAL \U_VID|vcount[5]~40\ : std_logic;
+SIGNAL \U_VID|vcount[6]~41_combout\ : std_logic;
+SIGNAL \U_VID|vcount[6]~42\ : std_logic;
+SIGNAL \U_VID|vcount[7]~43_combout\ : std_logic;
+SIGNAL \U_VID|vcount[7]~44\ : std_logic;
+SIGNAL \U_VID|vcount[8]~45_combout\ : std_logic;
+SIGNAL \U_VID|vcount[8]~46\ : std_logic;
+SIGNAL \U_VID|vcount[9]~47_combout\ : std_logic;
+SIGNAL \U_VID|vcount[9]~48\ : std_logic;
+SIGNAL \U_VID|vcount[10]~49_combout\ : std_logic;
+SIGNAL \U_VID|vcount[10]~50\ : std_logic;
+SIGNAL \U_VID|vcount[11]~51_combout\ : std_logic;
+SIGNAL \U_VID|vcount[11]~52\ : std_logic;
+SIGNAL \U_VID|vcount[12]~53_combout\ : std_logic;
+SIGNAL \U_VID|vcount[12]~54\ : std_logic;
+SIGNAL \U_VID|vcount[13]~55_combout\ : std_logic;
+SIGNAL \U_VID|vcount[13]~56\ : std_logic;
+SIGNAL \U_VID|vcount[14]~57_combout\ : std_logic;
+SIGNAL \U_VID|vcount[14]~58\ : std_logic;
+SIGNAL \U_VID|vcount[15]~59_combout\ : std_logic;
+SIGNAL \U_VID|vcount[15]~60\ : std_logic;
+SIGNAL \U_VID|vcount[16]~61_combout\ : std_logic;
+SIGNAL \U_VID|vcount[16]~62\ : std_logic;
+SIGNAL \U_VID|vcount[17]~63_combout\ : std_logic;
+SIGNAL \U_VID|vcount[17]~64\ : std_logic;
+SIGNAL \U_VID|vcount[18]~65_combout\ : std_logic;
+SIGNAL \U_VID|vcount[18]~66\ : std_logic;
+SIGNAL \U_VID|vcount[19]~67_combout\ : std_logic;
+SIGNAL \U_VID|vcount[19]~68\ : std_logic;
+SIGNAL \U_VID|vcount[20]~69_combout\ : std_logic;
+SIGNAL \U_VID|vcount[20]~70\ : std_logic;
+SIGNAL \U_VID|vcount[21]~71_combout\ : std_logic;
+SIGNAL \U_VID|vcount[21]~72\ : std_logic;
+SIGNAL \U_VID|vcount[22]~73_combout\ : std_logic;
+SIGNAL \U_VID|vcount[22]~74\ : std_logic;
+SIGNAL \U_VID|vcount[23]~75_combout\ : std_logic;
 SIGNAL \U_LED0|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED0|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED0|Mux4~0_combout\ : std_logic;
@@ -261,14 +300,16 @@ SIGNAL \U_LED0|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED0|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED0|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED0|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|count[3]~29\ : std_logic;
-SIGNAL \U_VID|count[4]~30_combout\ : std_logic;
-SIGNAL \U_VID|count[4]~31\ : std_logic;
-SIGNAL \U_VID|count[5]~32_combout\ : std_logic;
-SIGNAL \U_VID|count[5]~33\ : std_logic;
-SIGNAL \U_VID|count[6]~34_combout\ : std_logic;
-SIGNAL \U_VID|count[6]~35\ : std_logic;
-SIGNAL \U_VID|count[7]~36_combout\ : std_logic;
+SIGNAL \U_VID|vsync_led~feeder_combout\ : std_logic;
+SIGNAL \U_VID|vsync_led~q\ : std_logic;
+SIGNAL \U_VID|vcount[23]~76\ : std_logic;
+SIGNAL \U_VID|vcount[24]~77_combout\ : std_logic;
+SIGNAL \U_VID|vcount[24]~78\ : std_logic;
+SIGNAL \U_VID|vcount[25]~79_combout\ : std_logic;
+SIGNAL \U_VID|vcount[25]~80\ : std_logic;
+SIGNAL \U_VID|vcount[26]~81_combout\ : std_logic;
+SIGNAL \U_VID|vcount[26]~82\ : std_logic;
+SIGNAL \U_VID|vcount[27]~83_combout\ : std_logic;
 SIGNAL \U_LED1|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED1|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED1|Mux4~0_combout\ : std_logic;
@@ -276,14 +317,14 @@ SIGNAL \U_LED1|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED1|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED1|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED1|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|count[7]~37\ : std_logic;
-SIGNAL \U_VID|count[8]~38_combout\ : std_logic;
-SIGNAL \U_VID|count[8]~39\ : std_logic;
-SIGNAL \U_VID|count[9]~40_combout\ : std_logic;
-SIGNAL \U_VID|count[9]~41\ : std_logic;
-SIGNAL \U_VID|count[10]~42_combout\ : std_logic;
-SIGNAL \U_VID|count[10]~43\ : std_logic;
-SIGNAL \U_VID|count[11]~44_combout\ : std_logic;
+SIGNAL \U_VID|vcount[27]~84\ : std_logic;
+SIGNAL \U_VID|vcount[28]~85_combout\ : std_logic;
+SIGNAL \U_VID|vcount[28]~86\ : std_logic;
+SIGNAL \U_VID|vcount[29]~87_combout\ : std_logic;
+SIGNAL \U_VID|vcount[29]~88\ : std_logic;
+SIGNAL \U_VID|vcount[30]~89_combout\ : std_logic;
+SIGNAL \U_VID|vcount[30]~90\ : std_logic;
+SIGNAL \U_VID|vcount[31]~91_combout\ : std_logic;
 SIGNAL \U_LED2|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED2|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED2|Mux4~0_combout\ : std_logic;
@@ -291,14 +332,53 @@ SIGNAL \U_LED2|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED2|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED2|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED2|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|count[11]~45\ : std_logic;
-SIGNAL \U_VID|count[12]~46_combout\ : std_logic;
-SIGNAL \U_VID|count[12]~47\ : std_logic;
-SIGNAL \U_VID|count[13]~48_combout\ : std_logic;
-SIGNAL \U_VID|count[13]~49\ : std_logic;
-SIGNAL \U_VID|count[14]~50_combout\ : std_logic;
-SIGNAL \U_VID|count[14]~51\ : std_logic;
-SIGNAL \U_VID|count[15]~52_combout\ : std_logic;
+SIGNAL \hsync~input_o\ : std_logic;
+SIGNAL \U_VID|hcount[0]~93_combout\ : std_logic;
+SIGNAL \U_VID|hcount[1]~31_combout\ : std_logic;
+SIGNAL \U_VID|hcount[1]~32\ : std_logic;
+SIGNAL \U_VID|hcount[2]~33_combout\ : std_logic;
+SIGNAL \U_VID|hcount[2]~34\ : std_logic;
+SIGNAL \U_VID|hcount[3]~35_combout\ : std_logic;
+SIGNAL \U_VID|hcount[3]~36\ : std_logic;
+SIGNAL \U_VID|hcount[4]~37_combout\ : std_logic;
+SIGNAL \U_VID|hcount[4]~38\ : std_logic;
+SIGNAL \U_VID|hcount[5]~39_combout\ : std_logic;
+SIGNAL \U_VID|hcount[5]~40\ : std_logic;
+SIGNAL \U_VID|hcount[6]~41_combout\ : std_logic;
+SIGNAL \U_VID|hcount[6]~42\ : std_logic;
+SIGNAL \U_VID|hcount[7]~43_combout\ : std_logic;
+SIGNAL \U_VID|hcount[7]~44\ : std_logic;
+SIGNAL \U_VID|hcount[8]~45_combout\ : std_logic;
+SIGNAL \U_VID|hcount[8]~46\ : std_logic;
+SIGNAL \U_VID|hcount[9]~47_combout\ : std_logic;
+SIGNAL \U_VID|hcount[9]~48\ : std_logic;
+SIGNAL \U_VID|hcount[10]~49_combout\ : std_logic;
+SIGNAL \U_VID|hcount[10]~50\ : std_logic;
+SIGNAL \U_VID|hcount[11]~51_combout\ : std_logic;
+SIGNAL \U_VID|hcount[11]~52\ : std_logic;
+SIGNAL \U_VID|hcount[12]~53_combout\ : std_logic;
+SIGNAL \U_VID|hcount[12]~54\ : std_logic;
+SIGNAL \U_VID|hcount[13]~55_combout\ : std_logic;
+SIGNAL \U_VID|hcount[13]~56\ : std_logic;
+SIGNAL \U_VID|hcount[14]~57_combout\ : std_logic;
+SIGNAL \U_VID|hcount[14]~58\ : std_logic;
+SIGNAL \U_VID|hcount[15]~59_combout\ : std_logic;
+SIGNAL \U_VID|hcount[15]~60\ : std_logic;
+SIGNAL \U_VID|hcount[16]~61_combout\ : std_logic;
+SIGNAL \U_VID|hcount[16]~62\ : std_logic;
+SIGNAL \U_VID|hcount[17]~63_combout\ : std_logic;
+SIGNAL \U_VID|hcount[17]~64\ : std_logic;
+SIGNAL \U_VID|hcount[18]~65_combout\ : std_logic;
+SIGNAL \U_VID|hcount[18]~66\ : std_logic;
+SIGNAL \U_VID|hcount[19]~67_combout\ : std_logic;
+SIGNAL \U_VID|hcount[19]~68\ : std_logic;
+SIGNAL \U_VID|hcount[20]~69_combout\ : std_logic;
+SIGNAL \U_VID|hcount[20]~70\ : std_logic;
+SIGNAL \U_VID|hcount[21]~71_combout\ : std_logic;
+SIGNAL \U_VID|hcount[21]~72\ : std_logic;
+SIGNAL \U_VID|hcount[22]~73_combout\ : std_logic;
+SIGNAL \U_VID|hcount[22]~74\ : std_logic;
+SIGNAL \U_VID|hcount[23]~75_combout\ : std_logic;
 SIGNAL \U_LED3|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED3|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED3|Mux4~0_combout\ : std_logic;
@@ -306,14 +386,16 @@ SIGNAL \U_LED3|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED3|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED3|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED3|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|count[15]~53\ : std_logic;
-SIGNAL \U_VID|count[16]~54_combout\ : std_logic;
-SIGNAL \U_VID|count[16]~55\ : std_logic;
-SIGNAL \U_VID|count[17]~56_combout\ : std_logic;
-SIGNAL \U_VID|count[17]~57\ : std_logic;
-SIGNAL \U_VID|count[18]~58_combout\ : std_logic;
-SIGNAL \U_VID|count[18]~59\ : std_logic;
-SIGNAL \U_VID|count[19]~60_combout\ : std_logic;
+SIGNAL \U_VID|hsync_led~feeder_combout\ : std_logic;
+SIGNAL \U_VID|hsync_led~q\ : std_logic;
+SIGNAL \U_VID|hcount[23]~76\ : std_logic;
+SIGNAL \U_VID|hcount[24]~77_combout\ : std_logic;
+SIGNAL \U_VID|hcount[24]~78\ : std_logic;
+SIGNAL \U_VID|hcount[25]~79_combout\ : std_logic;
+SIGNAL \U_VID|hcount[25]~80\ : std_logic;
+SIGNAL \U_VID|hcount[26]~81_combout\ : std_logic;
+SIGNAL \U_VID|hcount[26]~82\ : std_logic;
+SIGNAL \U_VID|hcount[27]~83_combout\ : std_logic;
 SIGNAL \U_LED4|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED4|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED4|Mux4~0_combout\ : std_logic;
@@ -321,14 +403,14 @@ SIGNAL \U_LED4|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED4|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED4|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED4|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|count[19]~61\ : std_logic;
-SIGNAL \U_VID|count[20]~62_combout\ : std_logic;
-SIGNAL \U_VID|count[20]~63\ : std_logic;
-SIGNAL \U_VID|count[21]~64_combout\ : std_logic;
-SIGNAL \U_VID|count[21]~65\ : std_logic;
-SIGNAL \U_VID|count[22]~66_combout\ : std_logic;
-SIGNAL \U_VID|count[22]~67\ : std_logic;
-SIGNAL \U_VID|count[23]~68_combout\ : std_logic;
+SIGNAL \U_VID|hcount[27]~84\ : std_logic;
+SIGNAL \U_VID|hcount[28]~85_combout\ : std_logic;
+SIGNAL \U_VID|hcount[28]~86\ : std_logic;
+SIGNAL \U_VID|hcount[29]~87_combout\ : std_logic;
+SIGNAL \U_VID|hcount[29]~88\ : std_logic;
+SIGNAL \U_VID|hcount[30]~89_combout\ : std_logic;
+SIGNAL \U_VID|hcount[30]~90\ : std_logic;
+SIGNAL \U_VID|hcount[31]~91_combout\ : std_logic;
 SIGNAL \U_LED5|Mux6~0_combout\ : std_logic;
 SIGNAL \U_LED5|Mux5~0_combout\ : std_logic;
 SIGNAL \U_LED5|Mux4~0_combout\ : std_logic;
@@ -336,9 +418,8 @@ SIGNAL \U_LED5|Mux3~0_combout\ : std_logic;
 SIGNAL \U_LED5|Mux2~0_combout\ : std_logic;
 SIGNAL \U_LED5|Mux1~0_combout\ : std_logic;
 SIGNAL \U_LED5|Mux0~0_combout\ : std_logic;
-SIGNAL \U_VID|write_led~feeder_combout\ : std_logic;
-SIGNAL \U_VID|write_led~q\ : std_logic;
-SIGNAL \U_VID|count\ : std_logic_vector(23 DOWNTO 0);
+SIGNAL \U_VID|vcount\ : std_logic_vector(47 DOWNTO 0);
+SIGNAL \U_VID|hcount\ : std_logic_vector(47 DOWNTO 0);
 SIGNAL \U_LED5|ALT_INV_Mux0~0_combout\ : std_logic;
 SIGNAL \U_LED4|ALT_INV_Mux0~0_combout\ : std_logic;
 SIGNAL \U_LED3|ALT_INV_Mux0~0_combout\ : std_logic;
@@ -356,8 +437,9 @@ END COMPONENT;
 BEGIN
 
 ww_rst <= rst;
-ww_vsync <= vsync;
 ww_sclk <= sclk;
+ww_vsync <= vsync;
+ww_hsync <= hsync;
 led0 <= ww_led0;
 led0_dp <= ww_led0_dp;
 led1 <= ww_led1;
@@ -370,7 +452,6 @@ led4 <= ww_led4;
 led4_dp <= ww_led4_dp;
 led5 <= ww_led5;
 led5_dp <= ww_led5_dp;
-write_led <= ww_write_led;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
@@ -390,7 +471,7 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor);
 
--- Location: LCCOMB_X44_Y42_N12
+-- Location: LCCOMB_X44_Y51_N24
 \~QUARTUS_CREATED_GND~I\ : fiftyfivenm_lcell_comb
 -- Equation(s):
 -- \~QUARTUS_CREATED_GND~I_combout\ = GND
@@ -495,7 +576,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => VCC,
+	i => \U_VID|vsync_led~q\,
 	devoe => ww_devoe,
 	o => \led0_dp~output_o\);
 
@@ -783,7 +864,7 @@ GENERIC MAP (
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => VCC,
+	i => \U_VID|hsync_led~q\,
 	devoe => ww_devoe,
 	o => \led3_dp~output_o\);
 
@@ -979,19 +1060,7 @@ PORT MAP (
 	devoe => ww_devoe,
 	o => \led5_dp~output_o\);
 
--- Location: IOOBUF_X46_Y0_N2
-\write_led~output\ : fiftyfivenm_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false")
--- pragma translate_on
-PORT MAP (
-	i => \U_VID|write_led~q\,
-	devoe => ww_devoe,
-	o => \write_led~output_o\);
-
--- Location: IOIBUF_X22_Y0_N1
+-- Location: IOIBUF_X24_Y0_N29
 \sclk~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -1003,7 +1072,7 @@ PORT MAP (
 	i => ww_sclk,
 	o => \sclk~input_o\);
 
--- Location: IOIBUF_X24_Y0_N29
+-- Location: IOIBUF_X22_Y0_N1
 \vsync~input\ : fiftyfivenm_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -1015,20 +1084,20 @@ PORT MAP (
 	i => ww_vsync,
 	o => \vsync~input_o\);
 
--- Location: LCCOMB_X45_Y11_N4
-\U_VID|count[0]~23\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X25_Y2_N0
+\U_VID|vcount[0]~93\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_VID|count[0]~23_combout\ = \vsync~input_o\ $ (\U_VID|count\(0))
+-- \U_VID|vcount[0]~93_combout\ = \U_VID|vcount\(0) $ (\vsync~input_o\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011110000111100",
+	lut_mask => "0000111111110000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	datab => \vsync~input_o\,
-	datac => \U_VID|count\(0),
-	combout => \U_VID|count[0]~23_combout\);
+	datac => \U_VID|vcount\(0),
+	datad => \vsync~input_o\,
+	combout => \U_VID|vcount[0]~93_combout\);
 
 -- Location: IOIBUF_X46_Y54_N29
 \rst~input\ : fiftyfivenm_io_ibuf
@@ -1042,8 +1111,8 @@ PORT MAP (
 	i => ww_rst,
 	o => \rst~input_o\);
 
--- Location: FF_X45_Y11_N5
-\U_VID|count[0]\ : dffeas
+-- Location: FF_X25_Y2_N1
+\U_VID|vcount[0]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1051,17 +1120,17 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \sclk~input_o\,
-	d => \U_VID|count[0]~23_combout\,
+	d => \U_VID|vcount[0]~93_combout\,
 	clrn => \rst~input_o\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \U_VID|count\(0));
+	q => \U_VID|vcount\(0));
 
--- Location: LCCOMB_X45_Y11_N10
-\U_VID|count[1]~24\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X25_Y2_N2
+\U_VID|vcount[1]~31\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_VID|count[1]~24_combout\ = (\U_VID|count\(1) & (\U_VID|count\(0) $ (VCC))) # (!\U_VID|count\(1) & (\U_VID|count\(0) & VCC))
--- \U_VID|count[1]~25\ = CARRY((\U_VID|count\(1) & \U_VID|count\(0)))
+-- \U_VID|vcount[1]~31_combout\ = (\U_VID|vcount\(0) & (\U_VID|vcount\(1) $ (VCC))) # (!\U_VID|vcount\(0) & (\U_VID|vcount\(1) & VCC))
+-- \U_VID|vcount[1]~32\ = CARRY((\U_VID|vcount\(0) & \U_VID|vcount\(1)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -1069,14 +1138,14 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(1),
-	datab => \U_VID|count\(0),
+	dataa => \U_VID|vcount\(0),
+	datab => \U_VID|vcount\(1),
 	datad => VCC,
-	combout => \U_VID|count[1]~24_combout\,
-	cout => \U_VID|count[1]~25\);
+	combout => \U_VID|vcount[1]~31_combout\,
+	cout => \U_VID|vcount[1]~32\);
 
--- Location: FF_X45_Y11_N11
-\U_VID|count[1]\ : dffeas
+-- Location: FF_X25_Y2_N3
+\U_VID|vcount[1]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1084,18 +1153,698 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \sclk~input_o\,
-	d => \U_VID|count[1]~24_combout\,
+	d => \U_VID|vcount[1]~31_combout\,
 	clrn => \rst~input_o\,
 	ena => \vsync~input_o\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \U_VID|count\(1));
+	q => \U_VID|vcount\(1));
 
--- Location: LCCOMB_X45_Y11_N12
-\U_VID|count[2]~26\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X25_Y2_N4
+\U_VID|vcount[2]~33\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_VID|count[2]~26_combout\ = (\U_VID|count\(2) & (!\U_VID|count[1]~25\)) # (!\U_VID|count\(2) & ((\U_VID|count[1]~25\) # (GND)))
--- \U_VID|count[2]~27\ = CARRY((!\U_VID|count[1]~25\) # (!\U_VID|count\(2)))
+-- \U_VID|vcount[2]~33_combout\ = (\U_VID|vcount\(2) & (!\U_VID|vcount[1]~32\)) # (!\U_VID|vcount\(2) & ((\U_VID|vcount[1]~32\) # (GND)))
+-- \U_VID|vcount[2]~34\ = CARRY((!\U_VID|vcount[1]~32\) # (!\U_VID|vcount\(2)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(2),
+	datad => VCC,
+	cin => \U_VID|vcount[1]~32\,
+	combout => \U_VID|vcount[2]~33_combout\,
+	cout => \U_VID|vcount[2]~34\);
+
+-- Location: FF_X25_Y2_N5
+\U_VID|vcount[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[2]~33_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(2));
+
+-- Location: LCCOMB_X25_Y2_N6
+\U_VID|vcount[3]~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[3]~35_combout\ = (\U_VID|vcount\(3) & (\U_VID|vcount[2]~34\ $ (GND))) # (!\U_VID|vcount\(3) & (!\U_VID|vcount[2]~34\ & VCC))
+-- \U_VID|vcount[3]~36\ = CARRY((\U_VID|vcount\(3) & !\U_VID|vcount[2]~34\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(3),
+	datad => VCC,
+	cin => \U_VID|vcount[2]~34\,
+	combout => \U_VID|vcount[3]~35_combout\,
+	cout => \U_VID|vcount[3]~36\);
+
+-- Location: FF_X25_Y2_N7
+\U_VID|vcount[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[3]~35_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(3));
+
+-- Location: LCCOMB_X25_Y2_N8
+\U_VID|vcount[4]~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[4]~37_combout\ = (\U_VID|vcount\(4) & (!\U_VID|vcount[3]~36\)) # (!\U_VID|vcount\(4) & ((\U_VID|vcount[3]~36\) # (GND)))
+-- \U_VID|vcount[4]~38\ = CARRY((!\U_VID|vcount[3]~36\) # (!\U_VID|vcount\(4)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(4),
+	datad => VCC,
+	cin => \U_VID|vcount[3]~36\,
+	combout => \U_VID|vcount[4]~37_combout\,
+	cout => \U_VID|vcount[4]~38\);
+
+-- Location: FF_X25_Y2_N9
+\U_VID|vcount[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[4]~37_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(4));
+
+-- Location: LCCOMB_X25_Y2_N10
+\U_VID|vcount[5]~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[5]~39_combout\ = (\U_VID|vcount\(5) & (\U_VID|vcount[4]~38\ $ (GND))) # (!\U_VID|vcount\(5) & (!\U_VID|vcount[4]~38\ & VCC))
+-- \U_VID|vcount[5]~40\ = CARRY((\U_VID|vcount\(5) & !\U_VID|vcount[4]~38\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(5),
+	datad => VCC,
+	cin => \U_VID|vcount[4]~38\,
+	combout => \U_VID|vcount[5]~39_combout\,
+	cout => \U_VID|vcount[5]~40\);
+
+-- Location: FF_X25_Y2_N11
+\U_VID|vcount[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[5]~39_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(5));
+
+-- Location: LCCOMB_X25_Y2_N12
+\U_VID|vcount[6]~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[6]~41_combout\ = (\U_VID|vcount\(6) & (!\U_VID|vcount[5]~40\)) # (!\U_VID|vcount\(6) & ((\U_VID|vcount[5]~40\) # (GND)))
+-- \U_VID|vcount[6]~42\ = CARRY((!\U_VID|vcount[5]~40\) # (!\U_VID|vcount\(6)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(6),
+	datad => VCC,
+	cin => \U_VID|vcount[5]~40\,
+	combout => \U_VID|vcount[6]~41_combout\,
+	cout => \U_VID|vcount[6]~42\);
+
+-- Location: FF_X25_Y2_N13
+\U_VID|vcount[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[6]~41_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(6));
+
+-- Location: LCCOMB_X25_Y2_N14
+\U_VID|vcount[7]~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[7]~43_combout\ = (\U_VID|vcount\(7) & (\U_VID|vcount[6]~42\ $ (GND))) # (!\U_VID|vcount\(7) & (!\U_VID|vcount[6]~42\ & VCC))
+-- \U_VID|vcount[7]~44\ = CARRY((\U_VID|vcount\(7) & !\U_VID|vcount[6]~42\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(7),
+	datad => VCC,
+	cin => \U_VID|vcount[6]~42\,
+	combout => \U_VID|vcount[7]~43_combout\,
+	cout => \U_VID|vcount[7]~44\);
+
+-- Location: FF_X25_Y2_N15
+\U_VID|vcount[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[7]~43_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(7));
+
+-- Location: LCCOMB_X25_Y2_N16
+\U_VID|vcount[8]~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[8]~45_combout\ = (\U_VID|vcount\(8) & (!\U_VID|vcount[7]~44\)) # (!\U_VID|vcount\(8) & ((\U_VID|vcount[7]~44\) # (GND)))
+-- \U_VID|vcount[8]~46\ = CARRY((!\U_VID|vcount[7]~44\) # (!\U_VID|vcount\(8)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(8),
+	datad => VCC,
+	cin => \U_VID|vcount[7]~44\,
+	combout => \U_VID|vcount[8]~45_combout\,
+	cout => \U_VID|vcount[8]~46\);
+
+-- Location: FF_X25_Y2_N17
+\U_VID|vcount[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[8]~45_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(8));
+
+-- Location: LCCOMB_X25_Y2_N18
+\U_VID|vcount[9]~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[9]~47_combout\ = (\U_VID|vcount\(9) & (\U_VID|vcount[8]~46\ $ (GND))) # (!\U_VID|vcount\(9) & (!\U_VID|vcount[8]~46\ & VCC))
+-- \U_VID|vcount[9]~48\ = CARRY((\U_VID|vcount\(9) & !\U_VID|vcount[8]~46\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(9),
+	datad => VCC,
+	cin => \U_VID|vcount[8]~46\,
+	combout => \U_VID|vcount[9]~47_combout\,
+	cout => \U_VID|vcount[9]~48\);
+
+-- Location: FF_X25_Y2_N19
+\U_VID|vcount[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[9]~47_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(9));
+
+-- Location: LCCOMB_X25_Y2_N20
+\U_VID|vcount[10]~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[10]~49_combout\ = (\U_VID|vcount\(10) & (!\U_VID|vcount[9]~48\)) # (!\U_VID|vcount\(10) & ((\U_VID|vcount[9]~48\) # (GND)))
+-- \U_VID|vcount[10]~50\ = CARRY((!\U_VID|vcount[9]~48\) # (!\U_VID|vcount\(10)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(10),
+	datad => VCC,
+	cin => \U_VID|vcount[9]~48\,
+	combout => \U_VID|vcount[10]~49_combout\,
+	cout => \U_VID|vcount[10]~50\);
+
+-- Location: FF_X25_Y2_N21
+\U_VID|vcount[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[10]~49_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(10));
+
+-- Location: LCCOMB_X25_Y2_N22
+\U_VID|vcount[11]~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[11]~51_combout\ = (\U_VID|vcount\(11) & (\U_VID|vcount[10]~50\ $ (GND))) # (!\U_VID|vcount\(11) & (!\U_VID|vcount[10]~50\ & VCC))
+-- \U_VID|vcount[11]~52\ = CARRY((\U_VID|vcount\(11) & !\U_VID|vcount[10]~50\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(11),
+	datad => VCC,
+	cin => \U_VID|vcount[10]~50\,
+	combout => \U_VID|vcount[11]~51_combout\,
+	cout => \U_VID|vcount[11]~52\);
+
+-- Location: FF_X25_Y2_N23
+\U_VID|vcount[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[11]~51_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(11));
+
+-- Location: LCCOMB_X25_Y2_N24
+\U_VID|vcount[12]~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[12]~53_combout\ = (\U_VID|vcount\(12) & (!\U_VID|vcount[11]~52\)) # (!\U_VID|vcount\(12) & ((\U_VID|vcount[11]~52\) # (GND)))
+-- \U_VID|vcount[12]~54\ = CARRY((!\U_VID|vcount[11]~52\) # (!\U_VID|vcount\(12)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(12),
+	datad => VCC,
+	cin => \U_VID|vcount[11]~52\,
+	combout => \U_VID|vcount[12]~53_combout\,
+	cout => \U_VID|vcount[12]~54\);
+
+-- Location: FF_X25_Y2_N25
+\U_VID|vcount[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[12]~53_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(12));
+
+-- Location: LCCOMB_X25_Y2_N26
+\U_VID|vcount[13]~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[13]~55_combout\ = (\U_VID|vcount\(13) & (\U_VID|vcount[12]~54\ $ (GND))) # (!\U_VID|vcount\(13) & (!\U_VID|vcount[12]~54\ & VCC))
+-- \U_VID|vcount[13]~56\ = CARRY((\U_VID|vcount\(13) & !\U_VID|vcount[12]~54\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(13),
+	datad => VCC,
+	cin => \U_VID|vcount[12]~54\,
+	combout => \U_VID|vcount[13]~55_combout\,
+	cout => \U_VID|vcount[13]~56\);
+
+-- Location: FF_X25_Y2_N27
+\U_VID|vcount[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[13]~55_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(13));
+
+-- Location: LCCOMB_X25_Y2_N28
+\U_VID|vcount[14]~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[14]~57_combout\ = (\U_VID|vcount\(14) & (!\U_VID|vcount[13]~56\)) # (!\U_VID|vcount\(14) & ((\U_VID|vcount[13]~56\) # (GND)))
+-- \U_VID|vcount[14]~58\ = CARRY((!\U_VID|vcount[13]~56\) # (!\U_VID|vcount\(14)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(14),
+	datad => VCC,
+	cin => \U_VID|vcount[13]~56\,
+	combout => \U_VID|vcount[14]~57_combout\,
+	cout => \U_VID|vcount[14]~58\);
+
+-- Location: FF_X25_Y2_N29
+\U_VID|vcount[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[14]~57_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(14));
+
+-- Location: LCCOMB_X25_Y2_N30
+\U_VID|vcount[15]~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[15]~59_combout\ = (\U_VID|vcount\(15) & (\U_VID|vcount[14]~58\ $ (GND))) # (!\U_VID|vcount\(15) & (!\U_VID|vcount[14]~58\ & VCC))
+-- \U_VID|vcount[15]~60\ = CARRY((\U_VID|vcount\(15) & !\U_VID|vcount[14]~58\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(15),
+	datad => VCC,
+	cin => \U_VID|vcount[14]~58\,
+	combout => \U_VID|vcount[15]~59_combout\,
+	cout => \U_VID|vcount[15]~60\);
+
+-- Location: FF_X25_Y2_N31
+\U_VID|vcount[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[15]~59_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(15));
+
+-- Location: LCCOMB_X25_Y1_N0
+\U_VID|vcount[16]~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[16]~61_combout\ = (\U_VID|vcount\(16) & (!\U_VID|vcount[15]~60\)) # (!\U_VID|vcount\(16) & ((\U_VID|vcount[15]~60\) # (GND)))
+-- \U_VID|vcount[16]~62\ = CARRY((!\U_VID|vcount[15]~60\) # (!\U_VID|vcount\(16)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(16),
+	datad => VCC,
+	cin => \U_VID|vcount[15]~60\,
+	combout => \U_VID|vcount[16]~61_combout\,
+	cout => \U_VID|vcount[16]~62\);
+
+-- Location: FF_X25_Y1_N1
+\U_VID|vcount[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[16]~61_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(16));
+
+-- Location: LCCOMB_X25_Y1_N2
+\U_VID|vcount[17]~63\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[17]~63_combout\ = (\U_VID|vcount\(17) & (\U_VID|vcount[16]~62\ $ (GND))) # (!\U_VID|vcount\(17) & (!\U_VID|vcount[16]~62\ & VCC))
+-- \U_VID|vcount[17]~64\ = CARRY((\U_VID|vcount\(17) & !\U_VID|vcount[16]~62\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(17),
+	datad => VCC,
+	cin => \U_VID|vcount[16]~62\,
+	combout => \U_VID|vcount[17]~63_combout\,
+	cout => \U_VID|vcount[17]~64\);
+
+-- Location: FF_X25_Y1_N3
+\U_VID|vcount[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[17]~63_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(17));
+
+-- Location: LCCOMB_X25_Y1_N4
+\U_VID|vcount[18]~65\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[18]~65_combout\ = (\U_VID|vcount\(18) & (!\U_VID|vcount[17]~64\)) # (!\U_VID|vcount\(18) & ((\U_VID|vcount[17]~64\) # (GND)))
+-- \U_VID|vcount[18]~66\ = CARRY((!\U_VID|vcount[17]~64\) # (!\U_VID|vcount\(18)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(18),
+	datad => VCC,
+	cin => \U_VID|vcount[17]~64\,
+	combout => \U_VID|vcount[18]~65_combout\,
+	cout => \U_VID|vcount[18]~66\);
+
+-- Location: FF_X25_Y1_N5
+\U_VID|vcount[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[18]~65_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(18));
+
+-- Location: LCCOMB_X25_Y1_N6
+\U_VID|vcount[19]~67\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[19]~67_combout\ = (\U_VID|vcount\(19) & (\U_VID|vcount[18]~66\ $ (GND))) # (!\U_VID|vcount\(19) & (!\U_VID|vcount[18]~66\ & VCC))
+-- \U_VID|vcount[19]~68\ = CARRY((\U_VID|vcount\(19) & !\U_VID|vcount[18]~66\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(19),
+	datad => VCC,
+	cin => \U_VID|vcount[18]~66\,
+	combout => \U_VID|vcount[19]~67_combout\,
+	cout => \U_VID|vcount[19]~68\);
+
+-- Location: FF_X25_Y1_N7
+\U_VID|vcount[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[19]~67_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(19));
+
+-- Location: LCCOMB_X25_Y1_N8
+\U_VID|vcount[20]~69\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[20]~69_combout\ = (\U_VID|vcount\(20) & (!\U_VID|vcount[19]~68\)) # (!\U_VID|vcount\(20) & ((\U_VID|vcount[19]~68\) # (GND)))
+-- \U_VID|vcount[20]~70\ = CARRY((!\U_VID|vcount[19]~68\) # (!\U_VID|vcount\(20)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(20),
+	datad => VCC,
+	cin => \U_VID|vcount[19]~68\,
+	combout => \U_VID|vcount[20]~69_combout\,
+	cout => \U_VID|vcount[20]~70\);
+
+-- Location: FF_X25_Y1_N9
+\U_VID|vcount[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[20]~69_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(20));
+
+-- Location: LCCOMB_X25_Y1_N10
+\U_VID|vcount[21]~71\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[21]~71_combout\ = (\U_VID|vcount\(21) & (\U_VID|vcount[20]~70\ $ (GND))) # (!\U_VID|vcount\(21) & (!\U_VID|vcount[20]~70\ & VCC))
+-- \U_VID|vcount[21]~72\ = CARRY((\U_VID|vcount\(21) & !\U_VID|vcount[20]~70\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(21),
+	datad => VCC,
+	cin => \U_VID|vcount[20]~70\,
+	combout => \U_VID|vcount[21]~71_combout\,
+	cout => \U_VID|vcount[21]~72\);
+
+-- Location: FF_X25_Y1_N11
+\U_VID|vcount[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[21]~71_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(21));
+
+-- Location: LCCOMB_X25_Y1_N12
+\U_VID|vcount[22]~73\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[22]~73_combout\ = (\U_VID|vcount\(22) & (!\U_VID|vcount[21]~72\)) # (!\U_VID|vcount\(22) & ((\U_VID|vcount[21]~72\) # (GND)))
+-- \U_VID|vcount[22]~74\ = CARRY((!\U_VID|vcount[21]~72\) # (!\U_VID|vcount\(22)))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -1103,14 +1852,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(2),
+	dataa => \U_VID|vcount\(22),
 	datad => VCC,
-	cin => \U_VID|count[1]~25\,
-	combout => \U_VID|count[2]~26_combout\,
-	cout => \U_VID|count[2]~27\);
+	cin => \U_VID|vcount[21]~72\,
+	combout => \U_VID|vcount[22]~73_combout\,
+	cout => \U_VID|vcount[22]~74\);
 
--- Location: FF_X45_Y11_N13
-\U_VID|count[2]\ : dffeas
+-- Location: FF_X25_Y1_N13
+\U_VID|vcount[22]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1118,18 +1867,18 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \sclk~input_o\,
-	d => \U_VID|count[2]~26_combout\,
+	d => \U_VID|vcount[22]~73_combout\,
 	clrn => \rst~input_o\,
 	ena => \vsync~input_o\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \U_VID|count\(2));
+	q => \U_VID|vcount\(22));
 
--- Location: LCCOMB_X45_Y11_N14
-\U_VID|count[3]~28\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X25_Y1_N14
+\U_VID|vcount[23]~75\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_VID|count[3]~28_combout\ = (\U_VID|count\(3) & (\U_VID|count[2]~27\ $ (GND))) # (!\U_VID|count\(3) & (!\U_VID|count[2]~27\ & VCC))
--- \U_VID|count[3]~29\ = CARRY((\U_VID|count\(3) & !\U_VID|count[2]~27\))
+-- \U_VID|vcount[23]~75_combout\ = (\U_VID|vcount\(23) & (\U_VID|vcount[22]~74\ $ (GND))) # (!\U_VID|vcount\(23) & (!\U_VID|vcount[22]~74\ & VCC))
+-- \U_VID|vcount[23]~76\ = CARRY((\U_VID|vcount\(23) & !\U_VID|vcount[22]~74\))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -1137,14 +1886,14 @@ GENERIC MAP (
 	sum_lutc_input => "cin")
 -- pragma translate_on
 PORT MAP (
-	datab => \U_VID|count\(3),
+	datab => \U_VID|vcount\(23),
 	datad => VCC,
-	cin => \U_VID|count[2]~27\,
-	combout => \U_VID|count[3]~28_combout\,
-	cout => \U_VID|count[3]~29\);
+	cin => \U_VID|vcount[22]~74\,
+	combout => \U_VID|vcount[23]~75_combout\,
+	cout => \U_VID|vcount[23]~76\);
 
--- Location: FF_X45_Y11_N15
-\U_VID|count[3]\ : dffeas
+-- Location: FF_X25_Y1_N15
+\U_VID|vcount[23]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -1152,816 +1901,51 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \sclk~input_o\,
-	d => \U_VID|count[3]~28_combout\,
+	d => \U_VID|vcount[23]~75_combout\,
 	clrn => \rst~input_o\,
 	ena => \vsync~input_o\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \U_VID|count\(3));
+	q => \U_VID|vcount\(23));
 
--- Location: LCCOMB_X63_Y50_N28
+-- Location: LCCOMB_X59_Y50_N0
 \U_LED0|Mux6~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED0|Mux6~0_combout\ = (\U_VID|count\(3) & (\U_VID|count\(0) & (\U_VID|count\(2) $ (\U_VID|count\(1))))) # (!\U_VID|count\(3) & (!\U_VID|count\(1) & (\U_VID|count\(0) $ (\U_VID|count\(2)))))
+-- \U_LED0|Mux6~0_combout\ = (\U_VID|vcount\(22) & (!\U_VID|vcount\(21) & (\U_VID|vcount\(23) $ (!\U_VID|vcount\(20))))) # (!\U_VID|vcount\(22) & (\U_VID|vcount\(20) & (\U_VID|vcount\(23) $ (!\U_VID|vcount\(21)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000100010010010",
+	lut_mask => "0100000010010010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
 	combout => \U_LED0|Mux6~0_combout\);
 
--- Location: LCCOMB_X63_Y50_N26
+-- Location: LCCOMB_X59_Y50_N22
 \U_LED0|Mux5~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED0|Mux5~0_combout\ = (\U_VID|count\(3) & ((\U_VID|count\(0) & ((\U_VID|count\(1)))) # (!\U_VID|count\(0) & (\U_VID|count\(2))))) # (!\U_VID|count\(3) & (\U_VID|count\(2) & (\U_VID|count\(0) $ (\U_VID|count\(1)))))
+-- \U_LED0|Mux5~0_combout\ = (\U_VID|vcount\(23) & ((\U_VID|vcount\(20) & ((\U_VID|vcount\(21)))) # (!\U_VID|vcount\(20) & (\U_VID|vcount\(22))))) # (!\U_VID|vcount\(23) & (\U_VID|vcount\(22) & (\U_VID|vcount\(20) $ (\U_VID|vcount\(21)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1101100001100000",
+	lut_mask => "1100101000101000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
 	combout => \U_LED0|Mux5~0_combout\);
 
--- Location: LCCOMB_X63_Y50_N4
+-- Location: LCCOMB_X59_Y50_N28
 \U_LED0|Mux4~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED0|Mux4~0_combout\ = (\U_VID|count\(3) & (\U_VID|count\(2) & ((\U_VID|count\(1)) # (!\U_VID|count\(0))))) # (!\U_VID|count\(3) & (!\U_VID|count\(0) & (!\U_VID|count\(2) & \U_VID|count\(1))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100000101000000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
-	combout => \U_LED0|Mux4~0_combout\);
-
--- Location: LCCOMB_X63_Y50_N6
-\U_LED0|Mux3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED0|Mux3~0_combout\ = (\U_VID|count\(0) & ((\U_VID|count\(2) $ (!\U_VID|count\(1))))) # (!\U_VID|count\(0) & ((\U_VID|count\(3) & (!\U_VID|count\(2) & \U_VID|count\(1))) # (!\U_VID|count\(3) & (\U_VID|count\(2) & !\U_VID|count\(1)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010000011010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
-	combout => \U_LED0|Mux3~0_combout\);
-
--- Location: LCCOMB_X63_Y50_N12
-\U_LED0|Mux2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED0|Mux2~0_combout\ = (\U_VID|count\(1) & (\U_VID|count\(0) & (!\U_VID|count\(3)))) # (!\U_VID|count\(1) & ((\U_VID|count\(2) & ((!\U_VID|count\(3)))) # (!\U_VID|count\(2) & (\U_VID|count\(0)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0010001000111010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
-	combout => \U_LED0|Mux2~0_combout\);
-
--- Location: LCCOMB_X63_Y50_N22
-\U_LED0|Mux1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED0|Mux1~0_combout\ = (\U_VID|count\(0) & (\U_VID|count\(3) $ (((\U_VID|count\(1)) # (!\U_VID|count\(2)))))) # (!\U_VID|count\(0) & (!\U_VID|count\(3) & (!\U_VID|count\(2) & \U_VID|count\(1))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0010001110000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
-	combout => \U_LED0|Mux1~0_combout\);
-
--- Location: LCCOMB_X63_Y50_N24
-\U_LED0|Mux0~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED0|Mux0~0_combout\ = (\U_VID|count\(0) & ((\U_VID|count\(3)) # (\U_VID|count\(2) $ (\U_VID|count\(1))))) # (!\U_VID|count\(0) & ((\U_VID|count\(1)) # (\U_VID|count\(3) $ (\U_VID|count\(2)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1101111110111100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(0),
-	datab => \U_VID|count\(3),
-	datac => \U_VID|count\(2),
-	datad => \U_VID|count\(1),
-	combout => \U_LED0|Mux0~0_combout\);
-
--- Location: LCCOMB_X45_Y11_N16
-\U_VID|count[4]~30\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[4]~30_combout\ = (\U_VID|count\(4) & (!\U_VID|count[3]~29\)) # (!\U_VID|count\(4) & ((\U_VID|count[3]~29\) # (GND)))
--- \U_VID|count[4]~31\ = CARRY((!\U_VID|count[3]~29\) # (!\U_VID|count\(4)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(4),
-	datad => VCC,
-	cin => \U_VID|count[3]~29\,
-	combout => \U_VID|count[4]~30_combout\,
-	cout => \U_VID|count[4]~31\);
-
--- Location: FF_X45_Y11_N17
-\U_VID|count[4]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[4]~30_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(4));
-
--- Location: LCCOMB_X45_Y11_N18
-\U_VID|count[5]~32\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[5]~32_combout\ = (\U_VID|count\(5) & (\U_VID|count[4]~31\ $ (GND))) # (!\U_VID|count\(5) & (!\U_VID|count[4]~31\ & VCC))
--- \U_VID|count[5]~33\ = CARRY((\U_VID|count\(5) & !\U_VID|count[4]~31\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(5),
-	datad => VCC,
-	cin => \U_VID|count[4]~31\,
-	combout => \U_VID|count[5]~32_combout\,
-	cout => \U_VID|count[5]~33\);
-
--- Location: FF_X45_Y11_N19
-\U_VID|count[5]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[5]~32_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(5));
-
--- Location: LCCOMB_X45_Y11_N20
-\U_VID|count[6]~34\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[6]~34_combout\ = (\U_VID|count\(6) & (!\U_VID|count[5]~33\)) # (!\U_VID|count\(6) & ((\U_VID|count[5]~33\) # (GND)))
--- \U_VID|count[6]~35\ = CARRY((!\U_VID|count[5]~33\) # (!\U_VID|count\(6)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(6),
-	datad => VCC,
-	cin => \U_VID|count[5]~33\,
-	combout => \U_VID|count[6]~34_combout\,
-	cout => \U_VID|count[6]~35\);
-
--- Location: FF_X45_Y11_N21
-\U_VID|count[6]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[6]~34_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(6));
-
--- Location: LCCOMB_X45_Y11_N22
-\U_VID|count[7]~36\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[7]~36_combout\ = (\U_VID|count\(7) & (\U_VID|count[6]~35\ $ (GND))) # (!\U_VID|count\(7) & (!\U_VID|count[6]~35\ & VCC))
--- \U_VID|count[7]~37\ = CARRY((\U_VID|count\(7) & !\U_VID|count[6]~35\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(7),
-	datad => VCC,
-	cin => \U_VID|count[6]~35\,
-	combout => \U_VID|count[7]~36_combout\,
-	cout => \U_VID|count[7]~37\);
-
--- Location: FF_X45_Y11_N23
-\U_VID|count[7]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[7]~36_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(7));
-
--- Location: LCCOMB_X69_Y50_N0
-\U_LED1|Mux6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux6~0_combout\ = (\U_VID|count\(6) & (!\U_VID|count\(5) & (\U_VID|count\(4) $ (!\U_VID|count\(7))))) # (!\U_VID|count\(6) & (\U_VID|count\(4) & (\U_VID|count\(5) $ (!\U_VID|count\(7)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0110000000010100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux6~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N30
-\U_LED1|Mux5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux5~0_combout\ = (\U_VID|count\(5) & ((\U_VID|count\(4) & ((\U_VID|count\(7)))) # (!\U_VID|count\(4) & (\U_VID|count\(6))))) # (!\U_VID|count\(5) & (\U_VID|count\(6) & (\U_VID|count\(4) $ (\U_VID|count\(7)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010110001001000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux5~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N16
-\U_LED1|Mux4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux4~0_combout\ = (\U_VID|count\(6) & (\U_VID|count\(7) & ((\U_VID|count\(5)) # (!\U_VID|count\(4))))) # (!\U_VID|count\(6) & (\U_VID|count\(5) & (!\U_VID|count\(4) & !\U_VID|count\(7))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000110000000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux4~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N22
-\U_LED1|Mux3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux3~0_combout\ = (\U_VID|count\(4) & (\U_VID|count\(5) $ ((!\U_VID|count\(6))))) # (!\U_VID|count\(4) & ((\U_VID|count\(5) & (!\U_VID|count\(6) & \U_VID|count\(7))) # (!\U_VID|count\(5) & (\U_VID|count\(6) & !\U_VID|count\(7)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1001001010010100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux3~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N28
-\U_LED1|Mux2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux2~0_combout\ = (\U_VID|count\(5) & (((\U_VID|count\(4) & !\U_VID|count\(7))))) # (!\U_VID|count\(5) & ((\U_VID|count\(6) & ((!\U_VID|count\(7)))) # (!\U_VID|count\(6) & (\U_VID|count\(4)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001000011110100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux2~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N2
-\U_LED1|Mux1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux1~0_combout\ = (\U_VID|count\(5) & (!\U_VID|count\(7) & ((\U_VID|count\(4)) # (!\U_VID|count\(6))))) # (!\U_VID|count\(5) & (\U_VID|count\(4) & (\U_VID|count\(6) $ (!\U_VID|count\(7)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000010110010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux1~0_combout\);
-
--- Location: LCCOMB_X69_Y50_N12
-\U_LED1|Mux0~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED1|Mux0~0_combout\ = (\U_VID|count\(4) & ((\U_VID|count\(7)) # (\U_VID|count\(5) $ (\U_VID|count\(6))))) # (!\U_VID|count\(4) & ((\U_VID|count\(5)) # (\U_VID|count\(6) $ (\U_VID|count\(7)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111101101101110",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(5),
-	datab => \U_VID|count\(6),
-	datac => \U_VID|count\(4),
-	datad => \U_VID|count\(7),
-	combout => \U_LED1|Mux0~0_combout\);
-
--- Location: LCCOMB_X45_Y11_N24
-\U_VID|count[8]~38\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[8]~38_combout\ = (\U_VID|count\(8) & (!\U_VID|count[7]~37\)) # (!\U_VID|count\(8) & ((\U_VID|count[7]~37\) # (GND)))
--- \U_VID|count[8]~39\ = CARRY((!\U_VID|count[7]~37\) # (!\U_VID|count\(8)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(8),
-	datad => VCC,
-	cin => \U_VID|count[7]~37\,
-	combout => \U_VID|count[8]~38_combout\,
-	cout => \U_VID|count[8]~39\);
-
--- Location: FF_X45_Y11_N25
-\U_VID|count[8]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[8]~38_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(8));
-
--- Location: LCCOMB_X45_Y11_N26
-\U_VID|count[9]~40\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[9]~40_combout\ = (\U_VID|count\(9) & (\U_VID|count[8]~39\ $ (GND))) # (!\U_VID|count\(9) & (!\U_VID|count[8]~39\ & VCC))
--- \U_VID|count[9]~41\ = CARRY((\U_VID|count\(9) & !\U_VID|count[8]~39\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(9),
-	datad => VCC,
-	cin => \U_VID|count[8]~39\,
-	combout => \U_VID|count[9]~40_combout\,
-	cout => \U_VID|count[9]~41\);
-
--- Location: FF_X45_Y11_N27
-\U_VID|count[9]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[9]~40_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(9));
-
--- Location: LCCOMB_X45_Y11_N28
-\U_VID|count[10]~42\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[10]~42_combout\ = (\U_VID|count\(10) & (!\U_VID|count[9]~41\)) # (!\U_VID|count\(10) & ((\U_VID|count[9]~41\) # (GND)))
--- \U_VID|count[10]~43\ = CARRY((!\U_VID|count[9]~41\) # (!\U_VID|count\(10)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(10),
-	datad => VCC,
-	cin => \U_VID|count[9]~41\,
-	combout => \U_VID|count[10]~42_combout\,
-	cout => \U_VID|count[10]~43\);
-
--- Location: FF_X45_Y11_N29
-\U_VID|count[10]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[10]~42_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(10));
-
--- Location: LCCOMB_X45_Y11_N30
-\U_VID|count[11]~44\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[11]~44_combout\ = (\U_VID|count\(11) & (\U_VID|count[10]~43\ $ (GND))) # (!\U_VID|count\(11) & (!\U_VID|count[10]~43\ & VCC))
--- \U_VID|count[11]~45\ = CARRY((\U_VID|count\(11) & !\U_VID|count[10]~43\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(11),
-	datad => VCC,
-	cin => \U_VID|count[10]~43\,
-	combout => \U_VID|count[11]~44_combout\,
-	cout => \U_VID|count[11]~45\);
-
--- Location: FF_X45_Y11_N31
-\U_VID|count[11]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[11]~44_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(11));
-
--- Location: LCCOMB_X74_Y43_N0
-\U_LED2|Mux6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux6~0_combout\ = (\U_VID|count\(10) & (!\U_VID|count\(9) & (\U_VID|count\(11) $ (!\U_VID|count\(8))))) # (!\U_VID|count\(10) & (\U_VID|count\(8) & (\U_VID|count\(9) $ (!\U_VID|count\(11)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0110000100000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux6~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N26
-\U_LED2|Mux5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux5~0_combout\ = (\U_VID|count\(9) & ((\U_VID|count\(8) & ((\U_VID|count\(11)))) # (!\U_VID|count\(8) & (\U_VID|count\(10))))) # (!\U_VID|count\(9) & (\U_VID|count\(10) & (\U_VID|count\(11) $ (\U_VID|count\(8)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001010101000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux5~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N28
-\U_LED2|Mux4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux4~0_combout\ = (\U_VID|count\(10) & (\U_VID|count\(11) & ((\U_VID|count\(9)) # (!\U_VID|count\(8))))) # (!\U_VID|count\(10) & (\U_VID|count\(9) & (!\U_VID|count\(11) & !\U_VID|count\(8))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000000010100100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux4~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N2
-\U_LED2|Mux3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux3~0_combout\ = (\U_VID|count\(8) & (\U_VID|count\(10) $ ((!\U_VID|count\(9))))) # (!\U_VID|count\(8) & ((\U_VID|count\(10) & (!\U_VID|count\(9) & !\U_VID|count\(11))) # (!\U_VID|count\(10) & (\U_VID|count\(9) & \U_VID|count\(11)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1001100101000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux3~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N4
-\U_LED2|Mux2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux2~0_combout\ = (\U_VID|count\(9) & (((!\U_VID|count\(11) & \U_VID|count\(8))))) # (!\U_VID|count\(9) & ((\U_VID|count\(10) & (!\U_VID|count\(11))) # (!\U_VID|count\(10) & ((\U_VID|count\(8))))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001111100000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux2~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N10
-\U_LED2|Mux1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux1~0_combout\ = (\U_VID|count\(10) & (\U_VID|count\(8) & (\U_VID|count\(9) $ (\U_VID|count\(11))))) # (!\U_VID|count\(10) & (!\U_VID|count\(11) & ((\U_VID|count\(9)) # (\U_VID|count\(8)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0010110100000100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux1~0_combout\);
-
--- Location: LCCOMB_X74_Y43_N12
-\U_LED2|Mux0~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED2|Mux0~0_combout\ = (\U_VID|count\(8) & ((\U_VID|count\(11)) # (\U_VID|count\(10) $ (\U_VID|count\(9))))) # (!\U_VID|count\(8) & ((\U_VID|count\(9)) # (\U_VID|count\(10) $ (\U_VID|count\(11)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111011011011110",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(10),
-	datab => \U_VID|count\(9),
-	datac => \U_VID|count\(11),
-	datad => \U_VID|count\(8),
-	combout => \U_LED2|Mux0~0_combout\);
-
--- Location: LCCOMB_X45_Y10_N0
-\U_VID|count[12]~46\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[12]~46_combout\ = (\U_VID|count\(12) & (!\U_VID|count[11]~45\)) # (!\U_VID|count\(12) & ((\U_VID|count[11]~45\) # (GND)))
--- \U_VID|count[12]~47\ = CARRY((!\U_VID|count[11]~45\) # (!\U_VID|count\(12)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(12),
-	datad => VCC,
-	cin => \U_VID|count[11]~45\,
-	combout => \U_VID|count[12]~46_combout\,
-	cout => \U_VID|count[12]~47\);
-
--- Location: FF_X45_Y10_N1
-\U_VID|count[12]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[12]~46_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(12));
-
--- Location: LCCOMB_X45_Y10_N2
-\U_VID|count[13]~48\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[13]~48_combout\ = (\U_VID|count\(13) & (\U_VID|count[12]~47\ $ (GND))) # (!\U_VID|count\(13) & (!\U_VID|count[12]~47\ & VCC))
--- \U_VID|count[13]~49\ = CARRY((\U_VID|count\(13) & !\U_VID|count[12]~47\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(13),
-	datad => VCC,
-	cin => \U_VID|count[12]~47\,
-	combout => \U_VID|count[13]~48_combout\,
-	cout => \U_VID|count[13]~49\);
-
--- Location: FF_X45_Y10_N3
-\U_VID|count[13]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[13]~48_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(13));
-
--- Location: LCCOMB_X45_Y10_N4
-\U_VID|count[14]~50\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[14]~50_combout\ = (\U_VID|count\(14) & (!\U_VID|count[13]~49\)) # (!\U_VID|count\(14) & ((\U_VID|count[13]~49\) # (GND)))
--- \U_VID|count[14]~51\ = CARRY((!\U_VID|count[13]~49\) # (!\U_VID|count\(14)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(14),
-	datad => VCC,
-	cin => \U_VID|count[13]~49\,
-	combout => \U_VID|count[14]~50_combout\,
-	cout => \U_VID|count[14]~51\);
-
--- Location: FF_X45_Y10_N5
-\U_VID|count[14]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[14]~50_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(14));
-
--- Location: LCCOMB_X45_Y10_N6
-\U_VID|count[15]~52\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[15]~52_combout\ = (\U_VID|count\(15) & (\U_VID|count[14]~51\ $ (GND))) # (!\U_VID|count\(15) & (!\U_VID|count[14]~51\ & VCC))
--- \U_VID|count[15]~53\ = CARRY((\U_VID|count\(15) & !\U_VID|count[14]~51\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(15),
-	datad => VCC,
-	cin => \U_VID|count[14]~51\,
-	combout => \U_VID|count[15]~52_combout\,
-	cout => \U_VID|count[15]~53\);
-
--- Location: FF_X45_Y10_N7
-\U_VID|count[15]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[15]~52_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(15));
-
--- Location: LCCOMB_X74_Y33_N20
-\U_LED3|Mux6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED3|Mux6~0_combout\ = (\U_VID|count\(15) & (\U_VID|count\(12) & (\U_VID|count\(14) $ (\U_VID|count\(13))))) # (!\U_VID|count\(15) & (!\U_VID|count\(13) & (\U_VID|count\(14) $ (\U_VID|count\(12)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0010000010010100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux6~0_combout\);
-
--- Location: LCCOMB_X74_Y33_N6
-\U_LED3|Mux5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED3|Mux5~0_combout\ = (\U_VID|count\(15) & ((\U_VID|count\(12) & ((\U_VID|count\(13)))) # (!\U_VID|count\(12) & (\U_VID|count\(14))))) # (!\U_VID|count\(15) & (\U_VID|count\(14) & (\U_VID|count\(12) $ (\U_VID|count\(13)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010110001001000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux5~0_combout\);
-
--- Location: LCCOMB_X74_Y33_N4
-\U_LED3|Mux4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED3|Mux4~0_combout\ = (\U_VID|count\(15) & (\U_VID|count\(14) & ((\U_VID|count\(13)) # (!\U_VID|count\(12))))) # (!\U_VID|count\(15) & (!\U_VID|count\(14) & (!\U_VID|count\(12) & \U_VID|count\(13))))
+-- \U_LED0|Mux4~0_combout\ = (\U_VID|vcount\(22) & (\U_VID|vcount\(23) & ((\U_VID|vcount\(21)) # (!\U_VID|vcount\(20))))) # (!\U_VID|vcount\(22) & (!\U_VID|vcount\(23) & (!\U_VID|vcount\(20) & \U_VID|vcount\(21))))
 
 -- pragma translate_off
 GENERIC MAP (
@@ -1969,591 +1953,85 @@ GENERIC MAP (
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux4~0_combout\);
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
+	combout => \U_LED0|Mux4~0_combout\);
 
--- Location: LCCOMB_X74_Y33_N18
-\U_LED3|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X59_Y50_N2
+\U_LED0|Mux3~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED3|Mux3~0_combout\ = (\U_VID|count\(12) & ((\U_VID|count\(14) $ (!\U_VID|count\(13))))) # (!\U_VID|count\(12) & ((\U_VID|count\(15) & (!\U_VID|count\(14) & \U_VID|count\(13))) # (!\U_VID|count\(15) & (\U_VID|count\(14) & !\U_VID|count\(13)))))
+-- \U_LED0|Mux3~0_combout\ = (\U_VID|vcount\(20) & (\U_VID|vcount\(22) $ (((!\U_VID|vcount\(21)))))) # (!\U_VID|vcount\(20) & ((\U_VID|vcount\(22) & (!\U_VID|vcount\(23) & !\U_VID|vcount\(21))) # (!\U_VID|vcount\(22) & (\U_VID|vcount\(23) & 
+-- \U_VID|vcount\(21)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1100001000110100",
+	lut_mask => "1010010001010010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux3~0_combout\);
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
+	combout => \U_LED0|Mux3~0_combout\);
 
--- Location: LCCOMB_X74_Y33_N12
-\U_LED3|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X59_Y50_N4
+\U_LED0|Mux2~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED3|Mux2~0_combout\ = (\U_VID|count\(13) & (!\U_VID|count\(15) & ((\U_VID|count\(12))))) # (!\U_VID|count\(13) & ((\U_VID|count\(14) & (!\U_VID|count\(15))) # (!\U_VID|count\(14) & ((\U_VID|count\(12))))))
+-- \U_LED0|Mux2~0_combout\ = (\U_VID|vcount\(21) & (((!\U_VID|vcount\(23) & \U_VID|vcount\(20))))) # (!\U_VID|vcount\(21) & ((\U_VID|vcount\(22) & (!\U_VID|vcount\(23))) # (!\U_VID|vcount\(22) & ((\U_VID|vcount\(20))))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101000001110100",
+	lut_mask => "0011000001110010",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux2~0_combout\);
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
+	combout => \U_LED0|Mux2~0_combout\);
 
--- Location: LCCOMB_X74_Y33_N10
-\U_LED3|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X59_Y50_N10
+\U_LED0|Mux1~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED3|Mux1~0_combout\ = (\U_VID|count\(14) & (\U_VID|count\(12) & (\U_VID|count\(15) $ (\U_VID|count\(13))))) # (!\U_VID|count\(14) & (!\U_VID|count\(15) & ((\U_VID|count\(12)) # (\U_VID|count\(13)))))
+-- \U_LED0|Mux1~0_combout\ = (\U_VID|vcount\(22) & (\U_VID|vcount\(20) & (\U_VID|vcount\(23) $ (\U_VID|vcount\(21))))) # (!\U_VID|vcount\(22) & (!\U_VID|vcount\(23) & ((\U_VID|vcount\(20)) # (\U_VID|vcount\(21)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101000110010000",
+	lut_mask => "0011000110010000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux1~0_combout\);
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
+	combout => \U_LED0|Mux1~0_combout\);
 
--- Location: LCCOMB_X74_Y33_N28
-\U_LED3|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X59_Y50_N24
+\U_LED0|Mux0~0\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_LED3|Mux0~0_combout\ = (\U_VID|count\(12) & ((\U_VID|count\(15)) # (\U_VID|count\(14) $ (\U_VID|count\(13))))) # (!\U_VID|count\(12) & ((\U_VID|count\(13)) # (\U_VID|count\(15) $ (\U_VID|count\(14)))))
+-- \U_LED0|Mux0~0_combout\ = (\U_VID|vcount\(20) & ((\U_VID|vcount\(23)) # (\U_VID|vcount\(22) $ (\U_VID|vcount\(21))))) # (!\U_VID|vcount\(20) & ((\U_VID|vcount\(21)) # (\U_VID|vcount\(22) $ (\U_VID|vcount\(23)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "1011111111100110",
+	lut_mask => "1101111111100110",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \U_VID|count\(15),
-	datab => \U_VID|count\(14),
-	datac => \U_VID|count\(12),
-	datad => \U_VID|count\(13),
-	combout => \U_LED3|Mux0~0_combout\);
+	dataa => \U_VID|vcount\(22),
+	datab => \U_VID|vcount\(23),
+	datac => \U_VID|vcount\(20),
+	datad => \U_VID|vcount\(21),
+	combout => \U_LED0|Mux0~0_combout\);
 
--- Location: LCCOMB_X45_Y10_N8
-\U_VID|count[16]~54\ : fiftyfivenm_lcell_comb
+-- Location: LCCOMB_X24_Y2_N0
+\U_VID|vsync_led~feeder\ : fiftyfivenm_lcell_comb
 -- Equation(s):
--- \U_VID|count[16]~54_combout\ = (\U_VID|count\(16) & (!\U_VID|count[15]~53\)) # (!\U_VID|count\(16) & ((\U_VID|count[15]~53\) # (GND)))
--- \U_VID|count[16]~55\ = CARRY((!\U_VID|count[15]~53\) # (!\U_VID|count\(16)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(16),
-	datad => VCC,
-	cin => \U_VID|count[15]~53\,
-	combout => \U_VID|count[16]~54_combout\,
-	cout => \U_VID|count[16]~55\);
-
--- Location: FF_X45_Y10_N9
-\U_VID|count[16]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[16]~54_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(16));
-
--- Location: LCCOMB_X45_Y10_N10
-\U_VID|count[17]~56\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[17]~56_combout\ = (\U_VID|count\(17) & (\U_VID|count[16]~55\ $ (GND))) # (!\U_VID|count\(17) & (!\U_VID|count[16]~55\ & VCC))
--- \U_VID|count[17]~57\ = CARRY((\U_VID|count\(17) & !\U_VID|count[16]~55\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100001010",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datad => VCC,
-	cin => \U_VID|count[16]~55\,
-	combout => \U_VID|count[17]~56_combout\,
-	cout => \U_VID|count[17]~57\);
-
--- Location: FF_X45_Y10_N11
-\U_VID|count[17]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[17]~56_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(17));
-
--- Location: LCCOMB_X45_Y10_N12
-\U_VID|count[18]~58\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[18]~58_combout\ = (\U_VID|count\(18) & (!\U_VID|count[17]~57\)) # (!\U_VID|count\(18) & ((\U_VID|count[17]~57\) # (GND)))
--- \U_VID|count[18]~59\ = CARRY((!\U_VID|count[17]~57\) # (!\U_VID|count\(18)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101101001011111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(18),
-	datad => VCC,
-	cin => \U_VID|count[17]~57\,
-	combout => \U_VID|count[18]~58_combout\,
-	cout => \U_VID|count[18]~59\);
-
--- Location: FF_X45_Y10_N13
-\U_VID|count[18]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[18]~58_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(18));
-
--- Location: LCCOMB_X45_Y10_N14
-\U_VID|count[19]~60\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[19]~60_combout\ = (\U_VID|count\(19) & (\U_VID|count[18]~59\ $ (GND))) # (!\U_VID|count\(19) & (!\U_VID|count[18]~59\ & VCC))
--- \U_VID|count[19]~61\ = CARRY((\U_VID|count\(19) & !\U_VID|count[18]~59\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(19),
-	datad => VCC,
-	cin => \U_VID|count[18]~59\,
-	combout => \U_VID|count[19]~60_combout\,
-	cout => \U_VID|count[19]~61\);
-
--- Location: FF_X45_Y10_N15
-\U_VID|count[19]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[19]~60_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(19));
-
--- Location: LCCOMB_X77_Y40_N16
-\U_LED4|Mux6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux6~0_combout\ = (\U_VID|count\(18) & (!\U_VID|count\(17) & (\U_VID|count\(16) $ (!\U_VID|count\(19))))) # (!\U_VID|count\(18) & (\U_VID|count\(16) & (\U_VID|count\(17) $ (!\U_VID|count\(19)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0110000000010100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux6~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N22
-\U_LED4|Mux5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux5~0_combout\ = (\U_VID|count\(17) & ((\U_VID|count\(16) & ((\U_VID|count\(19)))) # (!\U_VID|count\(16) & (\U_VID|count\(18))))) # (!\U_VID|count\(17) & (\U_VID|count\(18) & (\U_VID|count\(16) $ (\U_VID|count\(19)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010110001001000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux5~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N4
-\U_LED4|Mux4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux4~0_combout\ = (\U_VID|count\(18) & (\U_VID|count\(19) & ((\U_VID|count\(17)) # (!\U_VID|count\(16))))) # (!\U_VID|count\(18) & (\U_VID|count\(17) & (!\U_VID|count\(16) & !\U_VID|count\(19))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000110000000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux4~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N2
-\U_LED4|Mux3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux3~0_combout\ = (\U_VID|count\(16) & (\U_VID|count\(17) $ ((!\U_VID|count\(18))))) # (!\U_VID|count\(16) & ((\U_VID|count\(17) & (!\U_VID|count\(18) & \U_VID|count\(19))) # (!\U_VID|count\(17) & (\U_VID|count\(18) & !\U_VID|count\(19)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1001001010010100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux3~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N12
-\U_LED4|Mux2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux2~0_combout\ = (\U_VID|count\(17) & (((\U_VID|count\(16) & !\U_VID|count\(19))))) # (!\U_VID|count\(17) & ((\U_VID|count\(18) & ((!\U_VID|count\(19)))) # (!\U_VID|count\(18) & (\U_VID|count\(16)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0001000011110100",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux2~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N14
-\U_LED4|Mux1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux1~0_combout\ = (\U_VID|count\(17) & (!\U_VID|count\(19) & ((\U_VID|count\(16)) # (!\U_VID|count\(18))))) # (!\U_VID|count\(17) & (\U_VID|count\(16) & (\U_VID|count\(18) $ (!\U_VID|count\(19)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100000010110010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux1~0_combout\);
-
--- Location: LCCOMB_X77_Y40_N20
-\U_LED4|Mux0~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED4|Mux0~0_combout\ = (\U_VID|count\(16) & ((\U_VID|count\(19)) # (\U_VID|count\(17) $ (\U_VID|count\(18))))) # (!\U_VID|count\(16) & ((\U_VID|count\(17)) # (\U_VID|count\(18) $ (\U_VID|count\(19)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1111101101101110",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(17),
-	datab => \U_VID|count\(18),
-	datac => \U_VID|count\(16),
-	datad => \U_VID|count\(19),
-	combout => \U_LED4|Mux0~0_combout\);
-
--- Location: LCCOMB_X45_Y10_N16
-\U_VID|count[20]~62\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[20]~62_combout\ = (\U_VID|count\(20) & (!\U_VID|count[19]~61\)) # (!\U_VID|count\(20) & ((\U_VID|count[19]~61\) # (GND)))
--- \U_VID|count[20]~63\ = CARRY((!\U_VID|count[19]~61\) # (!\U_VID|count\(20)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(20),
-	datad => VCC,
-	cin => \U_VID|count[19]~61\,
-	combout => \U_VID|count[20]~62_combout\,
-	cout => \U_VID|count[20]~63\);
-
--- Location: FF_X45_Y10_N17
-\U_VID|count[20]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[20]~62_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(20));
-
--- Location: LCCOMB_X45_Y10_N18
-\U_VID|count[21]~64\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[21]~64_combout\ = (\U_VID|count\(21) & (\U_VID|count[20]~63\ $ (GND))) # (!\U_VID|count\(21) & (!\U_VID|count[20]~63\ & VCC))
--- \U_VID|count[21]~65\ = CARRY((\U_VID|count\(21) & !\U_VID|count[20]~63\))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1100001100001100",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(21),
-	datad => VCC,
-	cin => \U_VID|count[20]~63\,
-	combout => \U_VID|count[21]~64_combout\,
-	cout => \U_VID|count[21]~65\);
-
--- Location: FF_X45_Y10_N19
-\U_VID|count[21]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[21]~64_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(21));
-
--- Location: LCCOMB_X45_Y10_N20
-\U_VID|count[22]~66\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[22]~66_combout\ = (\U_VID|count\(22) & (!\U_VID|count[21]~65\)) # (!\U_VID|count\(22) & ((\U_VID|count[21]~65\) # (GND)))
--- \U_VID|count[22]~67\ = CARRY((!\U_VID|count[21]~65\) # (!\U_VID|count\(22)))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011110000111111",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	datab => \U_VID|count\(22),
-	datad => VCC,
-	cin => \U_VID|count[21]~65\,
-	combout => \U_VID|count[22]~66_combout\,
-	cout => \U_VID|count[22]~67\);
-
--- Location: FF_X45_Y10_N21
-\U_VID|count[22]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[22]~66_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(22));
-
--- Location: LCCOMB_X45_Y10_N22
-\U_VID|count[23]~68\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|count[23]~68_combout\ = \U_VID|count\(23) $ (!\U_VID|count[22]~67\)
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010110100101",
-	sum_lutc_input => "cin")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(23),
-	cin => \U_VID|count[22]~67\,
-	combout => \U_VID|count[23]~68_combout\);
-
--- Location: FF_X45_Y10_N23
-\U_VID|count[23]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \sclk~input_o\,
-	d => \U_VID|count[23]~68_combout\,
-	clrn => \rst~input_o\,
-	ena => \vsync~input_o\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => \U_VID|count\(23));
-
--- Location: LCCOMB_X77_Y30_N4
-\U_LED5|Mux6~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux6~0_combout\ = (\U_VID|count\(23) & (\U_VID|count\(20) & (\U_VID|count\(21) $ (\U_VID|count\(22))))) # (!\U_VID|count\(23) & (!\U_VID|count\(21) & (\U_VID|count\(22) $ (\U_VID|count\(20)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0100100100010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux6~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N22
-\U_LED5|Mux5~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux5~0_combout\ = (\U_VID|count\(21) & ((\U_VID|count\(20) & (\U_VID|count\(23))) # (!\U_VID|count\(20) & ((\U_VID|count\(22)))))) # (!\U_VID|count\(21) & (\U_VID|count\(22) & (\U_VID|count\(23) $ (\U_VID|count\(20)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1001100011100000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux5~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N16
-\U_LED5|Mux4~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux4~0_combout\ = (\U_VID|count\(23) & (\U_VID|count\(22) & ((\U_VID|count\(21)) # (!\U_VID|count\(20))))) # (!\U_VID|count\(23) & (\U_VID|count\(21) & (!\U_VID|count\(22) & !\U_VID|count\(20))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1000000011000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux4~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N14
-\U_LED5|Mux3~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux3~0_combout\ = (\U_VID|count\(20) & (\U_VID|count\(21) $ (((!\U_VID|count\(22)))))) # (!\U_VID|count\(20) & ((\U_VID|count\(21) & (\U_VID|count\(23) & !\U_VID|count\(22))) # (!\U_VID|count\(21) & (!\U_VID|count\(23) & \U_VID|count\(22)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1010010100011000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux3~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N20
-\U_LED5|Mux2~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux2~0_combout\ = (\U_VID|count\(21) & (!\U_VID|count\(23) & ((\U_VID|count\(20))))) # (!\U_VID|count\(21) & ((\U_VID|count\(22) & (!\U_VID|count\(23))) # (!\U_VID|count\(22) & ((\U_VID|count\(20))))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0011011100010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux2~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N10
-\U_LED5|Mux1~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux1~0_combout\ = (\U_VID|count\(21) & (!\U_VID|count\(23) & ((\U_VID|count\(20)) # (!\U_VID|count\(22))))) # (!\U_VID|count\(21) & (\U_VID|count\(20) & (\U_VID|count\(23) $ (!\U_VID|count\(22)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0110001100000010",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux1~0_combout\);
-
--- Location: LCCOMB_X77_Y30_N12
-\U_LED5|Mux0~0\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_LED5|Mux0~0_combout\ = (\U_VID|count\(20) & ((\U_VID|count\(23)) # (\U_VID|count\(21) $ (\U_VID|count\(22))))) # (!\U_VID|count\(20) & ((\U_VID|count\(21)) # (\U_VID|count\(23) $ (\U_VID|count\(22)))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "1101111010111110",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \U_VID|count\(21),
-	datab => \U_VID|count\(23),
-	datac => \U_VID|count\(22),
-	datad => \U_VID|count\(20),
-	combout => \U_LED5|Mux0~0_combout\);
-
--- Location: LCCOMB_X45_Y10_N28
-\U_VID|write_led~feeder\ : fiftyfivenm_lcell_comb
--- Equation(s):
--- \U_VID|write_led~feeder_combout\ = \vsync~input_o\
+-- \U_VID|vsync_led~feeder_combout\ = \vsync~input_o\
 
 -- pragma translate_off
 GENERIC MAP (
@@ -2562,10 +2040,10 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	datac => \vsync~input_o\,
-	combout => \U_VID|write_led~feeder_combout\);
+	combout => \U_VID|vsync_led~feeder_combout\);
 
--- Location: FF_X45_Y10_N29
-\U_VID|write_led\ : dffeas
+-- Location: FF_X24_Y2_N1
+\U_VID|vsync_led\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
 	is_wysiwyg => "true",
@@ -2573,11 +2051,2002 @@ GENERIC MAP (
 -- pragma translate_on
 PORT MAP (
 	clk => \sclk~input_o\,
-	d => \U_VID|write_led~feeder_combout\,
+	d => \U_VID|vsync_led~feeder_combout\,
 	clrn => \rst~input_o\,
 	devclrn => ww_devclrn,
 	devpor => ww_devpor,
-	q => \U_VID|write_led~q\);
+	q => \U_VID|vsync_led~q\);
+
+-- Location: LCCOMB_X25_Y1_N16
+\U_VID|vcount[24]~77\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[24]~77_combout\ = (\U_VID|vcount\(24) & (!\U_VID|vcount[23]~76\)) # (!\U_VID|vcount\(24) & ((\U_VID|vcount[23]~76\) # (GND)))
+-- \U_VID|vcount[24]~78\ = CARRY((!\U_VID|vcount[23]~76\) # (!\U_VID|vcount\(24)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(24),
+	datad => VCC,
+	cin => \U_VID|vcount[23]~76\,
+	combout => \U_VID|vcount[24]~77_combout\,
+	cout => \U_VID|vcount[24]~78\);
+
+-- Location: FF_X25_Y1_N17
+\U_VID|vcount[24]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[24]~77_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(24));
+
+-- Location: LCCOMB_X25_Y1_N18
+\U_VID|vcount[25]~79\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[25]~79_combout\ = (\U_VID|vcount\(25) & (\U_VID|vcount[24]~78\ $ (GND))) # (!\U_VID|vcount\(25) & (!\U_VID|vcount[24]~78\ & VCC))
+-- \U_VID|vcount[25]~80\ = CARRY((\U_VID|vcount\(25) & !\U_VID|vcount[24]~78\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(25),
+	datad => VCC,
+	cin => \U_VID|vcount[24]~78\,
+	combout => \U_VID|vcount[25]~79_combout\,
+	cout => \U_VID|vcount[25]~80\);
+
+-- Location: FF_X25_Y1_N19
+\U_VID|vcount[25]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[25]~79_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(25));
+
+-- Location: LCCOMB_X25_Y1_N20
+\U_VID|vcount[26]~81\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[26]~81_combout\ = (\U_VID|vcount\(26) & (!\U_VID|vcount[25]~80\)) # (!\U_VID|vcount\(26) & ((\U_VID|vcount[25]~80\) # (GND)))
+-- \U_VID|vcount[26]~82\ = CARRY((!\U_VID|vcount[25]~80\) # (!\U_VID|vcount\(26)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(26),
+	datad => VCC,
+	cin => \U_VID|vcount[25]~80\,
+	combout => \U_VID|vcount[26]~81_combout\,
+	cout => \U_VID|vcount[26]~82\);
+
+-- Location: FF_X25_Y1_N21
+\U_VID|vcount[26]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[26]~81_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(26));
+
+-- Location: LCCOMB_X25_Y1_N22
+\U_VID|vcount[27]~83\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[27]~83_combout\ = (\U_VID|vcount\(27) & (\U_VID|vcount[26]~82\ $ (GND))) # (!\U_VID|vcount\(27) & (!\U_VID|vcount[26]~82\ & VCC))
+-- \U_VID|vcount[27]~84\ = CARRY((\U_VID|vcount\(27) & !\U_VID|vcount[26]~82\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(27),
+	datad => VCC,
+	cin => \U_VID|vcount[26]~82\,
+	combout => \U_VID|vcount[27]~83_combout\,
+	cout => \U_VID|vcount[27]~84\);
+
+-- Location: FF_X25_Y1_N23
+\U_VID|vcount[27]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[27]~83_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(27));
+
+-- Location: LCCOMB_X62_Y50_N28
+\U_LED1|Mux6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux6~0_combout\ = (\U_VID|vcount\(26) & (!\U_VID|vcount\(25) & (\U_VID|vcount\(24) $ (!\U_VID|vcount\(27))))) # (!\U_VID|vcount\(26) & (\U_VID|vcount\(24) & (\U_VID|vcount\(25) $ (!\U_VID|vcount\(27)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110000000010100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux6~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N30
+\U_LED1|Mux5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux5~0_combout\ = (\U_VID|vcount\(25) & ((\U_VID|vcount\(24) & ((\U_VID|vcount\(27)))) # (!\U_VID|vcount\(24) & (\U_VID|vcount\(26))))) # (!\U_VID|vcount\(25) & (\U_VID|vcount\(26) & (\U_VID|vcount\(24) $ (\U_VID|vcount\(27)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010110001001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux5~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N8
+\U_LED1|Mux4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux4~0_combout\ = (\U_VID|vcount\(26) & (\U_VID|vcount\(27) & ((\U_VID|vcount\(25)) # (!\U_VID|vcount\(24))))) # (!\U_VID|vcount\(26) & (\U_VID|vcount\(25) & (!\U_VID|vcount\(24) & !\U_VID|vcount\(27))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000110000000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux4~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N6
+\U_LED1|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux3~0_combout\ = (\U_VID|vcount\(24) & (\U_VID|vcount\(25) $ ((!\U_VID|vcount\(26))))) # (!\U_VID|vcount\(24) & ((\U_VID|vcount\(25) & (!\U_VID|vcount\(26) & \U_VID|vcount\(27))) # (!\U_VID|vcount\(25) & (\U_VID|vcount\(26) & 
+-- !\U_VID|vcount\(27)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1001001010010100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux3~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N4
+\U_LED1|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux2~0_combout\ = (\U_VID|vcount\(25) & (((\U_VID|vcount\(24) & !\U_VID|vcount\(27))))) # (!\U_VID|vcount\(25) & ((\U_VID|vcount\(26) & ((!\U_VID|vcount\(27)))) # (!\U_VID|vcount\(26) & (\U_VID|vcount\(24)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001000011110100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux2~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N22
+\U_LED1|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux1~0_combout\ = (\U_VID|vcount\(25) & (!\U_VID|vcount\(27) & ((\U_VID|vcount\(24)) # (!\U_VID|vcount\(26))))) # (!\U_VID|vcount\(25) & (\U_VID|vcount\(24) & (\U_VID|vcount\(26) $ (!\U_VID|vcount\(27)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000010110010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux1~0_combout\);
+
+-- Location: LCCOMB_X62_Y50_N12
+\U_LED1|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED1|Mux0~0_combout\ = (\U_VID|vcount\(24) & ((\U_VID|vcount\(27)) # (\U_VID|vcount\(25) $ (\U_VID|vcount\(26))))) # (!\U_VID|vcount\(24) & ((\U_VID|vcount\(25)) # (\U_VID|vcount\(26) $ (\U_VID|vcount\(27)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111101101101110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(25),
+	datab => \U_VID|vcount\(26),
+	datac => \U_VID|vcount\(24),
+	datad => \U_VID|vcount\(27),
+	combout => \U_LED1|Mux0~0_combout\);
+
+-- Location: LCCOMB_X25_Y1_N24
+\U_VID|vcount[28]~85\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[28]~85_combout\ = (\U_VID|vcount\(28) & (!\U_VID|vcount[27]~84\)) # (!\U_VID|vcount\(28) & ((\U_VID|vcount[27]~84\) # (GND)))
+-- \U_VID|vcount[28]~86\ = CARRY((!\U_VID|vcount[27]~84\) # (!\U_VID|vcount\(28)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(28),
+	datad => VCC,
+	cin => \U_VID|vcount[27]~84\,
+	combout => \U_VID|vcount[28]~85_combout\,
+	cout => \U_VID|vcount[28]~86\);
+
+-- Location: FF_X25_Y1_N25
+\U_VID|vcount[28]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[28]~85_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(28));
+
+-- Location: LCCOMB_X25_Y1_N26
+\U_VID|vcount[29]~87\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[29]~87_combout\ = (\U_VID|vcount\(29) & (\U_VID|vcount[28]~86\ $ (GND))) # (!\U_VID|vcount\(29) & (!\U_VID|vcount[28]~86\ & VCC))
+-- \U_VID|vcount[29]~88\ = CARRY((\U_VID|vcount\(29) & !\U_VID|vcount[28]~86\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datad => VCC,
+	cin => \U_VID|vcount[28]~86\,
+	combout => \U_VID|vcount[29]~87_combout\,
+	cout => \U_VID|vcount[29]~88\);
+
+-- Location: FF_X25_Y1_N27
+\U_VID|vcount[29]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[29]~87_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(29));
+
+-- Location: LCCOMB_X25_Y1_N28
+\U_VID|vcount[30]~89\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[30]~89_combout\ = (\U_VID|vcount\(30) & (!\U_VID|vcount[29]~88\)) # (!\U_VID|vcount\(30) & ((\U_VID|vcount[29]~88\) # (GND)))
+-- \U_VID|vcount[30]~90\ = CARRY((!\U_VID|vcount[29]~88\) # (!\U_VID|vcount\(30)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|vcount\(30),
+	datad => VCC,
+	cin => \U_VID|vcount[29]~88\,
+	combout => \U_VID|vcount[30]~89_combout\,
+	cout => \U_VID|vcount[30]~90\);
+
+-- Location: FF_X25_Y1_N29
+\U_VID|vcount[30]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[30]~89_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(30));
+
+-- Location: LCCOMB_X25_Y1_N30
+\U_VID|vcount[31]~91\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|vcount[31]~91_combout\ = \U_VID|vcount\(31) $ (!\U_VID|vcount[30]~90\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110100101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(31),
+	cin => \U_VID|vcount[30]~90\,
+	combout => \U_VID|vcount[31]~91_combout\);
+
+-- Location: FF_X25_Y1_N31
+\U_VID|vcount[31]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|vcount[31]~91_combout\,
+	clrn => \rst~input_o\,
+	ena => \vsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|vcount\(31));
+
+-- Location: LCCOMB_X74_Y43_N0
+\U_LED2|Mux6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux6~0_combout\ = (\U_VID|vcount\(30) & (!\U_VID|vcount\(29) & (\U_VID|vcount\(31) $ (!\U_VID|vcount\(28))))) # (!\U_VID|vcount\(30) & (\U_VID|vcount\(28) & (\U_VID|vcount\(29) $ (!\U_VID|vcount\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110000100000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux6~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N26
+\U_LED2|Mux5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux5~0_combout\ = (\U_VID|vcount\(29) & ((\U_VID|vcount\(28) & ((\U_VID|vcount\(31)))) # (!\U_VID|vcount\(28) & (\U_VID|vcount\(30))))) # (!\U_VID|vcount\(29) & (\U_VID|vcount\(30) & (\U_VID|vcount\(31) $ (\U_VID|vcount\(28)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010011001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux5~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N28
+\U_LED2|Mux4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux4~0_combout\ = (\U_VID|vcount\(30) & (\U_VID|vcount\(31) & ((\U_VID|vcount\(29)) # (!\U_VID|vcount\(28))))) # (!\U_VID|vcount\(30) & (\U_VID|vcount\(29) & (!\U_VID|vcount\(31) & !\U_VID|vcount\(28))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000000011000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux4~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N2
+\U_LED2|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux3~0_combout\ = (\U_VID|vcount\(28) & (\U_VID|vcount\(29) $ ((!\U_VID|vcount\(30))))) # (!\U_VID|vcount\(28) & ((\U_VID|vcount\(29) & (!\U_VID|vcount\(30) & \U_VID|vcount\(31))) # (!\U_VID|vcount\(29) & (\U_VID|vcount\(30) & 
+-- !\U_VID|vcount\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1001100100100100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux3~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N4
+\U_LED2|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux2~0_combout\ = (\U_VID|vcount\(29) & (((!\U_VID|vcount\(31) & \U_VID|vcount\(28))))) # (!\U_VID|vcount\(29) & ((\U_VID|vcount\(30) & (!\U_VID|vcount\(31))) # (!\U_VID|vcount\(30) & ((\U_VID|vcount\(28))))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0001111100000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux2~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N10
+\U_LED2|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux1~0_combout\ = (\U_VID|vcount\(29) & (!\U_VID|vcount\(31) & ((\U_VID|vcount\(28)) # (!\U_VID|vcount\(30))))) # (!\U_VID|vcount\(29) & (\U_VID|vcount\(28) & (\U_VID|vcount\(30) $ (!\U_VID|vcount\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100101100000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux1~0_combout\);
+
+-- Location: LCCOMB_X74_Y43_N12
+\U_LED2|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED2|Mux0~0_combout\ = (\U_VID|vcount\(28) & ((\U_VID|vcount\(31)) # (\U_VID|vcount\(29) $ (\U_VID|vcount\(30))))) # (!\U_VID|vcount\(28) & ((\U_VID|vcount\(29)) # (\U_VID|vcount\(30) $ (\U_VID|vcount\(31)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111011010111110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|vcount\(29),
+	datab => \U_VID|vcount\(30),
+	datac => \U_VID|vcount\(31),
+	datad => \U_VID|vcount\(28),
+	combout => \U_LED2|Mux0~0_combout\);
+
+-- Location: IOIBUF_X24_Y0_N1
+\hsync~input\ : fiftyfivenm_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	listen_to_nsleep_signal => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_hsync,
+	o => \hsync~input_o\);
+
+-- Location: LCCOMB_X25_Y4_N0
+\U_VID|hcount[0]~93\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[0]~93_combout\ = \U_VID|hcount\(0) $ (\hsync~input_o\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000111111110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datac => \U_VID|hcount\(0),
+	datad => \hsync~input_o\,
+	combout => \U_VID|hcount[0]~93_combout\);
+
+-- Location: FF_X25_Y4_N1
+\U_VID|hcount[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[0]~93_combout\,
+	clrn => \rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(0));
+
+-- Location: LCCOMB_X25_Y4_N2
+\U_VID|hcount[1]~31\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[1]~31_combout\ = (\U_VID|hcount\(0) & (\U_VID|hcount\(1) $ (VCC))) # (!\U_VID|hcount\(0) & (\U_VID|hcount\(1) & VCC))
+-- \U_VID|hcount[1]~32\ = CARRY((\U_VID|hcount\(0) & \U_VID|hcount\(1)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110011010001000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(0),
+	datab => \U_VID|hcount\(1),
+	datad => VCC,
+	combout => \U_VID|hcount[1]~31_combout\,
+	cout => \U_VID|hcount[1]~32\);
+
+-- Location: FF_X25_Y4_N3
+\U_VID|hcount[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[1]~31_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(1));
+
+-- Location: LCCOMB_X25_Y4_N4
+\U_VID|hcount[2]~33\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[2]~33_combout\ = (\U_VID|hcount\(2) & (!\U_VID|hcount[1]~32\)) # (!\U_VID|hcount\(2) & ((\U_VID|hcount[1]~32\) # (GND)))
+-- \U_VID|hcount[2]~34\ = CARRY((!\U_VID|hcount[1]~32\) # (!\U_VID|hcount\(2)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(2),
+	datad => VCC,
+	cin => \U_VID|hcount[1]~32\,
+	combout => \U_VID|hcount[2]~33_combout\,
+	cout => \U_VID|hcount[2]~34\);
+
+-- Location: FF_X25_Y4_N5
+\U_VID|hcount[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[2]~33_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(2));
+
+-- Location: LCCOMB_X25_Y4_N6
+\U_VID|hcount[3]~35\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[3]~35_combout\ = (\U_VID|hcount\(3) & (\U_VID|hcount[2]~34\ $ (GND))) # (!\U_VID|hcount\(3) & (!\U_VID|hcount[2]~34\ & VCC))
+-- \U_VID|hcount[3]~36\ = CARRY((\U_VID|hcount\(3) & !\U_VID|hcount[2]~34\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(3),
+	datad => VCC,
+	cin => \U_VID|hcount[2]~34\,
+	combout => \U_VID|hcount[3]~35_combout\,
+	cout => \U_VID|hcount[3]~36\);
+
+-- Location: FF_X25_Y4_N7
+\U_VID|hcount[3]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[3]~35_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(3));
+
+-- Location: LCCOMB_X25_Y4_N8
+\U_VID|hcount[4]~37\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[4]~37_combout\ = (\U_VID|hcount\(4) & (!\U_VID|hcount[3]~36\)) # (!\U_VID|hcount\(4) & ((\U_VID|hcount[3]~36\) # (GND)))
+-- \U_VID|hcount[4]~38\ = CARRY((!\U_VID|hcount[3]~36\) # (!\U_VID|hcount\(4)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(4),
+	datad => VCC,
+	cin => \U_VID|hcount[3]~36\,
+	combout => \U_VID|hcount[4]~37_combout\,
+	cout => \U_VID|hcount[4]~38\);
+
+-- Location: FF_X25_Y4_N9
+\U_VID|hcount[4]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[4]~37_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(4));
+
+-- Location: LCCOMB_X25_Y4_N10
+\U_VID|hcount[5]~39\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[5]~39_combout\ = (\U_VID|hcount\(5) & (\U_VID|hcount[4]~38\ $ (GND))) # (!\U_VID|hcount\(5) & (!\U_VID|hcount[4]~38\ & VCC))
+-- \U_VID|hcount[5]~40\ = CARRY((\U_VID|hcount\(5) & !\U_VID|hcount[4]~38\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(5),
+	datad => VCC,
+	cin => \U_VID|hcount[4]~38\,
+	combout => \U_VID|hcount[5]~39_combout\,
+	cout => \U_VID|hcount[5]~40\);
+
+-- Location: FF_X25_Y4_N11
+\U_VID|hcount[5]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[5]~39_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(5));
+
+-- Location: LCCOMB_X25_Y4_N12
+\U_VID|hcount[6]~41\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[6]~41_combout\ = (\U_VID|hcount\(6) & (!\U_VID|hcount[5]~40\)) # (!\U_VID|hcount\(6) & ((\U_VID|hcount[5]~40\) # (GND)))
+-- \U_VID|hcount[6]~42\ = CARRY((!\U_VID|hcount[5]~40\) # (!\U_VID|hcount\(6)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(6),
+	datad => VCC,
+	cin => \U_VID|hcount[5]~40\,
+	combout => \U_VID|hcount[6]~41_combout\,
+	cout => \U_VID|hcount[6]~42\);
+
+-- Location: FF_X25_Y4_N13
+\U_VID|hcount[6]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[6]~41_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(6));
+
+-- Location: LCCOMB_X25_Y4_N14
+\U_VID|hcount[7]~43\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[7]~43_combout\ = (\U_VID|hcount\(7) & (\U_VID|hcount[6]~42\ $ (GND))) # (!\U_VID|hcount\(7) & (!\U_VID|hcount[6]~42\ & VCC))
+-- \U_VID|hcount[7]~44\ = CARRY((\U_VID|hcount\(7) & !\U_VID|hcount[6]~42\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(7),
+	datad => VCC,
+	cin => \U_VID|hcount[6]~42\,
+	combout => \U_VID|hcount[7]~43_combout\,
+	cout => \U_VID|hcount[7]~44\);
+
+-- Location: FF_X25_Y4_N15
+\U_VID|hcount[7]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[7]~43_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(7));
+
+-- Location: LCCOMB_X25_Y4_N16
+\U_VID|hcount[8]~45\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[8]~45_combout\ = (\U_VID|hcount\(8) & (!\U_VID|hcount[7]~44\)) # (!\U_VID|hcount\(8) & ((\U_VID|hcount[7]~44\) # (GND)))
+-- \U_VID|hcount[8]~46\ = CARRY((!\U_VID|hcount[7]~44\) # (!\U_VID|hcount\(8)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(8),
+	datad => VCC,
+	cin => \U_VID|hcount[7]~44\,
+	combout => \U_VID|hcount[8]~45_combout\,
+	cout => \U_VID|hcount[8]~46\);
+
+-- Location: FF_X25_Y4_N17
+\U_VID|hcount[8]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[8]~45_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(8));
+
+-- Location: LCCOMB_X25_Y4_N18
+\U_VID|hcount[9]~47\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[9]~47_combout\ = (\U_VID|hcount\(9) & (\U_VID|hcount[8]~46\ $ (GND))) # (!\U_VID|hcount\(9) & (!\U_VID|hcount[8]~46\ & VCC))
+-- \U_VID|hcount[9]~48\ = CARRY((\U_VID|hcount\(9) & !\U_VID|hcount[8]~46\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(9),
+	datad => VCC,
+	cin => \U_VID|hcount[8]~46\,
+	combout => \U_VID|hcount[9]~47_combout\,
+	cout => \U_VID|hcount[9]~48\);
+
+-- Location: FF_X25_Y4_N19
+\U_VID|hcount[9]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[9]~47_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(9));
+
+-- Location: LCCOMB_X25_Y4_N20
+\U_VID|hcount[10]~49\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[10]~49_combout\ = (\U_VID|hcount\(10) & (!\U_VID|hcount[9]~48\)) # (!\U_VID|hcount\(10) & ((\U_VID|hcount[9]~48\) # (GND)))
+-- \U_VID|hcount[10]~50\ = CARRY((!\U_VID|hcount[9]~48\) # (!\U_VID|hcount\(10)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(10),
+	datad => VCC,
+	cin => \U_VID|hcount[9]~48\,
+	combout => \U_VID|hcount[10]~49_combout\,
+	cout => \U_VID|hcount[10]~50\);
+
+-- Location: FF_X25_Y4_N21
+\U_VID|hcount[10]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[10]~49_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(10));
+
+-- Location: LCCOMB_X25_Y4_N22
+\U_VID|hcount[11]~51\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[11]~51_combout\ = (\U_VID|hcount\(11) & (\U_VID|hcount[10]~50\ $ (GND))) # (!\U_VID|hcount\(11) & (!\U_VID|hcount[10]~50\ & VCC))
+-- \U_VID|hcount[11]~52\ = CARRY((\U_VID|hcount\(11) & !\U_VID|hcount[10]~50\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(11),
+	datad => VCC,
+	cin => \U_VID|hcount[10]~50\,
+	combout => \U_VID|hcount[11]~51_combout\,
+	cout => \U_VID|hcount[11]~52\);
+
+-- Location: FF_X25_Y4_N23
+\U_VID|hcount[11]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[11]~51_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(11));
+
+-- Location: LCCOMB_X25_Y4_N24
+\U_VID|hcount[12]~53\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[12]~53_combout\ = (\U_VID|hcount\(12) & (!\U_VID|hcount[11]~52\)) # (!\U_VID|hcount\(12) & ((\U_VID|hcount[11]~52\) # (GND)))
+-- \U_VID|hcount[12]~54\ = CARRY((!\U_VID|hcount[11]~52\) # (!\U_VID|hcount\(12)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(12),
+	datad => VCC,
+	cin => \U_VID|hcount[11]~52\,
+	combout => \U_VID|hcount[12]~53_combout\,
+	cout => \U_VID|hcount[12]~54\);
+
+-- Location: FF_X25_Y4_N25
+\U_VID|hcount[12]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[12]~53_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(12));
+
+-- Location: LCCOMB_X25_Y4_N26
+\U_VID|hcount[13]~55\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[13]~55_combout\ = (\U_VID|hcount\(13) & (\U_VID|hcount[12]~54\ $ (GND))) # (!\U_VID|hcount\(13) & (!\U_VID|hcount[12]~54\ & VCC))
+-- \U_VID|hcount[13]~56\ = CARRY((\U_VID|hcount\(13) & !\U_VID|hcount[12]~54\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(13),
+	datad => VCC,
+	cin => \U_VID|hcount[12]~54\,
+	combout => \U_VID|hcount[13]~55_combout\,
+	cout => \U_VID|hcount[13]~56\);
+
+-- Location: FF_X25_Y4_N27
+\U_VID|hcount[13]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[13]~55_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(13));
+
+-- Location: LCCOMB_X25_Y4_N28
+\U_VID|hcount[14]~57\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[14]~57_combout\ = (\U_VID|hcount\(14) & (!\U_VID|hcount[13]~56\)) # (!\U_VID|hcount\(14) & ((\U_VID|hcount[13]~56\) # (GND)))
+-- \U_VID|hcount[14]~58\ = CARRY((!\U_VID|hcount[13]~56\) # (!\U_VID|hcount\(14)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(14),
+	datad => VCC,
+	cin => \U_VID|hcount[13]~56\,
+	combout => \U_VID|hcount[14]~57_combout\,
+	cout => \U_VID|hcount[14]~58\);
+
+-- Location: FF_X25_Y4_N29
+\U_VID|hcount[14]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[14]~57_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(14));
+
+-- Location: LCCOMB_X25_Y4_N30
+\U_VID|hcount[15]~59\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[15]~59_combout\ = (\U_VID|hcount\(15) & (\U_VID|hcount[14]~58\ $ (GND))) # (!\U_VID|hcount\(15) & (!\U_VID|hcount[14]~58\ & VCC))
+-- \U_VID|hcount[15]~60\ = CARRY((\U_VID|hcount\(15) & !\U_VID|hcount[14]~58\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(15),
+	datad => VCC,
+	cin => \U_VID|hcount[14]~58\,
+	combout => \U_VID|hcount[15]~59_combout\,
+	cout => \U_VID|hcount[15]~60\);
+
+-- Location: FF_X25_Y4_N31
+\U_VID|hcount[15]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[15]~59_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(15));
+
+-- Location: LCCOMB_X25_Y3_N0
+\U_VID|hcount[16]~61\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[16]~61_combout\ = (\U_VID|hcount\(16) & (!\U_VID|hcount[15]~60\)) # (!\U_VID|hcount\(16) & ((\U_VID|hcount[15]~60\) # (GND)))
+-- \U_VID|hcount[16]~62\ = CARRY((!\U_VID|hcount[15]~60\) # (!\U_VID|hcount\(16)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(16),
+	datad => VCC,
+	cin => \U_VID|hcount[15]~60\,
+	combout => \U_VID|hcount[16]~61_combout\,
+	cout => \U_VID|hcount[16]~62\);
+
+-- Location: FF_X25_Y3_N1
+\U_VID|hcount[16]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[16]~61_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(16));
+
+-- Location: LCCOMB_X25_Y3_N2
+\U_VID|hcount[17]~63\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[17]~63_combout\ = (\U_VID|hcount\(17) & (\U_VID|hcount[16]~62\ $ (GND))) # (!\U_VID|hcount\(17) & (!\U_VID|hcount[16]~62\ & VCC))
+-- \U_VID|hcount[17]~64\ = CARRY((\U_VID|hcount\(17) & !\U_VID|hcount[16]~62\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(17),
+	datad => VCC,
+	cin => \U_VID|hcount[16]~62\,
+	combout => \U_VID|hcount[17]~63_combout\,
+	cout => \U_VID|hcount[17]~64\);
+
+-- Location: FF_X25_Y3_N3
+\U_VID|hcount[17]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[17]~63_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(17));
+
+-- Location: LCCOMB_X25_Y3_N4
+\U_VID|hcount[18]~65\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[18]~65_combout\ = (\U_VID|hcount\(18) & (!\U_VID|hcount[17]~64\)) # (!\U_VID|hcount\(18) & ((\U_VID|hcount[17]~64\) # (GND)))
+-- \U_VID|hcount[18]~66\ = CARRY((!\U_VID|hcount[17]~64\) # (!\U_VID|hcount\(18)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(18),
+	datad => VCC,
+	cin => \U_VID|hcount[17]~64\,
+	combout => \U_VID|hcount[18]~65_combout\,
+	cout => \U_VID|hcount[18]~66\);
+
+-- Location: FF_X25_Y3_N5
+\U_VID|hcount[18]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[18]~65_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(18));
+
+-- Location: LCCOMB_X25_Y3_N6
+\U_VID|hcount[19]~67\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[19]~67_combout\ = (\U_VID|hcount\(19) & (\U_VID|hcount[18]~66\ $ (GND))) # (!\U_VID|hcount\(19) & (!\U_VID|hcount[18]~66\ & VCC))
+-- \U_VID|hcount[19]~68\ = CARRY((\U_VID|hcount\(19) & !\U_VID|hcount[18]~66\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(19),
+	datad => VCC,
+	cin => \U_VID|hcount[18]~66\,
+	combout => \U_VID|hcount[19]~67_combout\,
+	cout => \U_VID|hcount[19]~68\);
+
+-- Location: FF_X25_Y3_N7
+\U_VID|hcount[19]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[19]~67_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(19));
+
+-- Location: LCCOMB_X25_Y3_N8
+\U_VID|hcount[20]~69\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[20]~69_combout\ = (\U_VID|hcount\(20) & (!\U_VID|hcount[19]~68\)) # (!\U_VID|hcount\(20) & ((\U_VID|hcount[19]~68\) # (GND)))
+-- \U_VID|hcount[20]~70\ = CARRY((!\U_VID|hcount[19]~68\) # (!\U_VID|hcount\(20)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(20),
+	datad => VCC,
+	cin => \U_VID|hcount[19]~68\,
+	combout => \U_VID|hcount[20]~69_combout\,
+	cout => \U_VID|hcount[20]~70\);
+
+-- Location: FF_X25_Y3_N9
+\U_VID|hcount[20]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[20]~69_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(20));
+
+-- Location: LCCOMB_X25_Y3_N10
+\U_VID|hcount[21]~71\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[21]~71_combout\ = (\U_VID|hcount\(21) & (\U_VID|hcount[20]~70\ $ (GND))) # (!\U_VID|hcount\(21) & (!\U_VID|hcount[20]~70\ & VCC))
+-- \U_VID|hcount[21]~72\ = CARRY((\U_VID|hcount\(21) & !\U_VID|hcount[20]~70\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(21),
+	datad => VCC,
+	cin => \U_VID|hcount[20]~70\,
+	combout => \U_VID|hcount[21]~71_combout\,
+	cout => \U_VID|hcount[21]~72\);
+
+-- Location: FF_X25_Y3_N11
+\U_VID|hcount[21]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[21]~71_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(21));
+
+-- Location: LCCOMB_X25_Y3_N12
+\U_VID|hcount[22]~73\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[22]~73_combout\ = (\U_VID|hcount\(22) & (!\U_VID|hcount[21]~72\)) # (!\U_VID|hcount\(22) & ((\U_VID|hcount[21]~72\) # (GND)))
+-- \U_VID|hcount[22]~74\ = CARRY((!\U_VID|hcount[21]~72\) # (!\U_VID|hcount\(22)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101001011111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(22),
+	datad => VCC,
+	cin => \U_VID|hcount[21]~72\,
+	combout => \U_VID|hcount[22]~73_combout\,
+	cout => \U_VID|hcount[22]~74\);
+
+-- Location: FF_X25_Y3_N13
+\U_VID|hcount[22]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[22]~73_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(22));
+
+-- Location: LCCOMB_X25_Y3_N14
+\U_VID|hcount[23]~75\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[23]~75_combout\ = (\U_VID|hcount\(23) & (\U_VID|hcount[22]~74\ $ (GND))) # (!\U_VID|hcount\(23) & (!\U_VID|hcount[22]~74\ & VCC))
+-- \U_VID|hcount[23]~76\ = CARRY((\U_VID|hcount\(23) & !\U_VID|hcount[22]~74\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(23),
+	datad => VCC,
+	cin => \U_VID|hcount[22]~74\,
+	combout => \U_VID|hcount[23]~75_combout\,
+	cout => \U_VID|hcount[23]~76\);
+
+-- Location: FF_X25_Y3_N15
+\U_VID|hcount[23]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[23]~75_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(23));
+
+-- Location: LCCOMB_X74_Y35_N4
+\U_LED3|Mux6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux6~0_combout\ = (\U_VID|hcount\(23) & (\U_VID|hcount\(20) & (\U_VID|hcount\(21) $ (\U_VID|hcount\(22))))) # (!\U_VID|hcount\(23) & (!\U_VID|hcount\(21) & (\U_VID|hcount\(20) $ (\U_VID|hcount\(22)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000100110000100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux6~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N10
+\U_LED3|Mux5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux5~0_combout\ = (\U_VID|hcount\(23) & ((\U_VID|hcount\(20) & (\U_VID|hcount\(21))) # (!\U_VID|hcount\(20) & ((\U_VID|hcount\(22)))))) # (!\U_VID|hcount\(23) & (\U_VID|hcount\(22) & (\U_VID|hcount\(20) $ (\U_VID|hcount\(21)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1011011010000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux5~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N28
+\U_LED3|Mux4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux4~0_combout\ = (\U_VID|hcount\(23) & (\U_VID|hcount\(22) & ((\U_VID|hcount\(21)) # (!\U_VID|hcount\(20))))) # (!\U_VID|hcount\(23) & (!\U_VID|hcount\(20) & (\U_VID|hcount\(21) & !\U_VID|hcount\(22))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010001000010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux4~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N22
+\U_LED3|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux3~0_combout\ = (\U_VID|hcount\(20) & ((\U_VID|hcount\(21) $ (!\U_VID|hcount\(22))))) # (!\U_VID|hcount\(20) & ((\U_VID|hcount\(23) & (\U_VID|hcount\(21) & !\U_VID|hcount\(22))) # (!\U_VID|hcount\(23) & (!\U_VID|hcount\(21) & 
+-- \U_VID|hcount\(22)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100000100101100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux3~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N24
+\U_LED3|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux2~0_combout\ = (\U_VID|hcount\(21) & (!\U_VID|hcount\(23) & (\U_VID|hcount\(20)))) # (!\U_VID|hcount\(21) & ((\U_VID|hcount\(22) & (!\U_VID|hcount\(23))) # (!\U_VID|hcount\(22) & ((\U_VID|hcount\(20))))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100010101001100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux2~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N26
+\U_LED3|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux1~0_combout\ = (\U_VID|hcount\(20) & (\U_VID|hcount\(23) $ (((\U_VID|hcount\(21)) # (!\U_VID|hcount\(22)))))) # (!\U_VID|hcount\(20) & (!\U_VID|hcount\(23) & (\U_VID|hcount\(21) & !\U_VID|hcount\(22))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100100001010100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux1~0_combout\);
+
+-- Location: LCCOMB_X74_Y35_N12
+\U_LED3|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED3|Mux0~0_combout\ = (\U_VID|hcount\(20) & ((\U_VID|hcount\(23)) # (\U_VID|hcount\(21) $ (\U_VID|hcount\(22))))) # (!\U_VID|hcount\(20) & ((\U_VID|hcount\(21)) # (\U_VID|hcount\(23) $ (\U_VID|hcount\(22)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1011110111111010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(23),
+	datab => \U_VID|hcount\(20),
+	datac => \U_VID|hcount\(21),
+	datad => \U_VID|hcount\(22),
+	combout => \U_LED3|Mux0~0_combout\);
+
+-- Location: LCCOMB_X24_Y2_N14
+\U_VID|hsync_led~feeder\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hsync_led~feeder_combout\ = \hsync~input_o\
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1111111100000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	datad => \hsync~input_o\,
+	combout => \U_VID|hsync_led~feeder_combout\);
+
+-- Location: FF_X24_Y2_N15
+\U_VID|hsync_led\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hsync_led~feeder_combout\,
+	clrn => \rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hsync_led~q\);
+
+-- Location: LCCOMB_X25_Y3_N16
+\U_VID|hcount[24]~77\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[24]~77_combout\ = (\U_VID|hcount\(24) & (!\U_VID|hcount[23]~76\)) # (!\U_VID|hcount\(24) & ((\U_VID|hcount[23]~76\) # (GND)))
+-- \U_VID|hcount[24]~78\ = CARRY((!\U_VID|hcount[23]~76\) # (!\U_VID|hcount\(24)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(24),
+	datad => VCC,
+	cin => \U_VID|hcount[23]~76\,
+	combout => \U_VID|hcount[24]~77_combout\,
+	cout => \U_VID|hcount[24]~78\);
+
+-- Location: FF_X25_Y3_N17
+\U_VID|hcount[24]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[24]~77_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(24));
+
+-- Location: LCCOMB_X25_Y3_N18
+\U_VID|hcount[25]~79\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[25]~79_combout\ = (\U_VID|hcount\(25) & (\U_VID|hcount[24]~78\ $ (GND))) # (!\U_VID|hcount\(25) & (!\U_VID|hcount[24]~78\ & VCC))
+-- \U_VID|hcount[25]~80\ = CARRY((\U_VID|hcount\(25) & !\U_VID|hcount[24]~78\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1100001100001100",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(25),
+	datad => VCC,
+	cin => \U_VID|hcount[24]~78\,
+	combout => \U_VID|hcount[25]~79_combout\,
+	cout => \U_VID|hcount[25]~80\);
+
+-- Location: FF_X25_Y3_N19
+\U_VID|hcount[25]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[25]~79_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(25));
+
+-- Location: LCCOMB_X25_Y3_N20
+\U_VID|hcount[26]~81\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[26]~81_combout\ = (\U_VID|hcount\(26) & (!\U_VID|hcount[25]~80\)) # (!\U_VID|hcount\(26) & ((\U_VID|hcount[25]~80\) # (GND)))
+-- \U_VID|hcount[26]~82\ = CARRY((!\U_VID|hcount[25]~80\) # (!\U_VID|hcount\(26)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(26),
+	datad => VCC,
+	cin => \U_VID|hcount[25]~80\,
+	combout => \U_VID|hcount[26]~81_combout\,
+	cout => \U_VID|hcount[26]~82\);
+
+-- Location: FF_X25_Y3_N21
+\U_VID|hcount[26]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[26]~81_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(26));
+
+-- Location: LCCOMB_X25_Y3_N22
+\U_VID|hcount[27]~83\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[27]~83_combout\ = (\U_VID|hcount\(27) & (\U_VID|hcount[26]~82\ $ (GND))) # (!\U_VID|hcount\(27) & (!\U_VID|hcount[26]~82\ & VCC))
+-- \U_VID|hcount[27]~84\ = CARRY((\U_VID|hcount\(27) & !\U_VID|hcount[26]~82\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(27),
+	datad => VCC,
+	cin => \U_VID|hcount[26]~82\,
+	combout => \U_VID|hcount[27]~83_combout\,
+	cout => \U_VID|hcount[27]~84\);
+
+-- Location: FF_X25_Y3_N23
+\U_VID|hcount[27]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[27]~83_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(27));
+
+-- Location: LCCOMB_X77_Y37_N4
+\U_LED4|Mux6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux6~0_combout\ = (\U_VID|hcount\(27) & (\U_VID|hcount\(24) & (\U_VID|hcount\(25) $ (\U_VID|hcount\(26))))) # (!\U_VID|hcount\(27) & (!\U_VID|hcount\(25) & (\U_VID|hcount\(24) $ (\U_VID|hcount\(26)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100000110010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux6~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N22
+\U_LED4|Mux5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux5~0_combout\ = (\U_VID|hcount\(25) & ((\U_VID|hcount\(24) & (\U_VID|hcount\(27))) # (!\U_VID|hcount\(24) & ((\U_VID|hcount\(26)))))) # (!\U_VID|hcount\(25) & (\U_VID|hcount\(26) & (\U_VID|hcount\(27) $ (\U_VID|hcount\(24)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1001111010000000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux5~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N16
+\U_LED4|Mux4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux4~0_combout\ = (\U_VID|hcount\(27) & (\U_VID|hcount\(26) & ((\U_VID|hcount\(25)) # (!\U_VID|hcount\(24))))) # (!\U_VID|hcount\(27) & (\U_VID|hcount\(25) & (!\U_VID|hcount\(24) & !\U_VID|hcount\(26))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000110000000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux4~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N18
+\U_LED4|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux3~0_combout\ = (\U_VID|hcount\(24) & (\U_VID|hcount\(25) $ (((!\U_VID|hcount\(26)))))) # (!\U_VID|hcount\(24) & ((\U_VID|hcount\(25) & (\U_VID|hcount\(27) & !\U_VID|hcount\(26))) # (!\U_VID|hcount\(25) & (!\U_VID|hcount\(27) & 
+-- \U_VID|hcount\(26)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010000101011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux3~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N12
+\U_LED4|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux2~0_combout\ = (\U_VID|hcount\(25) & (!\U_VID|hcount\(27) & (\U_VID|hcount\(24)))) # (!\U_VID|hcount\(25) & ((\U_VID|hcount\(26) & (!\U_VID|hcount\(27))) # (!\U_VID|hcount\(26) & ((\U_VID|hcount\(24))))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011000101110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux2~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N10
+\U_LED4|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux1~0_combout\ = (\U_VID|hcount\(25) & (!\U_VID|hcount\(27) & ((\U_VID|hcount\(24)) # (!\U_VID|hcount\(26))))) # (!\U_VID|hcount\(25) & (\U_VID|hcount\(24) & (\U_VID|hcount\(27) $ (!\U_VID|hcount\(26)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110000000110010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux1~0_combout\);
+
+-- Location: LCCOMB_X77_Y37_N8
+\U_LED4|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED4|Mux0~0_combout\ = (\U_VID|hcount\(24) & ((\U_VID|hcount\(27)) # (\U_VID|hcount\(25) $ (\U_VID|hcount\(26))))) # (!\U_VID|hcount\(24) & ((\U_VID|hcount\(25)) # (\U_VID|hcount\(27) $ (\U_VID|hcount\(26)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101101111101110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(25),
+	datab => \U_VID|hcount\(27),
+	datac => \U_VID|hcount\(24),
+	datad => \U_VID|hcount\(26),
+	combout => \U_LED4|Mux0~0_combout\);
+
+-- Location: LCCOMB_X25_Y3_N24
+\U_VID|hcount[28]~85\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[28]~85_combout\ = (\U_VID|hcount\(28) & (!\U_VID|hcount[27]~84\)) # (!\U_VID|hcount\(28) & ((\U_VID|hcount[27]~84\) # (GND)))
+-- \U_VID|hcount[28]~86\ = CARRY((!\U_VID|hcount[27]~84\) # (!\U_VID|hcount\(28)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(28),
+	datad => VCC,
+	cin => \U_VID|hcount[27]~84\,
+	combout => \U_VID|hcount[28]~85_combout\,
+	cout => \U_VID|hcount[28]~86\);
+
+-- Location: FF_X25_Y3_N25
+\U_VID|hcount[28]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[28]~85_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(28));
+
+-- Location: LCCOMB_X25_Y3_N26
+\U_VID|hcount[29]~87\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[29]~87_combout\ = (\U_VID|hcount\(29) & (\U_VID|hcount[28]~86\ $ (GND))) # (!\U_VID|hcount\(29) & (!\U_VID|hcount[28]~86\ & VCC))
+-- \U_VID|hcount[29]~88\ = CARRY((\U_VID|hcount\(29) & !\U_VID|hcount[28]~86\))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100001010",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datad => VCC,
+	cin => \U_VID|hcount[28]~86\,
+	combout => \U_VID|hcount[29]~87_combout\,
+	cout => \U_VID|hcount[29]~88\);
+
+-- Location: FF_X25_Y3_N27
+\U_VID|hcount[29]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[29]~87_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(29));
+
+-- Location: LCCOMB_X25_Y3_N28
+\U_VID|hcount[30]~89\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[30]~89_combout\ = (\U_VID|hcount\(30) & (!\U_VID|hcount[29]~88\)) # (!\U_VID|hcount\(30) & ((\U_VID|hcount[29]~88\) # (GND)))
+-- \U_VID|hcount[30]~90\ = CARRY((!\U_VID|hcount[29]~88\) # (!\U_VID|hcount\(30)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011110000111111",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	datab => \U_VID|hcount\(30),
+	datad => VCC,
+	cin => \U_VID|hcount[29]~88\,
+	combout => \U_VID|hcount[30]~89_combout\,
+	cout => \U_VID|hcount[30]~90\);
+
+-- Location: FF_X25_Y3_N29
+\U_VID|hcount[30]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[30]~89_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(30));
+
+-- Location: LCCOMB_X25_Y3_N30
+\U_VID|hcount[31]~91\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_VID|hcount[31]~91_combout\ = \U_VID|hcount\(31) $ (!\U_VID|hcount[30]~90\)
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010110100101",
+	sum_lutc_input => "cin")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(31),
+	cin => \U_VID|hcount[30]~90\,
+	combout => \U_VID|hcount[31]~91_combout\);
+
+-- Location: FF_X25_Y3_N31
+\U_VID|hcount[31]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \sclk~input_o\,
+	d => \U_VID|hcount[31]~91_combout\,
+	clrn => \rst~input_o\,
+	ena => \hsync~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \U_VID|hcount\(31));
+
+-- Location: LCCOMB_X77_Y34_N16
+\U_LED5|Mux6~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux6~0_combout\ = (\U_VID|hcount\(31) & (\U_VID|hcount\(28) & (\U_VID|hcount\(29) $ (\U_VID|hcount\(30))))) # (!\U_VID|hcount\(31) & (!\U_VID|hcount\(29) & (\U_VID|hcount\(30) $ (\U_VID|hcount\(28)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100100100010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux6~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N2
+\U_LED5|Mux5~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux5~0_combout\ = (\U_VID|hcount\(29) & ((\U_VID|hcount\(28) & (\U_VID|hcount\(31))) # (!\U_VID|hcount\(28) & ((\U_VID|hcount\(30)))))) # (!\U_VID|hcount\(29) & (\U_VID|hcount\(30) & (\U_VID|hcount\(31) $ (\U_VID|hcount\(28)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1001100011100000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux5~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N4
+\U_LED5|Mux4~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux4~0_combout\ = (\U_VID|hcount\(31) & (\U_VID|hcount\(30) & ((\U_VID|hcount\(29)) # (!\U_VID|hcount\(28))))) # (!\U_VID|hcount\(31) & (\U_VID|hcount\(29) & (!\U_VID|hcount\(30) & !\U_VID|hcount\(28))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1000000011000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux4~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N14
+\U_LED5|Mux3~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux3~0_combout\ = (\U_VID|hcount\(28) & (\U_VID|hcount\(29) $ (((!\U_VID|hcount\(30)))))) # (!\U_VID|hcount\(28) & ((\U_VID|hcount\(29) & (\U_VID|hcount\(31) & !\U_VID|hcount\(30))) # (!\U_VID|hcount\(29) & (!\U_VID|hcount\(31) & 
+-- \U_VID|hcount\(30)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1010010100011000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux3~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N20
+\U_LED5|Mux2~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux2~0_combout\ = (\U_VID|hcount\(29) & (!\U_VID|hcount\(31) & ((\U_VID|hcount\(28))))) # (!\U_VID|hcount\(29) & ((\U_VID|hcount\(30) & (!\U_VID|hcount\(31))) # (!\U_VID|hcount\(30) & ((\U_VID|hcount\(28))))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0011011100010000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux2~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N10
+\U_LED5|Mux1~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux1~0_combout\ = (\U_VID|hcount\(29) & (!\U_VID|hcount\(31) & ((\U_VID|hcount\(28)) # (!\U_VID|hcount\(30))))) # (!\U_VID|hcount\(29) & (\U_VID|hcount\(28) & (\U_VID|hcount\(31) $ (!\U_VID|hcount\(30)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110001100000010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux1~0_combout\);
+
+-- Location: LCCOMB_X77_Y34_N12
+\U_LED5|Mux0~0\ : fiftyfivenm_lcell_comb
+-- Equation(s):
+-- \U_LED5|Mux0~0_combout\ = (\U_VID|hcount\(28) & ((\U_VID|hcount\(31)) # (\U_VID|hcount\(29) $ (\U_VID|hcount\(30))))) # (!\U_VID|hcount\(28) & ((\U_VID|hcount\(29)) # (\U_VID|hcount\(31) $ (\U_VID|hcount\(30)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "1101111010111110",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \U_VID|hcount\(29),
+	datab => \U_VID|hcount\(31),
+	datac => \U_VID|hcount\(30),
+	datad => \U_VID|hcount\(28),
+	combout => \U_LED5|Mux0~0_combout\);
 
 -- Location: UNVM_X0_Y40_N40
 \~QUARTUS_CREATED_UNVM~\ : fiftyfivenm_unvm
@@ -2745,8 +4214,6 @@ ww_led5(5) <= \led5[5]~output_o\;
 ww_led5(6) <= \led5[6]~output_o\;
 
 ww_led5_dp <= \led5_dp~output_o\;
-
-ww_write_led <= \write_led~output_o\;
 END structure;
 
 

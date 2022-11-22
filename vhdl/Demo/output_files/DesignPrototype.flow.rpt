@@ -1,5 +1,5 @@
 Flow report for DesignPrototype
-Fri Nov 18 16:02:20 2022
+Tue Nov 22 14:56:40 2022
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -41,17 +41,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Nov 18 16:02:20 2022       ;
+; Flow Status                        ; Successful - Tue Nov 22 14:56:40 2022       ;
 ; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                      ; DesignPrototype                             ;
 ; Top-level Entity Name              ; toplevel                                    ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C6GES                            ;
 ; Timing Models                      ; Preliminary                                 ;
-; Total logic elements               ; 68 / 49,760 ( < 1 % )                       ;
-;     Total combinational functions  ; 67 / 49,760 ( < 1 % )                       ;
-;     Dedicated logic registers      ; 25 / 49,760 ( < 1 % )                       ;
-; Total registers                    ; 25                                          ;
+; Total logic elements               ; 109 / 49,760 ( < 1 % )                      ;
+;     Total combinational functions  ; 107 / 49,760 ( < 1 % )                      ;
+;     Dedicated logic registers      ; 66 / 49,760 ( < 1 % )                       ;
+; Total registers                    ; 66                                          ;
 ; Total pins                         ; 52 / 360 ( 14 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 1,677,312 ( 0 % )                       ;
@@ -67,7 +67,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/18/2022 16:01:56 ;
+; Start date & time ; 11/22/2022 14:56:12 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DesignPrototype     ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+-----------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value   ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+-----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 91762596164.166880531606980            ; --              ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 10995770589194.166914697201064         ; --              ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --              ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --              ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --              ; --          ; eda_board_design_signal_integrity ;
@@ -103,12 +103,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:08     ; 1.0                     ; 4857 MB             ; 00:00:20                           ;
-; Fitter               ; 00:00:07     ; 1.1                     ; 6611 MB             ; 00:00:14                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4694 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.2                     ; 4972 MB             ; 00:00:02                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4646 MB             ; 00:00:01                           ;
-; Total                ; 00:00:19     ; --                      ; --                  ; 00:00:39                           ;
+; Analysis & Synthesis ; 00:00:09     ; 1.0                     ; 4787 MB             ; 00:00:10                           ;
+; Fitter               ; 00:00:09     ; 1.0                     ; 5654 MB             ; 00:00:06                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4694 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:03     ; 1.1                     ; 4825 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4645 MB             ; 00:00:00                           ;
+; Total                ; 00:00:24     ; --                      ; --                  ; 00:00:19                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -117,11 +117,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; MincePC          ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; MincePC          ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; MincePC          ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; MincePC          ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; MincePC          ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; Gio              ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; Gio              ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; Gio              ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; Gio              ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; Gio              ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

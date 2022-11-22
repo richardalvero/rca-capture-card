@@ -9,34 +9,51 @@ entity videoInput is
 		sclk, rst : in std_logic;
 		-- Enable Count
 		vsync : 	in std_logic;
+		hsync :	in std_logic;
 		
 		-- Output of Counter
-		output : out std_logic_vector(23 downto 0);
-		write_led : out std_logic);
+		v_output : out std_logic_vector(47 downto 0);
+		h_output : out std_logic_vector(47 downto 0);
+		vsync_led : out std_logic;
+		hsync_led : out std_logic);
 end videoInput;
 
 -- Architecture of Video Input
 architecture video of videoInput is
 
-	signal count : unsigned(23 downto 0);
+	signal vcount : unsigned(47 downto 0);
+	signal hcount : unsigned(47 downto 0);
 
 begin
 	process(sclk, rst)
 	begin
 		if (rst = '1') then
-			count <= (others => '0');
-			write_led <= '0';
+			vcount <= (others => '0');
+			hcount <= (others => '0');
+			vsync_led <= '0';
+			hsync_led <= '0';
 
 		elsif (rising_edge(sclk)) then
+			-- VSYNC
 			if (vsync = '1') then
-				count <= count + 1;
-				write_led <= '1';
+				vcount <= vcount + 1;
+				vsync_led <= '1';
 			else 
-				write_led <= '0';
+				vsync_led <= '0';
 			end if;
+			
+			-- HSYNC
+			if (hsync = '1') then
+				hcount <= hcount + 1;
+				hsync_led <= '1';
+			else
+				hsync_led <= '0';
+			end if;
+			
 		end if;
 	end process;
 
-	output <= std_logic_vector(count);
+	v_output <= std_logic_vector(vcount);
+	h_output <= std_logic_vector(hcount);
 	
 end video;
