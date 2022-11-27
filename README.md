@@ -1,23 +1,25 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/catiaspsilva/README-template">
+  <a href="https://github.com/richardalvero/rca-capture-card">
     <img src="images/gators.jpg" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">README Template</h3>
 
   <p align="center">
-    A README template to jumpstart your projects!
+    A detailed README for exploring all aspects of this capstone project.
     <br />
-    <a href="https://github.com/catiaspsilva/README-template/blob/main/images/docs.txt"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/richardalvero/rca-capture-card/tree/main/documentation"><strong>Explore the documentation »</strong></a>
+    <br />
+    <a href="https://github.com/richardalvero/rca-capture-card/tree/main/vhdl"><strong>Explore the VHDL code »</strong></a>
     <br />
     <br />
     <a href="#usage">View Demo</a>
     ·
-    <a href="https://github.com/catiaspsilva/README-template/issues">Report Bug</a>
+    <a href="https://github.com/richardalvero/rca-capture-card/issues">Report Bug</a>
     ·
-    <a href="https://github.com/catiaspsilva/README-template/issues">Request Feature</a>
+    <a href="https://github.com/richardalvero/rca-capture-card/issues">Request Feature</a>
   </p>
 </p>
 
@@ -28,21 +30,21 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#project-architecture">Project Architecture</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#hardware">Hardware</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#project-goals">Project Goals</a>
       <ul>
-        <li><a href="#dependencies">Dependencies</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#short-term">Short-Term</a></li>
+        <li><a href="#stretch-goals">Stretch Goals</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#progress">Progress</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#authors">Authors</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -52,110 +54,106 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Project Architecture
 
-In this section you should describe your project, including any datasets you used and appropriate citations. You may refer to your project report or cite your paper for more detailed information.
+This section will give a brief description of the overall project architecture, from both a hardware and software perspective.
 
-[Here goes the title with hyperlink](https://github.com/catiaspsilva/README-template)
+From a hardware perspective, this project intends to use an external component to decode the input RCA signal for processing within the FPGA board, where it will be further routed to a USB and RCA output for capturing purposes. So far, we have seen success in using the TVP5150AM1 Video Decoder for this purpose, and this additional part should allow us to convert the signal to a USB signal within the FPGA.
 
-You can include tables or images to summarize your results when and if appropriate.
+From a software perspective, this project required us to create code in VHDL that would be used to program the DE10 Lite to handle the inputs from the Video Decoder. This has been largely successful, and all relevant VHDL code used to program the FPGA is linked below:
+
+[VHDL Directory](https://github.com/richardalvero/rca-capture-card/tree/main/vhdl)
+
+This VHDL was synthesized into a programmable device using Quartus Prime 19.1, and programmed onto the DE10 Lite via a USB connection to the PC. For the purposes of the upcoming demo, the DE10 Lite is a sufficiently powerful FPGA that can be used to demonstrate the separate components interacting with each other.
+
+_For a more in-depth look at the architecture of our project, please see the [Pre-Alpha Build](https://github.com/richardalvero/rca-capture-card/blob/main/documentation/RCA%20Pre-Alpha%20Build%2011_01_22.pdf)_
+
+### Built With
+
+- Quartus Prime 19.1 Lite Edition (Programming)
+- Notepad++ v8.4.6 (VHDL Coding)
+- Visual Studio Code (VHDL)
+
+### Hardware
+
+- DE10 Lite FPGA
+- TVP5150AM1 Ultra Low-Power Video Decoder
+
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Project Goals
 
-In this section you should provide instructions on how to use this repository to recreate your project locally.
+This section will describe the current goals that we wish to accomplish during the development of this capture card.
 
-### Dependencies
+### Short-Term
 
-Here, list all libraries, packages and other dependencies that need to be installed to run your project. Include library versions and how they should be installed if a special requirement is needed.
+For our short-term goal, as in by the end of this semester, we plan to have the basic workings of the capture card completed. This would include how to route the input signal through the video decoder, how to properly decode the signal to be transferred to the FPGA, and VHDL code that can take the input data and process it to an onboard output.
 
-For example, this is how you would list them:
-* Transformers 4.8.0
-  ```sh
-  conda install -c conda-forge transformers
-  ```
-* OpenCV 4.5.2
-  ```sh
-  conda install -c conda-forge opencv
-  ```
-### Alternative: Export your Environment
+We have met a few of our short-term goals already, which included purchasing all relevant hardware that we would use for decoding and processing the RCA input. This includes the separate video decoder IC.
 
-Alternatively, you can export your Python working environment, push it to your project's repository and allow users to clone it locally. This way, anyone can install it and they will have all dependencies needed. Here is how you export a copy of your Python environment:
 
-  ```sh
-  conda env export > requirements.yml
-  ```
+### Stretch Goals
 
-The user will be able to recreate it using:
+Within the weekly meetings, we have determined a few of our stretch goals with the help of Carsten's input. First of all, we have moved HDMI to a small, but not zero possibility due to the difficulty of processing HDMI signals. These require a lot more outputs that a simple USB output, and outputting an RCA signal is as simple as recoding the decoded input signal.
 
-  ```sh
-  conda env create -f requirements.yml
-  ```
+Similarly, if we could synthesize the device onto a more compact surface using soldering, but in its current state, a breadboard has been sufficient in connecting all the relevant pins on our devices. How difficult this will be to construct is currently unknown, but further work on this product should give us an idea of how feasible this goal is.
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/catiaspsilva/README-template.git
-   ```
-2. Setup (and activate) your environment
-  ```sh
-  conda env create -f requirements.yml
-  ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+<!-- STILL NEEDS A BIT OF WORK -->
 
 Use this space to show useful examples of how a project can be used. For course projects, include which file to execute and the format of any input variables.
 
 Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For a thorough explanation of our demo process, Please refer to the [Walkthrough](https://github.com/richardalvero/rca-capture-card/blob/main/experiments/TVP5150AM1PBS/walkthrough.md)_
 
 <!-- ROADMAP -->
-## Roadmap
+## Progress
 
-See the [open issues](https://github.com/catiaspsilva/README-template/issues) for a list of proposed features (and known issues).
+This section will list the current progress that we have made toward our intended final product. We:
 
-<!-- CONTRIBUTING -->
-## Contributing
+* Defined our short-term and stretch goals based on progress,
+* Created a GitHub repository for storing all relevant code and documentation,
+* Created an overall architecture design using VHDL,
+* Ordered all necessary hardware for the basic function of the capture card, and
+* Experimented with a small NTSC version RCA camera
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+We intend to keep making good progress with this product into the next semester, with more time to focus soley on this device.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
+See the [open issues](https://github.com/richardalvero/rca-capture-card/issues) for a list of proposed features (and known issues).
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under basic educational licenses. This 'product' is for a capstone project, so naturally, for educational purposes only.
 
 
 <!-- Authors -->
 ## Authors
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Richard Alvero    - [richardalvero](https://github.com/richardalvero) - richardalvero@ufl.edu
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Dakota Cappel     - [dakota-cappel](https://github.com/dakota-cappel) - dakota.cappel@ufl.edu
+
+Giovanni Cornejo  - [Giovanni Cornejo](https://github.com/Gearsman24) - cornejog@ufl.edu
+
+Anthony Khmarin   - [Anthony Khmarin](https://github.com/MinceGit) - akhmarin@ufl.edu
+
+Emily Namm        - [EmilyNamm](https://github.com/EmilyNamm) - enamm@ufl.edu
+
+
+Project Link: [https://github.com/richardalvero/rca-capture-card](https://github.com/richardalvero/rca-capture-card)
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-You can acknowledge any individual, group, institution or service.
-* [Catia Silva](https://faculty.eng.ufl.edu/catia-silva/)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
+* [Jeremiah Blanchard](https://www.eng.ufl.edu/eed/faculty/name/jeremiah-blanchard/)
+* [Carsten Thue-Bludworth](https://www.eng.ufl.edu/about/contact/college-directory/name/carsten-thue-bludworth/)
 * [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
 
-## Thank you
+## Thank You
 
-<!-- If this is useful: [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg)](https://www.buymeacoffee.com/catiaspsilva) -->
