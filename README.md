@@ -5,7 +5,7 @@
     <img src="images/gators.jpg" alt="Logo" width="150" height="150">
   </a>
 
-  <h3 align="center">README Template</h3>
+  <h3 align="center">RCA Capture Card</h3>
 
   <p align="center">
     A detailed README for exploring all aspects of this capstone project.
