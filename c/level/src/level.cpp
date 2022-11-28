@@ -20,7 +20,7 @@ int main() {
     uint8_t inputSelect = lis3dh.read_reg(0x00);
 
     while(1){
-        printf("%d, %d, %d, %d.\n", id, misc, dataType, inputSelect);
+        printf("High Byte ID: %d | MISC_REG: %d | DATA_TYPE_REG: %d | INPUT_SEL_REG: %d\n", id, misc, dataType, inputSelect);
     }
 
     while(1);
