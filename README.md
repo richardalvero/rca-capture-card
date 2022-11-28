@@ -106,7 +106,7 @@ Similarly, if we could synthesize the device onto a more compact surface using s
 
 Our device is an open source alternative to running software on emulators, as it would allow users to use hardware they already have. It also offers a higher-quality alternative to recording the monitor externally.
 
-_For a thorough explanation of our demo process, Please refer to the [Walkthrough](https://github.com/richardalvero/rca-capture-card/blob/main/experiments/TVP5150AM1PBS/walkthrough.md)_
+_For a thorough explanation of our demo process, Please refer to the [Walkthrough](https://github.com/richardalvero/rca-capture-card/blob/main/experiments/TVP5150AM1PBS/Experiment2_walkthrough.md)_
 
 <!-- ROADMAP -->
 ## Progress
