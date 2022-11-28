@@ -32,6 +32,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "led0_dp",
+					"strict" : false
+				},
+				{
 					"name" : "led1[0]",
 					"strict" : false
 				},
@@ -116,6 +120,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "led3_dp",
+					"strict" : false
+				},
+				{
 					"name" : "led4[0]",
 					"strict" : false
 				},
@@ -172,7 +180,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "write_led",
+					"name" : "sclk",
+					"strict" : false
+				},
+				{
+					"name" : "rst",
 					"strict" : false
 				},
 				{
@@ -180,11 +192,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "sclk",
-					"strict" : false
-				},
-				{
-					"name" : "rst",
+					"name" : "hsync",
 					"strict" : false
 				}
 			]
