@@ -58,13 +58,13 @@
 
 This section will give a brief description of the overall project architecture, from both a hardware and software perspective.
 
-From a hardware perspective, this project intends to use an external component to decode the input RCA signal for processing within the FPGA board, where it will be further routed to a USB and RCA output for capturing purposes. So far, we have seen success in using the TVP5150AM1 Video Decoder for this purpose, and this additional part should allow us to convert the signal to a USB signal within the FPGA.
+From a hardware perspective, this project intends to use an external component to decode the input RCA signal for processing within the FPGA board, where it will be further routed to a USB output for capturing purposes. The hardware will also pass the RCA signals through, to allow access to the original signals. So far, we have seen success in using the TVP5150AM1 Video Decoder for this purpose, and this additional part should allow us to convert the signal to a USB signal within the FPGA.
 
 From a software perspective, this project required us to create code in VHDL that would be used to program the DE10 Lite to handle the inputs from the Video Decoder. This has been largely successful, and all relevant VHDL code used to program the FPGA is linked below:
 
 [VHDL Directory](https://github.com/richardalvero/rca-capture-card/tree/main/vhdl)
 
-This VHDL was synthesized into a programmable device using Quartus Prime 19.1, and programmed onto the DE10 Lite via a USB connection to the PC. For the purposes of the upcoming demo, the DE10 Lite is a sufficiently powerful FPGA that can be used to demonstrate the separate components interacting with each other.
+This VHDL was synthesized into a programmable device using Quartus Prime 19.1, and programmed onto the DE10 Lite via a USB connection to the PC. For the purposes of the upcoming demo, the DE10 Lite is a sufficiently powerful FPGA that can be used to demonstrate the separate components interacting with each other. However, we are looking into other FPGAs that have built-in USB capabilities for our future implementations.
 
 _For a more in-depth look at the architecture of our project, please see the [Pre-Alpha Build](https://github.com/richardalvero/rca-capture-card/blob/main/documentation/RCA%20Pre-Alpha%20Build%2011_01_22.pdf)_
 
@@ -76,7 +76,7 @@ _For a more in-depth look at the architecture of our project, please see the [Pr
 
 ### Hardware
 
-- DE10 Lite FPGA
+- DE10 Lite FPGA (For now)
 - TVP5150AM1 Ultra Low-Power Video Decoder
 
 
@@ -104,9 +104,7 @@ Similarly, if we could synthesize the device onto a more compact surface using s
 
 <!-- STILL NEEDS A BIT OF WORK -->
 
-Use this space to show useful examples of how a project can be used. For course projects, include which file to execute and the format of any input variables.
-
-Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Our device is an open source alternative to running software on emulators, as it would allow users to use hardware they already have. It also offers a higher-quality alternative to recording the monitor externally.
 
 _For a thorough explanation of our demo process, Please refer to the [Walkthrough](https://github.com/richardalvero/rca-capture-card/blob/main/experiments/TVP5150AM1PBS/walkthrough.md)_
 
