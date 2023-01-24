@@ -27,7 +27,7 @@ end top_level;
 architecture STR of top_level is
 
 	-- Related to RCA_Input *Uses I2C
-		constant CLK_FREQ : integer := 50e6; -- Also used for UART
+		constant CLK_FREQ : integer := 50e6;
 		constant BUS_CLK : integer := 400000;
 		signal ADC_address : std_logic_vector(6 downto 0);
 		signal wr : std_logic;
@@ -39,7 +39,7 @@ architecture STR of top_level is
 	-- Related to RCA_to_HDMI (Not Connected Yet)
 
 	-- Related to USB_Output *Uses UART
-		--constant CLK_FREQ : integer := 50e6;
+		--Also uses CLK_FREQ
 		constant BAUD_RATE : integer := 125000;
 		constant PARITY_BIT : std_logic_vector(1 downto 0) := "00";
 		signal UART_TX_valid :	std_logic; 

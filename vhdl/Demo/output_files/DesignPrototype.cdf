@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484ES) Path("C:/Users/gioco/Documents/GitHub/rca-capture-card/vhdl/Demo/output_files/") File("DesignPrototype.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484ES) Path("C:/Users/gioco/Documents/GitHub/rca-capture-card/vhdl/Demo/output_files/") File("DesignPrototype.pof") MfrSpec(OpMask(1) Child_OpMask(2 1 1));
 
 ChainEnd;
 
