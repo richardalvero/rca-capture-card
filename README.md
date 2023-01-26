@@ -58,9 +58,9 @@
 
 This section will give a brief description of the overall project architecture, from both a hardware and software perspective.
 
-From a hardware perspective, this project intends to use an external component to decode the input RCA signal for processing within the FPGA board, where it will be further routed to a USB output for capturing purposes. The hardware will also pass the RCA signals through, to allow access to the original signals. So far, we have seen success in using the TVP5150AM1 Video Decoder for this purpose, and this additional part should allow us to convert the signal to a USB signal within the FPGA.
+From a hardware perspective, this project intends to use an external component to decode the input RCA signal for processing and reformatting via a USB FIFO IC, where it will be further routed to a USB output for capturing purposes. The hardware will also pass the RCA signals through, to allow access to the original signals. So far, we have seen success in using the TVP5150AM1 Video Decoder for this purpose, and this additional part should allow us to convert the signal to a USB signal by feeding the output to the FT240X USB 8-Bit FIFO IC.
 
-From a software perspective, this project required us to create code in VHDL that would be used to program the DE10 Lite to handle the inputs from the Video Decoder. This has been largely successful, and all relevant VHDL code used to program the FPGA is linked below:
+From a software perspective, this project required us to create code in VHDL that would be used to program the DE10 Lite to handle the inputs from the Video Decoder. The DE10 Lite has also been used for demoing purposes and testing. This has been largely successful, and all relevant VHDL code used to program the FPGA is linked below:
 
 [VHDL Directory](https://github.com/richardalvero/rca-capture-card/tree/main/vhdl)
 
@@ -78,6 +78,7 @@ _For a more in-depth look at the architecture of our project, please see the [Pr
 
 - DE10 Lite FPGA (For now)
 - TVP5150AM1 Ultra Low-Power Video Decoder
+- USB 8-Bit FIFO IC
 
 
 <!-- GETTING STARTED -->
@@ -85,12 +86,17 @@ _For a more in-depth look at the architecture of our project, please see the [Pr
 
 This section will describe the current goals that we wish to accomplish during the development of this capture card.
 
-### Short-Term
+### Short-Term (First Semester)
 
-For our short-term goal, as in by the end of this semester, we plan to have the basic workings of the capture card completed. This would include how to route the input signal through the video decoder, how to properly decode the signal to be transferred to the FPGA, and VHDL code that can take the input data and process it to an onboard output.
+For our short-term goal, we plan to have the basic workings of the capture card completed. This would include how to route the input signal through the video decoder, how to properly decode the signal to be transferred to the FT240X, and VHDL code that can take the data and process it to an onboard output.
 
-We have met a few of our short-term goals already, which included purchasing all relevant hardware that we would use for decoding and processing the RCA input. This includes the separate video decoder IC.
+We have met a few of our short-term goals already, which included purchasing all relevant hardware that we would use for decoding and processing the RCA input. This includes the separate video decoder IC. We have also achieved a successful output from the video decoder IC.
 
+### Long-Term (Second Semester)
+
+For our long-term goal, data should be fully converted from RCA to USB. This requires the RCA input to be correctly decoded by the video decoder and then processed using the USB FIFO IC. From there it should be able to be outputted to a monitor.
+
+As of now, data can be sent through each component and the next step is to ensure a correct output from each.
 
 ### Stretch Goals
 
@@ -118,8 +124,10 @@ This section will list the current progress that we have made toward our intende
 * Created an overall architecture design using VHDL,
 * Ordered all necessary hardware for the basic function of the capture card, and
 * Experimented with a small NTSC version RCA camera
+* Received an output from the video decoder IC
+* Received an output from the USB FIFO IC
 
-We intend to keep making good progress with this product into the next semester, with more time to focus soley on this device.
+We intend to keep making good progress with this product, with more time to focus on bug fixes and testing.
 
 See the [open issues](https://github.com/richardalvero/rca-capture-card/issues) for a list of proposed features (and known issues).
 
