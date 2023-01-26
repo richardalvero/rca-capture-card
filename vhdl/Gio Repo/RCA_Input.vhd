@@ -11,7 +11,7 @@ entity RCA_Input is
 		clk :				in std_logic; -- Clock
 		rst :				in std_logic; -- Reset
 		
-		en :				in std_logic; -- Enable I2C
+		en :				in std_logic; -- Enable I2C transmission
 		wr :				in std_logic; -- '0' is write, '1' is read
 		ADC_address :	in std_logic_vector(6 downto 0); -- Address of ADC
 		REG_address :	in std_logic_vector(6 downto 0); -- Address of Register

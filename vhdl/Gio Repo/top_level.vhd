@@ -4,9 +4,9 @@ use ieee.std_logic_1164.all;
 
 entity top_level is
 	port (
-		-- INPUTS
+		-- FPGA
 		clk :				in std_logic; -- Clock
-		power_on : 		in std_logic; -- Power System
+		power_on : 		out std_logic; -- Visual Aid to Indicate System On
 		rst : 			in std_logic; -- Restart System
 		
 		-- RCA IN --
@@ -102,6 +102,8 @@ begin -- STR
 			TMDS_n => TMDS_n,
 			TMDS_clk_p => TMDS_clk_p,
 			TMDS_clk_n => TMDS_clk_n);
+	
+	power_on <= '1';
 
 end STR;	
 		
