@@ -39,7 +39,8 @@
     <li>
       <a href="#project-goals">Project Goals</a>
       <ul>
-        <li><a href="#short-term">Short-Term</a></li>
+        <li><a href="#short-term">Short-Term (First Semester)</a></li>
+        <li><a href="#long-term#">Long-Term (Second Semester)</a></li>
         <li><a href="#stretch-goals">Stretch Goals</a></li>
       </ul>
     </li>
