@@ -4,9 +4,9 @@ use ieee.std_logic_1164.all;
 
 entity top_level is
 	port (
-		-- INPUTS
+		-- FPGA
 		clk :				in std_logic; -- Clock
-		power_on : 		in std_logic; -- Power System
+		power_on : 		out std_logic; -- Visual Aid to Indicate System On
 		rst : 			in std_logic; -- Restart System
 		
 		-- RCA IN --
@@ -27,7 +27,7 @@ end top_level;
 architecture STR of top_level is
 
 	-- Related to RCA_Input *Uses I2C
-		constant CLK_FREQ : integer := 50e6; -- Also used for UART
+		constant CLK_FREQ : integer := 50e6;
 		constant BUS_CLK : integer := 400000;
 		signal ADC_address : std_logic_vector(6 downto 0);
 		signal wr : std_logic;
@@ -39,7 +39,7 @@ architecture STR of top_level is
 	-- Related to RCA_to_HDMI (Not Connected Yet)
 
 	-- Related to USB_Output *Uses UART
-		--constant CLK_FREQ : integer := 50e6;
+		--Also uses CLK_FREQ
 		constant BAUD_RATE : integer := 125000;
 		constant PARITY_BIT : std_logic_vector(1 downto 0) := "00";
 		signal UART_TX_valid :	std_logic; 
@@ -102,6 +102,8 @@ begin -- STR
 			TMDS_n => TMDS_n,
 			TMDS_clk_p => TMDS_clk_p,
 			TMDS_clk_n => TMDS_clk_n);
+	
+	power_on <= '1';
 
 end STR;	
 		

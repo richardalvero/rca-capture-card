@@ -67,31 +67,31 @@ begin
 		vsync_led => vsync_led,
 		hsync_led => hsync_led);
 
-	-- map VSync Counter to 7 Segment Display
+	-- map VSync/HSync Counter to 7 Segment Display
 	U_LED0 : decoder port map (
-		input => vsync_counter(23 downto 20),
+		input => vsync_counter(7 downto 4),
 		output => led0);
 	U_LED1 : decoder port map (
-		input => vsync_counter(27 downto 24),
+		input => vsync_counter(11 downto 8),
 		output => led1);
 	U_LED2 : decoder port map (
-		input => vsync_counter(31 downto 28),
+		input => hsync_counter(7 downto 4),
 		output => led2);
 	U_LED3 : decoder port map (
-		input => hsync_counter(23 downto 20),
+		input => hsync_counter(11 downto 8),
 		output => led3);
 	U_LED4 : decoder port map (
-		input => hsync_counter(27 downto 24),
+		input => hsync_counter(15 downto 12),
 		output => led4);
 	U_LED5 : decoder port map (
-		input => hsync_counter(31 downto 28),
+		input => hsync_counter(19 downto 16),
 		output => led5);
 		
 	-- map decimal points to off
-	led0_dp <= vsync_led;
+	led0_dp <= '0';
 	led1_dp <= '1';
-	led2_dp <= '1';
-	led3_dp <= hsync_led;
+	led2_dp <= '0';
+	led3_dp <= '1';
 	led4_dp <= '1';
 	led5_dp <= '1';
 

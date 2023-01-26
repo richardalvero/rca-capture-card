@@ -2,40 +2,76 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1200mV 85C Model Setup 'sclk'
-Slack : -2.080
-TNS   : -79.404
+Type  : Slow 1200mV 85C Model Setup 'hsync'
+Slack : -1.325
+TNS   : -15.823
 
-Type  : Slow 1200mV 85C Model Hold 'sclk'
-Slack : 0.359
+Type  : Slow 1200mV 85C Model Setup 'vsync'
+Slack : -0.950
+TNS   : -6.900
+
+Type  : Slow 1200mV 85C Model Hold 'hsync'
+Slack : 0.371
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sclk'
-Slack : -3.000
-TNS   : -83.652
-
-Type  : Slow 1200mV 0C Model Setup 'sclk'
-Slack : -1.774
-TNS   : -65.500
-
-Type  : Slow 1200mV 0C Model Hold 'sclk'
-Slack : 0.325
+Type  : Slow 1200mV 85C Model Hold 'vsync'
+Slack : 0.371
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sclk'
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'hsync'
 Slack : -3.000
-TNS   : -83.652
+TNS   : -27.440
 
-Type  : Fast 1200mV 0C Model Setup 'sclk'
-Slack : -0.476
-TNS   : -9.041
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'vsync'
+Slack : -3.000
+TNS   : -17.664
 
-Type  : Fast 1200mV 0C Model Hold 'sclk'
-Slack : 0.166
+Type  : Slow 1200mV 0C Model Setup 'hsync'
+Slack : -1.099
+TNS   : -12.588
+
+Type  : Slow 1200mV 0C Model Setup 'vsync'
+Slack : -0.771
+TNS   : -5.380
+
+Type  : Slow 1200mV 0C Model Hold 'hsync'
+Slack : 0.338
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sclk'
+Type  : Slow 1200mV 0C Model Hold 'vsync'
+Slack : 0.338
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'hsync'
 Slack : -3.000
-TNS   : -73.840
+TNS   : -27.440
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'vsync'
+Slack : -3.000
+TNS   : -17.664
+
+Type  : Fast 1200mV 0C Model Setup 'hsync'
+Slack : -0.099
+TNS   : -0.198
+
+Type  : Fast 1200mV 0C Model Setup 'vsync'
+Slack : 0.084
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'hsync'
+Slack : 0.170
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'vsync'
+Slack : 0.170
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'hsync'
+Slack : -3.000
+TNS   : -26.040
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'vsync'
+Slack : -3.000
+TNS   : -16.500
 
 ------------------------------------------------------------

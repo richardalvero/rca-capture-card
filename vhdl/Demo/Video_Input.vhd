@@ -24,32 +24,26 @@ architecture video of videoInput is
 	signal vcount : unsigned(47 downto 0);
 	signal hcount : unsigned(47 downto 0);
 
-begin
-	process(sclk, rst)
+begin	
+	process(vsync, rst)
 	begin
 		if (rst = '1') then
 			vcount <= (others => '0');
-			hcount <= (others => '0');
 			vsync_led <= '0';
+		elsif(rising_edge(vsync)) then
+			vcount <= vcount + 1;
+			vsync_led <= '1';
+		end if;
+	end process;
+	
+	process(hsync, rst)
+	begin
+		if (rst = '1') then
+			hcount <= (others => '0');
 			hsync_led <= '0';
-
-		elsif (rising_edge(sclk)) then
-			-- VSYNC
-			if (vsync = '1') then
-				vcount <= vcount + 1;
-				vsync_led <= '1';
-			else 
-				vsync_led <= '0';
-			end if;
-			
-			-- HSYNC
-			if (hsync = '1') then
-				hcount <= hcount + 1;
-				hsync_led <= '1';
-			else
-				hsync_led <= '0';
-			end if;
-			
+		elsif(rising_edge(hsync)) then
+			hcount <= hcount + 1;
+			hsync_led <= '1';
 		end if;
 	end process;
 
